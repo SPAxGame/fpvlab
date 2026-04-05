@@ -1,0 +1,120 @@
+[
+  {
+    "id": "p-1775312637681",
+    "inStock": true,
+    "category": "frame",
+    "name": "Speedybee Mario 5\"",
+    "price": 225,
+    "description": "SpeedyBee Mario 5 to wytrzymała rama FPV klasy 5 cali zaprojektowana do freestyle i cinematic. Wykonana z wysokiej jakości carbonu, oferuje dużą sztywność i odporność na crash’e.",
+    "image": "rama-speedybee-mario-5-20260404-231445.jpg",
+    "frameType": "DC",
+    "includesStraps": false,
+    "images": [
+      "rama-speedybee-mario-5-20260404-231445.jpg",
+      "rama-speedybee-mario-5-20260404-231702.webp"
+    ]
+  },
+  {
+    "id": "p-1775312843805",
+    "inStock": true,
+    "category": "motor",
+    "name": "T-Motor F60 Pro IV 2207",
+    "price": 460,
+    "description": "Silnik bezszczotkowy od firmy T-Motor o rozmiarze 2207 przeznaczony do baterii 5-6s o mocy 1950kv.",
+    "image": "silniki-t-motor-f60-pro-iv-2207-20260404-171436.png",
+    "includesStraps": false,
+    "kv": 1950
+  },
+  {
+    "id": "p-1775313219217",
+    "inStock": true,
+    "category": "stack",
+    "name": "SpeedyBee F405 V4 BLS 60A",
+    "price": 372,
+    "description": "Ten stack to niezawodny klasyk przeznaczony do dronów freestyle i cinematic,. Wyposażony w kontroler lotu STM32F405 oraz wydajny ESC OX32 60A, zapewnia stabilną pracę i dużą moc",
+    "image": "stack-fc-esc-speedybee-f405-v4-bls-60a-20260404-163335.png",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775313363080",
+    "inStock": true,
+    "category": "video_bundle",
+    "name": "DJI O4 Pro Air Unit",
+    "price": 1200,
+    "description": "DJI O4 Air Unit Pro wyznacza nowe standardy wydajności transmisji wideo. Ten kompaktowy system umożliwia przesyłanie obrazu w wysokiej rozdzielczości 1080p, zapewniając niższe opóźnienie i większy zasięg. Został też wyposażony w kamerę z 1/1,3-calową matrycą CMOS, która pozwala nagrywać niesamowite filmy 4K/120FPS. Oferuje także szerokie pole widzenia 155°1 oraz tryb kolorów 10-bit D-Log M. DJI O4 Air Unit Pro jest przy tym kompatybilny z różnymi goglami i aparaturami sterującymi – doskonale sprawdzi się w wielu konfiguracjach sprzętowych.",
+    "image": "zestaw-video-kamera-vtx-antena-dji-o4-pro-air-unit-20260404-163552.webp",
+    "includesStraps": false,
+    "videoType": "digital"
+  },
+  {
+    "id": "p-1775313568524",
+    "inStock": true,
+    "category": "vtx",
+    "name": "Speedybee TX800 - 5.8GHz 25-800mW ",
+    "price": 150,
+    "description": "Kanał częstotliwości: 5,8 GHz 48 kanałów\nMoc wyjściowa: PIT/25mW/200mW/400mW/800mW\nPrąd roboczy: 5V@250~750mA\nNapięcie zasilania: 3,7-5V\nImpedancja wejściowa wideo: 75 omów\nZłącze antenowe:  MMCX\nWaga:  5,6 g (bez anteny)",
+    "image": "nadajnik-vtx-speedybee-tx800-5-8ghz-25-800mw-20260404-163921.png",
+    "includesStraps": false,
+    "videoType": "analog"
+  },
+  {
+    "id": "p-1775313962832",
+    "inStock": true,
+    "category": "battery",
+    "name": "2x akumulator LiPo Ovonic 1300mAh 6S 120C 22,2V ze wtyczką XT60",
+    "price": 145,
+    "description": "Akumulator LiPo Ovonic 1300 mAh 6S 120C to jeden z naszych najniezawodniejszych i najlepiej sprzedających się akumulatorów, któremu zaufały tysiące pilotów FPV na całym świecie. Zapewnia idealne połączenie wysokiej mocy rozładowania, lekkiej konstrukcji i solidnej wytrzymałości – idealny zarówno do dronów wyścigowych, jak i freestyle'owych.",
+    "image": "akumulator-2x-akumulator-lipo-ovonic-1300mah-6s-120c-22-2v-ze-wtyczka-xt60-20260404-164600.png",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775314360518",
+    "inStock": true,
+    "category": "battery_strap",
+    "name": "5x iFlight Nylon Lipo Battery Strap 20x200mm",
+    "price": 13,
+    "description": "Nylonowa opaska do baterii Lipo zapewnia długotrwałe użytkowanie i wytrzymałość. Materiał nie niszczy baterii.",
+    "image": "paski-do-akumulatora-velcro-20260404-164947.png",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775314442590",
+    "inStock": true,
+    "category": "buzzer",
+    "name": "Buzzer z zasilaniem 100dB VIFLY Finder 2",
+    "price": 60,
+    "description": "Waga: 5 gram\nWymiary: 24x13x16 mm\nGłośność: do 105 dB\nCzas pracy: do 30 godzin\nCzas ładowania: do 1,5 godziny\nAkumulator: 80mAh LiPo\nNapięcie: 4.5-8.5 V",
+    "image": "buzzer-buzzer-z-zasilaniem-100db-vifly-finder-2-20260404-165342.png",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775315273037",
+    "inStock": true,
+    "category": "gps",
+    "name": "GPS GEPRC GEP M10 DQ",
+    "price": 130,
+    "description": "Wysoka czułość odbiornika i zaawansowane funkcje takie jak QMC5883L magnetometr i DPS310 barometr wersji GEP-M10-DQ, zapewniają precyzyjne pozycjonowanie i zmiany wysokości.",
+    "image": "modul-gps-gps-geprc-gep-m10-dq-20260404-170750.png",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775315577074",
+    "inStock": true,
+    "category": "elrs",
+    "name": "Odbiornik Radiomaster RP 1 ELRS 2,4GHz RP1 V2",
+    "price": 96,
+    "description": "Model RP1 posiada wbudowany moduł Wi-Fi, co umożliwia aktualizację oprogramowania układowego i konfigurację odbiornika za pomocą wbudowanego interfejsu WebUI z poziomu komputera lub telefonu komórkowego. Dzięki modułowi RF o niskim opóźnieniu i wysokiej częstotliwości odświeżania, model RP1 idealnie nadaje się do wyścigów FPV lub lotów długodystansowych.",
+    "image": "modul-elrs-odbiornik-radiomaster-rp-1-elrs-2-4ghz-rp1-v2-20260404-171114.png",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775315937173",
+    "inStock": true,
+    "category": "battery",
+    "name": "Akumulator LiPo Ovonic 6S 1300mAh 100C, wtyczka 22,2V XT60",
+    "price": 120,
+    "description": "Akumulator LiPo 6S 1300 mAh 100C firmy Ovonic to jeden z naszych najlepiej sprzedających się i najtańszych pakietów. Zaprojektowany dla pilotów, którzy oczekują najwyższej wydajności bez wygórowanej ceny , zapewnia idealną równowagę między mocą, wagą i wytrzymałością .",
+    "image": "akumulator-akumulator-lipo-ovonic-6s-1300mah-100c-wtyczka-22-2v-xt60-20260404-171855.png",
+    "includesStraps": false
+  }
+]
