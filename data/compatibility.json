@@ -1,0 +1,62 @@
+[
+  {
+    "id": "c-1775509167511",
+    "productA": "p-1775312843805",
+    "productB": "p-1780000000108",
+    "reason": "Za niskie kv dla baterii 4s"
+  },
+  {
+    "id": "c-1775509235084",
+    "productA": "p-1780000000011",
+    "productB": "p-1780000000108",
+    "reason": "Za niskie kv dla baterii 4s"
+  },
+  {
+    "id": "c-1775509250276",
+    "productA": "p-1780000000012",
+    "productB": "p-1780000000108",
+    "reason": "Za niskie kv dla baterii 4s"
+  },
+  {
+    "id": "c-1775509263576",
+    "productA": "p-1780000000013",
+    "productB": "p-1780000000102",
+    "reason": "Za wysokie kv dla baterii 6s"
+  },
+  {
+    "id": "c-1775509263582",
+    "productA": "p-1780000000013",
+    "productB": "p-1775315937173",
+    "reason": "Za wysokie kv dla baterii 6s"
+  },
+  {
+    "id": "c-1775509279670",
+    "productA": "p-1775390263703",
+    "productB": "p-1780000000108",
+    "reason": "Za niskie kv dla baterii 4s"
+  },
+  {
+    "id": "c-1775509290399",
+    "productA": "p-1775474497378",
+    "productB": "p-1775315937173",
+    "reason": "Za wysokie kv dla baterii 6s"
+  },
+  {
+    "id": "c-1775509290404",
+    "productA": "p-1775474497378",
+    "productB": "p-1780000000102",
+    "reason": "Za wysokie kv dla baterii 6s"
+  },
+  {
+    "id": "c-1775560104707",
+    "productA": "p-1780000000009",
+    "productB": "p-1780000000108",
+    "reason": "Za niskie kv dla baterii 4s"
+  },
+  {
+    "id": "c-1775560127293",
+    "productA": "p-1780000000014",
+    "productB": "p-1780000000108",
+    "reason": "Za niskie kv dla baterii 4s"
+  }
+]

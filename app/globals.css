@@ -38,6 +38,15 @@ body {
   -webkit-backdrop-filter: blur(10px);
 }
 
+.no-spinner::-webkit-inner-spin-button,
+.no-spinner::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-spinner {
+  -moz-appearance: textfield;
+}
+
 /* Parallax background — disabled on iOS Safari (background-attachment: fixed unsupported) */
 .bg-parallax {
   background-attachment: fixed;

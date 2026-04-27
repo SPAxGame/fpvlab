@@ -1,5 +1,6 @@
 export interface HomepageSettings {
   bgDataUrl: string;
+  bgImagePath: string;
   bgApplyToSubpages: boolean;
   panelBgColor: string;
   panelBgApplyToSubpages: boolean;
@@ -17,22 +18,24 @@ export interface HomepageSettings {
 
 export const DEFAULT_SETTINGS: HomepageSettings = {
   bgDataUrl: "",
-  bgApplyToSubpages: false,
+  bgImagePath: "",
+  bgApplyToSubpages: true,
   panelBgColor: "#171717",
   panelBgApplyToSubpages: false,
-  panelOpacity: "80",
-  panelBorderColor: "#575E6B",
+  panelOpacity: "60",
+  panelBorderColor: "#727A88",
   panelTitleColor: "#FFFFFF",
   subpageTitleColor: "#FFFFFF",
   panelSubtitleColor: "#CCA12C",
-  panelTextColor: "#9BA5B0",
+  panelTextColor: "#B0BAC4",
   sliderBgColor: "#23272F",
-  sliderBorderColor: "#575E6B",
-  advantageBgColor: "#575E6B",
-  infoTextColor: "#9BA5B0",
+  sliderBorderColor: "#727A88",
+  advantageBgColor: "#727A88",
+  infoTextColor: "#B0BAC4",
 };
 
 export const SETTINGS_KEY = "homepageSettings";
+export const PRESET_BACKGROUNDS_KEY = "presetBackgrounds";
 
 export function hexToRgba(hex: string, opacityPercent: number): string {
   const h = hex.replace("#", "").padEnd(6, "0");

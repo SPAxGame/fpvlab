@@ -1,29 +1,29 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import MainHeader from "../components/MainHeader";
 import MainFooter from "../components/MainFooter";
 import SubpageShell from "../components/SubpageShell";
 
 const TIPS = [
-  "Zacznij od gotowego zestawu — zmniejszysz liczbę zmiennych i łatwiej zdiagnozujesz problemy.",
+  "Zacznij od gotowego zestawu - zmniejszysz liczbę zmiennych i łatwiej zdiagnozujesz problemy.",
   "Zawsze sprawdzaj kierunek obrotów silników przed pierwszym lotem.",
   "Skalibruj akcelerometr na równej, stabilnej powierzchni.",
   "Ustaw limity throttle w kontrolerze lotu, aby uniknąć gwałtownych odlotów.",
-  "Lataj najpierw w trybie Angle (stabilizowany) — dopiero potem próbuj Acro.",
-  "Regularnie sprawdzaj dokręcenie śmigieł — wibracje potrafią je odkręcić.",
+  "Lataj najpierw w trybie Angle (stabilizowany) - dopiero potem próbuj Acro.",
+  "Regularnie sprawdzaj dokręcenie śmigieł - wibracje potrafią je odkręcić.",
   "Używaj modułu OSD, by monitorować napięcie baterii w locie.",
-  "Wykonaj blackbox log już w pierwszych lotach — dane pomogą w tune'owaniu PID.",
+  "Wykonaj blackbox log już w pierwszych lotach - dane pomogą w tune'owaniu PID.",
   "Poznaj zasady przestrzeni powietrznej obowiązujące w Twoim regionie.",
-  "Dołącz do lokalnej grupy pilotów FPV — wspólne latanie przyspiesza naukę.",
+  "Dołącz do lokalnej grupy pilotów FPV - wspólne latanie przyspiesza naukę.",
 ];
 
 const REASONS = [
-  "FPV daje poczucie lotu niedostępne w żadnym innym sporcie — adrenalina gwarantowana.",
-  "Budujesz i programujesz własny sprzęt — rozwijasz umiejętności techniczne i elektroniczne.",
+  "FPV daje poczucie lotu niedostępne w żadnym innym sporcie - adrenalina gwarantowana.",
+  "Budujesz i programujesz własny sprzęt - rozwijasz umiejętności techniczne i elektroniczne.",
   "Społeczność FPV jest otwarta i chętna do pomocy niezależnie od poziomu.",
-  "Możliwości twórcze są nieograniczone — od wyścigów po filmowanie przyrody.",
-  "Każdy lot to nowe wyzwanie, nowy trick, nowy kadr — nuda jest niemożliwa.",
+  "Możliwości twórcze są nieograniczone - od wyścigów po filmowanie przyrody.",
+  "Każdy lot to nowe wyzwanie, nowy trick, nowy kadr - nuda jest niemożliwa.",
 ];
 
 function labelFromFilename(filename: string): string {
@@ -35,6 +35,8 @@ function labelFromFilename(filename: string): string {
 
 function VideoCard({ label, src }: { label: string; src: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [playing, setPlaying] = useState(false);
 
   return (
     <div
@@ -47,28 +49,35 @@ function VideoCard({ label, src }: { label: string; src: string }) {
         aspectRatio: "16/9",
         cursor: "pointer",
       }}
-      onMouseEnter={() => videoRef.current?.play()}
+      onMouseEnter={() => { videoRef.current?.play(); setPlaying(true); }}
       onMouseLeave={() => {
         if (videoRef.current) {
           videoRef.current.pause();
           videoRef.current.currentTime = 0;
         }
+        setProgress(0);
+        setPlaying(false);
       }}
     >
       <video
         ref={videoRef}
         muted
-        loop
         playsInline
         src={src}
+        onTimeUpdate={() => {
+          const v = videoRef.current;
+          if (v && v.duration) setProgress(v.currentTime / v.duration);
+        }}
         style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
       />
+      {/* Label – center of frame */}
       <div
         style={{
           position: "absolute",
-          bottom: 0,
+          top: "50%",
           left: 0,
           right: 0,
+          transform: "translateY(-50%)",
           padding: "6px 12px",
           backgroundColor: "rgba(0,0,0,0.5)",
           backdropFilter: "blur(4px)",
@@ -78,9 +87,31 @@ function VideoCard({ label, src }: { label: string; src: string }) {
           color: "rgba(255,255,255,0.9)",
           textTransform: "uppercase",
           textAlign: "center",
+          opacity: playing ? 0 : 1,
+          transition: "opacity 0.2s",
         }}
       >
         {label}
+      </div>
+      {/* Progress bar – bottom edge */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 3,
+          backgroundColor: "rgba(255,255,255,0.15)",
+        }}
+      >
+        <div
+          style={{
+            height: "100%",
+            width: `${progress * 100}%`,
+            backgroundColor: playing ? "rgba(255,255,255,0.85)" : "transparent",
+            transition: "width 0.25s linear",
+          }}
+        />
       </div>
     </div>
   );
@@ -93,7 +124,7 @@ export default function WarsztatyClient({ videos, captions = {} }: { videos: str
       <main
         style={{
           flex: 1,
-          maxWidth: 860,
+          maxWidth: 1100,
           width: "100%",
           margin: "0 auto",
           padding: "52px 24px 48px",
@@ -102,6 +133,31 @@ export default function WarsztatyClient({ videos, captions = {} }: { videos: str
           gap: 28,
         }}
       >
+        <div>
+          <h1
+            style={{
+              fontSize: 26,
+              fontWeight: 700,
+              color: "var(--sub-title)",
+              letterSpacing: 3,
+              textTransform: "uppercase",
+              marginBottom: 8,
+            }}
+          >
+            Warsztaty FPV
+          </h1>
+          <p
+            style={{
+              color: "var(--sub-subtitle)",
+              fontSize: 13,
+              letterSpacing: 1,
+              marginBottom: 0,
+              fontWeight: 500,
+            }}
+          >
+            Wiedza. Praktyka. Pasja.
+          </p>
+        </div>
         {/* ── Panel 1: Praktyczne porady ── */}
         <div
           className="subpage-card"

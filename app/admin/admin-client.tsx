@@ -15,7 +15,7 @@ import type { Category, Product } from "../lib/products";
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
-const FRAME_TYPES: ("DC" | "X")[] = ["DC", "X"];
+const FRAME_TYPES: ("DC" | "X" | "DC/X")[] = ["DC", "X", "DC/X"];
 const VIDEO_TYPES: ("analog" | "digital")[] = ["analog", "digital"];
 
 function emptyForm(): Partial<Product> {
@@ -31,7 +31,10 @@ function emptyForm(): Partial<Product> {
     includesStraps: false,
     color: undefined,
     kv: undefined,
+    kvOptions: [],
+    cellCount: undefined,
     videoType: undefined,
+    pitch: undefined,
     polarization: undefined,
   };
 }
@@ -50,8 +53,10 @@ export default function AdminClient() {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [uploadingImgIdx, setUploadingImgIdx] = useState<number | null>(null);
   const [dragOverSlot, setDragOverSlot] = useState<number | null>(null);
+  const [dragSourceSlot, setDragSourceSlot] = useState<number | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [hoveredImg, setHoveredImg] = useState<string | null>(null);
+  const [lightboxData, setLightboxData] = useState<{ images: string[]; activeIdx: number } | null>(null);
   const [msg, setMsg] = useState<{ text: string; ok: boolean } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const uploadingSlotRef = useRef<number>(-1);
@@ -74,13 +79,19 @@ export default function AdminClient() {
 
   useEffect(() => { loadProducts(); }, []);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") setLightboxData(null); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
   const showMsg = (text: string, ok = true) => {
     setMsg({ text, ok });
     setTimeout(() => setMsg(null), 3000);
   };
 
   const panelStyle: React.CSSProperties = {
-    border: `2px solid ${settings.panelBorderColor}`,
+    border: `1px solid ${hexToRgba(settings.panelBorderColor, 30)}`,
     backgroundColor: hexToRgba(settings.panelBgColor, parseInt(settings.panelOpacity)),
     backdropFilter: "blur(10px)",
     WebkitBackdropFilter: "blur(10px)",
@@ -99,7 +110,16 @@ export default function AdminClient() {
 
   const openEdit = (p: Product) => {
     setEditingId(p.id);
-    setForm({ ...p });
+    const formData: Partial<Product> = { ...p };
+    // Backfill images[] from image field for products that only have the legacy image string
+    if ((!formData.images || formData.images.length === 0) && formData.image) {
+      formData.images = [formData.image];
+    }
+    // Backfill kvOptions from kv for legacy motor products
+    if (formData.category === "motor" && !formData.kvOptions?.length && formData.kv) {
+      formData.kvOptions = [formData.kv];
+    }
+    setForm(formData);
     setShowForm(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -185,7 +205,7 @@ export default function AdminClient() {
   // ── Render ─────────────────────────────────────────────────────────────
 
   return (
-    <div style={{ width: "100%", maxWidth: 1100, margin: "0 auto", padding: "0 16px 60px" }}>
+    <div style={{ width: "100%", maxWidth: 1100, margin: "0 auto", padding: "0 24px 60px" }}>
 
       {/* Toast */}
       {msg && (
@@ -233,7 +253,7 @@ export default function AdminClient() {
                 value={form.category ?? "frame"}
                 onChange={(e) => {
                   const cat = e.target.value as Category;
-                  setForm((p) => ({ ...p, category: cat, frameType: undefined, includesStraps: false, color: undefined, kv: undefined, videoType: undefined, polarization: undefined }));
+                  setForm((p) => ({ ...p, category: cat, frameType: undefined, includesStraps: false, color: undefined, kv: undefined, kvOptions: [], videoType: undefined, polarization: undefined }));
                   setActiveCategory(cat);
                 }}
                 style={inputStyle(settings)}
@@ -261,7 +281,7 @@ export default function AdminClient() {
                 type="number"
                 min={0}
                 step={0.01}
-                value={form.price ?? ""}
+                value={form.price || ""}
                 onChange={(e) => setForm((p) => ({ ...p, price: parseFloat(e.target.value) || 0 }))}
                 style={inputStyle(settings)}
               />
@@ -286,11 +306,11 @@ export default function AdminClient() {
                 <FormField label="Typ ramy" settings={settings}>
                   <select
                     value={form.frameType ?? ""}
-                    onChange={(e) => setForm((p) => ({ ...p, frameType: e.target.value as "DC" | "X" }))}
+                    onChange={(e) => setForm((p) => ({ ...p, frameType: e.target.value as "DC" | "X" | "DC/X" }))}
                     style={inputStyle(settings)}
                   >
                     <option value="">Wybierz...</option>
-                    {FRAME_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
+                    {FRAME_TYPES.map((t) => <option key={t} value={t}>{t === "DC/X" ? "DC/X (konwertowalny)" : t}</option>)}
                   </select>
                 </FormField>
                 <FormField label="Kolor ramy" settings={settings}>
@@ -318,21 +338,113 @@ export default function AdminClient() {
 
             {/* Motor-specific */}
             {form.category === "motor" && (
-              <FormField label="KV (obroty)" settings={settings}>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  value={form.kv ?? ""}
-                  onChange={(e) => setForm((p) => ({ ...p, kv: parseInt(e.target.value) || undefined }))}
-                  onFocus={(e) => e.target.select()}
-                  placeholder="np. 2400"
+              <>
+                <FormField label="KV (obroty)" settings={settings}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="np. 2400 (Enter aby dodać)"
+                      id="kv-input"
+                      style={inputStyle(settings)}
+                      onFocus={(e) => e.target.select()}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          const val = parseInt((e.target as HTMLInputElement).value);
+                          if (!val) return;
+                          (e.target as HTMLInputElement).value = "";
+                          setForm((p) => ({
+                            ...p,
+                            kvOptions: [...new Set([...(p.kvOptions ?? []), val])].sort((a, b) => a - b),
+                          }));
+                        }
+                      }}
+                    />
+                    {(form.kvOptions ?? []).length > 0 && (
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                        {(form.kvOptions ?? []).map((kv) => (
+                          <span
+                            key={kv}
+                            style={{
+                              display: "inline-flex", alignItems: "center", gap: 4,
+                              background: hexToRgba(settings.sliderBgColor, 80),
+                              border: `1px solid ${hexToRgba(settings.panelBorderColor, 50)}`,
+                              color: settings.panelTextColor,
+                              borderRadius: 6, padding: "3px 8px", fontSize: 13, fontWeight: 600,
+                            }}
+                          >
+                            {kv} KV
+                            <button
+                              type="button"
+                              onClick={() => setForm((p) => ({ ...p, kvOptions: (p.kvOptions ?? []).filter((v) => v !== kv) }))}
+                              style={{ background: "none", border: "none", cursor: "pointer", color: settings.panelSubtitleColor, fontSize: 16, lineHeight: 1, padding: "0 0 1px 4px" }}
+                              aria-label={`Usuń ${kv} KV`}
+                            >×</button>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </FormField>
+                <FormField label="Liczba ogniw (S)" settings={settings}>
+                  <select
+                    value={form.cellCount ?? ""}
+                    onChange={(e) => setForm((p) => ({ ...p, cellCount: (e.target.value as "4s" | "6s") || undefined }))}
+                    style={inputStyle(settings)}
+                  >
+                    <option value="6s">6S</option>
+                    <option value="4s">4S</option>
+                    <option value="">Nieokreślona</option>
+                  </select>
+                </FormField>
+              </>
+            )}
+
+            {/* Battery-specific */}
+            {form.category === "battery" && (
+              <FormField label="Liczba ogniw (S)" settings={settings}>
+                <select
+                  value={form.cellCount ?? ""}
+                  onChange={(e) => setForm((p) => ({ ...p, cellCount: (e.target.value as "4s" | "6s") || undefined }))}
                   style={inputStyle(settings)}
-                />
+                >
+                  <option value="6s">6S</option>
+                  <option value="4s">4S</option>
+                  <option value="">Nieokreślona</option>
+                </select>
               </FormField>
             )}
 
-            {/* Antenna-specific */}
+            {/* Propeller-specific */}
+            {form.category === "propeller" && (
+              <>
+                <FormField label=" (Pitch - Skok Śmigła)" settings={settings}>
+                  <input
+                    type="number"
+                    min="0"
+                    max="10"
+                    step="0.1"
+                    value={form.pitch ?? ""}
+                    onChange={(e) => setForm((p) => ({ ...p, pitch: e.target.value ? parseFloat(e.target.value) : undefined }))}
+                    placeholder="np. 3.5"
+                    className="no-spinner"
+                    style={inputStyle(settings)}
+                  />
+                </FormField>
+                <FormField label="Kolor śmigła" settings={settings}>
+                  <input
+                    type="text"
+                    value={form.color ?? ""}
+                    onChange={(e) => setForm((p) => ({ ...p, color: e.target.value || undefined }))}
+                    placeholder="np. Czarny, Biały, Miks..."
+                    style={inputStyle(settings)}
+                  />
+                </FormField>
+              </>
+            )}
+
             {form.category === "antenna" && (
               <FormField label="Polaryzacja" settings={settings}>
                 <select
@@ -393,11 +505,27 @@ export default function AdminClient() {
                           <div
                             key={idx}
                             style={{ position: "relative", width: 80, height: 64 }}
+                            draggable
+                            onDragStart={() => setDragSourceSlot(idx)}
+                            onDragEnd={() => { setDragSourceSlot(null); setDragOverSlot(null); }}
                             onDragOver={(e) => { e.preventDefault(); setDragOverSlot(idx); }}
                             onDragLeave={() => setDragOverSlot(null)}
                             onDrop={(e) => {
                               e.preventDefault();
                               setDragOverSlot(null);
+                              // Internal reorder
+                              if (dragSourceSlot !== null && dragSourceSlot !== idx) {
+                                setDragSourceSlot(null);
+                                setForm((p) => {
+                                  const copy = [...(p.images ?? [])];
+                                  const [moved] = copy.splice(dragSourceSlot, 1);
+                                  copy.splice(idx, 0, moved);
+                                  return { ...p, images: copy };
+                                });
+                                return;
+                              }
+                              setDragSourceSlot(null);
+                              // External file drop
                               const file = e.dataTransfer.files?.[0];
                               if (file) uploadFile(file, idx);
                             }}
@@ -679,6 +807,7 @@ export default function AdminClient() {
                 }}
               >
                 {/* Image thumb */}
+                <div style={{ display: "flex", flexDirection: "column", gap: 6, flexShrink: 0 }}>
                 {(p.images?.[0] || p.image) ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -686,6 +815,7 @@ export default function AdminClient() {
                     alt=""
                     onMouseEnter={() => setHoveredImg(p.id)}
                     onMouseLeave={() => setHoveredImg(null)}
+                    onClick={() => { const imgs = p.images?.length ? p.images : p.image ? [p.image] : []; if (imgs.length) setLightboxData({ images: imgs, activeIdx: 0 }); }}
                     style={{
                       width: 112,
                       height: 88,
@@ -695,7 +825,7 @@ export default function AdminClient() {
                       flexShrink: 0,
                       cursor: "zoom-in",
                       transition: "transform 0.2s",
-                      transform: hoveredImg === p.id ? "scale(1.8)" : "scale(1)",
+                      transform: hoveredImg === p.id ? "scale(1.08)" : "scale(1)",
                       zIndex: hoveredImg === p.id ? 10 : 1,
                       position: "relative",
                     }}
@@ -718,18 +848,48 @@ export default function AdminClient() {
                     📷
                   </div>
                 )}
+                {/* Extra image thumbnails */}
+                {p.images && p.images.length > 1 && (
+                  <div style={{ display: "flex", gap: 4, flexWrap: "wrap", width: 112 }}>
+                    {p.images.slice(1).map((img) => (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        key={img}
+                        src={`/products/${img}`}
+                        alt=""
+                        style={{
+                          width: 32,
+                          height: 26,
+                          objectFit: "cover",
+                          borderRadius: 4,
+                          border: `1px solid ${borderSubtle}`,
+                          opacity: 0.8,
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+                </div>
 
                 {/* Info */}
                 <div style={{ flex: 1, minWidth: 160 }}>
                   <div style={{ fontWeight: 600, fontSize: 14, color: settings.panelTitleColor }}>
                     {p.name}
+                    {p.category === "frame" && p.frameType && (
+                      <span style={{ marginLeft: 8, fontSize: 11, fontWeight: 900, color: "#ffd700", letterSpacing: "0.04em" }}>
+                        {p.frameType === "DC/X" ? "DC/X" : p.frameType}
+                      </span>
+                    )}
                     {!p.inStock && (
                       <span style={{ marginLeft: 8, fontSize: 11, color: "#e05252", fontWeight: 400 }}>niedostępny</span>
                     )}
                   </div>
                   <div style={{ fontSize: 12, color: settings.panelTextColor, marginTop: 2 }}>
                     {p.category === "frame" && p.frameType && `Typ: ${p.frameType}${p.color ? " · " + p.color : ""}${p.includesStraps ? " · paski w zestawie" : ""} · `}
-                    {p.category === "motor" && p.kv && `${p.kv} kV · `}
+                    {p.category === "motor" && (p.kvOptions?.length ? p.kvOptions.join(" / ") + " kV · " : p.kv ? `${p.kv} kV · ` : "")}
+                    {p.category === "motor" && p.cellCount && `${p.cellCount.toUpperCase()} · `}
+                    {p.category === "battery" && p.cellCount && `${p.cellCount.toUpperCase()} · `}
+                    {p.category === "propeller" && p.pitch != null && `Skok ${p.pitch} · `}
                     {p.category === "antenna" && p.polarization && `${p.polarization} · `}
                     {(p.category === "video_bundle" || p.category === "camera" || p.category === "vtx") && p.videoType && `${p.videoType === "analog" ? "Analog" : "Digital"} · `}
                     {p.description}
@@ -811,6 +971,65 @@ export default function AdminClient() {
           </div>
         )}
       </div>
+
+      {/* Lightbox overlay */}
+      {lightboxData && (
+        <div
+          onClick={() => setLightboxData(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 10000,
+            backgroundColor: "rgba(0,0,0,0.85)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 12,
+            cursor: "zoom-out",
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`/products/${lightboxData.images[lightboxData.activeIdx]}`}
+            alt=""
+            style={{
+              maxWidth: "90vw",
+              maxHeight: lightboxData.images.length > 1 ? "calc(90vh - 72px)" : "90vh",
+              objectFit: "contain",
+              borderRadius: 10,
+              boxShadow: "0 8px 40px rgba(0,0,0,0.7)",
+              pointerEvents: "none",
+            }}
+          />
+          {lightboxData.images.length > 1 && (
+            <div
+              style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {lightboxData.images.map((img, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={img}
+                  src={`/products/${img}`}
+                  alt=""
+                  onClick={(e) => { e.stopPropagation(); setLightboxData((prev) => prev ? { ...prev, activeIdx: i } : null); }}
+                  style={{
+                    width: 60,
+                    height: 48,
+                    objectFit: "cover",
+                    borderRadius: 6,
+                    cursor: "pointer",
+                    border: i === lightboxData.activeIdx ? "2px solid #fff" : "2px solid rgba(255,255,255,0.25)",
+                    opacity: i === lightboxData.activeIdx ? 1 : 0.55,
+                    transition: "all 0.12s",
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

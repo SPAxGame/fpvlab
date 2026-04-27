@@ -1,6 +1,7 @@
 export type Category =
   | "frame"
   | "motor"
+  | "propeller"
   | "stack"
   | "video_bundle"
   | "camera"
@@ -15,8 +16,9 @@ export type Category =
 export const CATEGORY_LABELS: Record<Category, string> = {
   frame: "Rama",
   motor: "Silniki",
+  propeller: "Śmigła",
   stack: "Stack (FC + ESC)",
-  video_bundle: "Zestaw video (kamera + VTX + antena)",
+  video_bundle: "System cyfrowy",
   camera: "Kamera",
   vtx: "Nadajnik VTX",
   antenna: "Antena",
@@ -30,6 +32,7 @@ export const CATEGORY_LABELS: Record<Category, string> = {
 export const ALL_CATEGORIES: Category[] = [
   "frame",
   "motor",
+  "propeller",
   "stack",
   "video_bundle",
   "camera",
@@ -52,13 +55,19 @@ export interface Product {
   description?: string;
   inStock: boolean;
   // frame-specific
-  frameType?: "DC" | "X";
+  frameType?: "DC" | "X" | "DC/X";
   includesStraps?: boolean;
   color?: string;
   // motor-specific
   kv?: number;
+  kvOptions?: number[];
+  cellCount?: "4s" | "6s";
+  // battery-specific
+  // (cellCount shared with motor)
   // video-specific
   videoType?: "analog" | "digital";
+  // propeller-specific
+  pitch?: number;
   // antenna-specific
   polarization?: "RHCP" | "LHCP";
 }

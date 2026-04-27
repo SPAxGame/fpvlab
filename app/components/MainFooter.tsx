@@ -23,7 +23,7 @@ export default function MainFooter() {
       <footer
         className="rounded-2xl flex flex-wrap items-center justify-center text-center"
         style={{
-          border: `2px solid ${settings.panelBorderColor}`,
+          border: `1px solid ${hexToRgba(settings.panelBorderColor, 30)}`,
           backgroundColor: panelBgRgba,
           backdropFilter: "blur(10px)",
           WebkitBackdropFilter: "blur(10px)",
@@ -34,7 +34,7 @@ export default function MainFooter() {
           color: settings.panelBorderColor,
         }}
       >
-        <span>© 2026 KONFIGURATOR DRONA FPV — WSZELKIE PRAWA ZASTRZEŻONE</span>
+        <span>© 2026 KONFIGURATOR DRONA FPV - WSZELKIE PRAWA ZASTRZEŻONE</span>
       </footer>
     </div>
   );

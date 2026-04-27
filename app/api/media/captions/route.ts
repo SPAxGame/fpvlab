@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import path from "path";
 
-const ALLOWED_FOLDERS = ["panel_1_home", "slider", "videos"];
+const ALLOWED_FOLDERS = ["panel_1_home", "slider", "videos", "panel_drony_fpv"];
 
 function captionsPath(folder: string) {
   return path.join(process.cwd(), "public", folder, "_captions.json");

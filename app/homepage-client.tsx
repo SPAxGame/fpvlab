@@ -60,7 +60,7 @@ export default function HomepageClient({
   const borderSubtle = hexToRgba(settings.panelBorderColor, 30);
 
   const panelStyle: CSSProperties = {
-    border: `2px solid ${settings.panelBorderColor}`,
+    border: `1px solid ${borderSubtle}`,
     backgroundColor: panelBgRgba,
     backdropFilter: "blur(10px)",
     WebkitBackdropFilter: "blur(10px)",
@@ -74,7 +74,9 @@ export default function HomepageClient({
 
   const bgStyle: CSSProperties = settings.bgDataUrl
     ? { backgroundImage: `url('${settings.bgDataUrl}')` }
-    : { backgroundImage: "url('/images/background_mono.jpg')" };
+    : settings.bgImagePath
+    ? { backgroundImage: `url('${settings.bgImagePath}')` }
+    : { backgroundImage: "url('/images/background_mario.jpg')" };
 
   return (
     <div
@@ -105,9 +107,9 @@ export default function HomepageClient({
           <div className="flex flex-col sm:flex-row-reverse sm:items-start gap-5">
             {/* Crossfade slideshow */}
             <div
-              className="w-full sm:w-[280px] sm:flex-shrink-0 mx-auto sm:mx-0"
+              className="w-full sm:w-[380px] sm:flex-shrink-0 mx-auto sm:mx-0 sm:-mt-24"
               style={{
-                maxWidth: 280,
+                maxWidth: 380,
                 aspectRatio: "4/3",
                 borderRadius: 12,
                 border: `0px solid ${settings.panelBorderColor}`,
@@ -127,6 +129,7 @@ export default function HomepageClient({
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
+                    objectPosition: "top",
                     opacity: i === activePanel1 ? 1 : 0,
                     transition: `opacity ${CROSSFADE_DURATION}ms ease-in-out`,
                   }}
@@ -139,10 +142,11 @@ export default function HomepageClient({
             >
               {[
                 "Skonfiguruj swojego drona FPV według własnych potrzeb i preferencji.",
-                "Nieograniczone możliwości. Wybieraj z najlepszych podzespołów.",
-                "Porównuj buildy między sobą.",
+                "Nieograniczone możliwości. Wybieraj z najlepszych przetestowanychpodzespołów.",
+                "Porównuj buildy między sobą, by wybrać najlepszy dla siebie.",
                 "Wycena od ręki, bez konieczności logowania.",
-                "Zapisz i wyślij do nas Twoją konfigurację.",
+                "Zapisz w pdf, wydrukuj lub wyślij do nas swoją konfigurację do konsultacji.",
+                "Możesz zamówić gotowy zestaw do montażu, lub zlecić montaż nam.",
                 "Prosty proces, od pomysłu do lotu w parę chwil.",
               ].map((item) => (
                 <li key={item} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
@@ -198,8 +202,9 @@ export default function HomepageClient({
                         width: "100%",
                         height: "180px",
                         objectFit: "cover",
+                        objectPosition: "top",
                         borderRadius: "10px",
-                        border: `2px solid ${settings.sliderBorderColor}`,
+                        border: `1px solid ${hexToRgba(settings.sliderBorderColor, 30)}`,
                         display: "block",
                         backgroundColor: settings.sliderBgColor,
                       }}
@@ -262,13 +267,19 @@ export default function HomepageClient({
             ].map((word) => (
               <div
                 key={word}
-                className="text-center py-3 rounded-xl font-semibold text-sm tracking-wide"
+                className="py-3 rounded-xl font-semibold text-sm tracking-wide"
                 style={{
                   backgroundColor: settings.sliderBgColor,
                   color: settings.panelTextColor,
                   border: `1px solid ${borderSubtle}`,
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 8,
+                  padding: "12px 14px",
                 }}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/propeller_ico.png" alt="" style={{ width: 15, height: 15, minWidth: 15, marginTop: 1, objectFit: "contain" }} />
                 {word}
               </div>
             ))}
@@ -294,7 +305,11 @@ export default function HomepageClient({
                 className="flex justify-between items-center pb-2"
                 style={{ borderBottom: `1px solid ${borderSubtle}` }}
               >
-                <span style={{ color: settings.infoTextColor }}>{label}</span>
+                <span style={{ color: settings.infoTextColor, display: "flex", alignItems: "center", gap: 8 }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/images/propeller_ico.png" alt="" style={{ width: 14, height: 14, minWidth: 14, objectFit: "contain" }} />
+                  {label}
+                </span>
                 <span
                   className="font-semibold"
                   style={{ color: settings.panelSubtitleColor }}

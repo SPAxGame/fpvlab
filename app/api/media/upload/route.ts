@@ -2,7 +2,7 @@ import { writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 import { type NextRequest } from "next/server";
 
-const ALLOWED_FOLDERS = ["panel_1_home", "slider", "videos"] as const;
+const ALLOWED_FOLDERS = ["panel_1_home", "slider", "videos", "panel_drony_fpv"] as const;
 type AllowedFolder = (typeof ALLOWED_FOLDERS)[number];
 
 function isAllowed(folder: string | null): folder is AllowedFolder {
@@ -44,7 +44,18 @@ export async function POST(request: NextRequest) {
   }
 
   const origExt = file.name.split(".").pop()?.toLowerCase() ?? (isVideo ? "mp4" : "jpg");
-  const safeName = `${formatDate(new Date())}_${Math.random().toString(36).slice(2, 6)}.${origExt}`;
+  const suffix = Math.floor(Math.random() * 900000 + 100000).toString(); // 6 cyfr
+  let safeName: string;
+  if (isVideo) {
+    const baseName = file.name
+      .replace(/\.[^.]+$/, "")
+      .replace(/[^a-zA-Z0-9_\-]/g, "_")
+      .replace(/_+/g, "_")
+      .slice(0, 60);
+    safeName = `${baseName}_${suffix}.${origExt}`;
+  } else {
+    safeName = `${formatDate(new Date())}_${Math.random().toString(36).slice(2, 6)}.${origExt}`;
+  }
 
   const dirPath = join(process.cwd(), "public", folder);
   mkdirSync(dirPath, { recursive: true });

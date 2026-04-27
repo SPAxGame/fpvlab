@@ -63,7 +63,7 @@ export default function Drukuj3DPage() {
       <main
         style={{
           flex: 1,
-          maxWidth: 860,
+          maxWidth: 1100,
           width: "100%",
           margin: "0 auto",
           padding: "52px 24px",
@@ -189,7 +189,7 @@ export default function Drukuj3DPage() {
               </p>
 
               <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0 }}>
-                Przyjmujemy zamówienia jednostkowe i seryjne — od jednej sztuki po kilkudziesięcioelementowe
+                Przyjmujemy zamówienia jednostkowe i seryjne - od jednej sztuki po kilkudziesięcioelementowe
                 serie. Specjalizujemy się w częściach do dronów FPV: uchwyty anten,
                 mocowania kamer, stopki ramy, osłony stacków i wszystko, co możesz
                 sobie wyobrazić.

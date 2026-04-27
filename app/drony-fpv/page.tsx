@@ -1,20 +1,45 @@
 import type { Metadata } from "next";
+import { readdirSync, readFileSync } from "fs";
+import { join } from "path";
 import MainHeader from "../components/MainHeader";
 import MainFooter from "../components/MainFooter";
 import SubpageShell from "../components/SubpageShell";
+import DronyFPVClient from "./drony-fpv-client";
 
 export const metadata: Metadata = {
   title: "Drony FPV",
 };
 
+function getDronyImages(): string[] {
+  const dir = join(process.cwd(), "public", "panel_drony_fpv");
+  try {
+    const all = readdirSync(dir).filter(
+      (f) => !f.startsWith(".") && !f.endsWith(".keep") && f !== "_order.json" && f !== "_captions.json"
+    );
+    try {
+      const raw = readFileSync(join(dir, "_order.json"), "utf8");
+      const saved = JSON.parse(raw) as unknown;
+      if (Array.isArray(saved)) {
+        const ordered = (saved as string[]).filter((f) => all.includes(f));
+        all.forEach((f) => { if (!ordered.includes(f)) ordered.push(f); });
+        return ordered;
+      }
+    } catch { /* no order file */ }
+    return all.sort();
+  } catch {
+    return [];
+  }
+}
+
 export default function DronyFPVPage() {
+  const images = getDronyImages();
   return (
     <SubpageShell>
       <MainHeader />
       <main
         style={{
           flex: 1,
-          maxWidth: 960,
+          maxWidth: 1100,
           width: "100%",
           margin: "0 auto",
           padding: "52px 24px",
@@ -41,70 +66,43 @@ export default function DronyFPVPage() {
             fontWeight: 500,
           }}
         >
-          First Person View — to wspaniałe wrażenia z lotu, które oferują drony FPV. Dzięki kamerze na pokładzie i goglom, możesz poczuć się jakbyś był pilotem, przemierzając niebo z niesamowitą prędkością i precyzją. Oferta obejmuje różnorodne modele dronów FPV, dostosowane do różnych stylów latania i poziomów zaawansowania. Niezależnie od tego, czy jesteś początkującym entuzjastą, czy doświadczonym pilotem, możesz zaprojektować drona FPV idealnego dla Ciebie. Konfigurator daje możliwość budowy drona według własnych preferencji. Dołącz do świata FPV i odkryj nowe horyzonty latania!
+          First Person View - to wspaniałe wrażenia z lotu, które oferują drony FPV. Dzięki kamerze na pokładzie i goglom, możesz poczuć się jakbyś był pilotem, przemierzając niebo z niesamowitą prędkością i precyzją. Oferta obejmuje różnorodne modele dronów FPV, dostosowane do różnych stylów latania i poziomów zaawansowania. Niezależnie od tego, czy jesteś początkującym entuzjastą, czy doświadczonym pilotem, możesz zaprojektować drona FPV idealnego dla Ciebie. Konfigurator daje możliwość budowy drona według własnych preferencji. Dołącz do świata FPV i odkryj nowe horyzonty latania!
         </p>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-            gap: 20,
-          }}
-        >
-          {[
+        <DronyFPVClient
+          cards={[
             {
               title: "Drony wyścigowe",
-              desc: "Zaprojektowane z myślą o maksymalnej prędkości i zwinności na torze wyścigowym. Rama 5 cali, silniki 2400 KV, czas okrążenia poniżej 4 sekund.",
+              desc: "Zaprojektowane z myślą o maksymalnej prędkości i zwinności na torze wyścigowym. Dynamika, pełna immersja dzięki podglądzie na żywo.",
+              image: images[0],
             },
             {
               title: "Drony freestyle",
-              desc: "Idealny partner do efektownych manewrów, flipów i szpagatu lotniczego. Wytrzymała konstrukcja, miękkie śmigła, konfiguracja Betaflight.",
+              desc: "Kreatywne, akrobacyjne latanie w trybie acro. Przeciwieństwo do dronów wyścigowych. Te cechują się wytrzymałością na crashe i zdolnością do wykonywania akrobacji.",
+              image: images[1],
             },
             {
               title: "Drony long range",
-              desc: "Zasięg do 30 km dzięki systemowi ExpressLRS. Długi czas lotu, stałe skrzydła lub multirotorowiec, pełna telemetria.",
+              desc: "Do wykonywania długich lotów na dużą odległość. Loty na odległości do 10km i długi czas w powietrzu. Idealne do eksploracji terenu.",
+              image: images[2],
             },
             {
-              title: "Drony HD",
-              desc: "Kamera DJI O3 lub Runcam Wiz. Nagrywanie w 4K@60fps, czysty feed analogowy jako backup. Filmy z dynamicznym montażem.",
+              title: "Drony konsumenckie",
+              desc: "Łatwe w obsłudze, z trybami wspomagającymi. Dobre dla osób, które chcą latać rekreacyjnie i podziwiać świat z lotu ptaka bez posiadania pełnej kontroli nad dronem.",
+              image: images[3],
             },
             {
-              title: "Drony budżetowe",
-              desc: "Zestawy startowe dla początkujących — kompletny sprzęt, simulator, szkolenie online i wsparcie techniczne w cenie pakietu.",
+              title: "Drony budżetowe/tinywhoop",
+              desc: "Małe, lekkie drony do latania w pomieszczeniach. Często używane do nauki podstaw latania FPV. Rozwijają małą prędkość i nie dają dużo satysfakcji oraz przyjemności z latania.",
+              image: images[4],
             },
             {
               title: "Drony na zamówienie",
-              desc: "Budujemy drony według specyfikacji klienta — konkretne wymogi wagowe, zasięg, ładunek lub systemy dedykowane.",
+              desc: "Drony składane według preferencji użytkownika. Nie wybieraj kompromisów. Zaprojektuj drona idealnie pod siebie, a my zadbamy o to, żeby osiągi dorównały Twoim oczekiwaniom.",
+              image: images[5],
             },
-          ].map(({ title, desc }) => (
-            <div
-              key={title}
-              className="subpage-card"
-              style={{
-                backgroundColor: "var(--sub-card-bg)",
-                border: "1px solid var(--sub-border-subtle)",
-                borderRadius: 12,
-                padding: "22px 20px",
-              }}
-            >
-              <h2
-                style={{
-                  color: "var(--sub-subtitle)",
-                  fontSize: 14,
-                  fontWeight: 700,
-                  letterSpacing: 1,
-                  textTransform: "uppercase",
-                  marginBottom: 10,
-                }}
-              >
-                {title}
-              </h2>
-              <p style={{ fontSize: 13, lineHeight: 1.8, color: "var(--sub-text)" }}>
-                {desc}
-              </p>
-            </div>
-          ))}
-        </div>
+          ]}
+        />
       </main>
 
       <MainFooter />

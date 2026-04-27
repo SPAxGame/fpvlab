@@ -14,7 +14,7 @@ export default function OMniePage() {
       <main
         style={{
           flex: 1,
-          maxWidth: 780,
+          maxWidth: 1100,
           width: "100%",
           margin: "0 auto",
           padding: "52px 24px",
@@ -57,21 +57,27 @@ export default function OMniePage() {
               gap: 16,
             }}
           >
-            <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0 }}>
-              CEO działu FPV LAB to pilot statków powietrznych z ponad 8-letnim doświadczeniem w 
+            <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0, display: "flex", alignItems: "flex-start", gap: 10 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, marginTop: 6, objectFit: "contain" }} />
+              <span>CEO działu FPV LAB to pilot statków powietrznych z ponad 8-letnim doświadczeniem w 
               składaniu, programowaniu i pilotażu dronów. Zaczynał od prostych quadrocopterów,
               a dziś buduje maszyny wyczynowe dla siebie i innych entuzjastów. 
-              Jego pasja do latania FPV przerodziła się w pełnowymiarowy warsztat.
+              Jego pasja do latania FPV przerodziła się w pełnowymiarowy warsztat.</span>
             </p>
-            <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0 }}>
-              Specjalizuje się w konfigurowaniu Betaflight, lutowaniu stacków
+            <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0, display: "flex", alignItems: "flex-start", gap: 10 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, marginTop: 6, objectFit: "contain" }} />
+              <span>Specjalizuje się w konfigurowaniu Betaflight, lutowaniu stacków
               i dostrajaniu PID-ów pod konkretny styl lotu. Każdy dron, który
               opuszcza jego warsztat, przechodzi pełny test bench oraz oblot
-              w kontrolowanym środowisku.
+              w kontrolowanym środowisku.</span>
             </p>
-            <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0 }}>
-              Prowadzi szkolenia stacjonarne i online dla początkujących pilotów
-              oraz doskonali techniki zaawansowanych.
+            <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0, display: "flex", alignItems: "flex-start", gap: 10 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, marginTop: 6, objectFit: "contain" }} />
+              <span>Prowadzi szkolenia stacjonarne i online dla początkujących pilotów
+              oraz doskonali techniki zaawansowanych.</span>
             </p>
           </div>
 

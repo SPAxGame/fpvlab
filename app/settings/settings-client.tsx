@@ -5,6 +5,7 @@ import type { ChangeEvent } from "react";
 import {
   DEFAULT_SETTINGS,
   SETTINGS_KEY,
+  PRESET_BACKGROUNDS_KEY,
   hexToRgba,
 } from "../lib/settings";
 import type { HomepageSettings } from "../lib/settings";
@@ -14,60 +15,70 @@ const PRESETS: Record<string, HomepageSettings> = {
   "Sky": {
     ...DEFAULT_SETTINGS,
     panelBgColor: "#0A1628",
-    panelOpacity: "85",
-    panelBorderColor: "#1E5FA8",
+    panelOpacity: "60",
+    panelBorderColor: "#4A8CC8",
     panelTitleColor: "#E8F4FD",
     subpageTitleColor: "#E8F4FD",
-    panelSubtitleColor: "#4DB8FF",
-    panelTextColor: "#8BB8D4",
+    panelSubtitleColor: "#5BC4FF",
+    panelTextColor: "#A8D0E8",
     sliderBgColor: "#0D1F35",
-    sliderBorderColor: "#1E5FA8",
+    sliderBorderColor: "#4A8CC8",
     advantageBgColor: "#1E5FA8",
-    infoTextColor: "#8BB8D4",
+    infoTextColor: "#A8D0E8",
   },
   "Zachód": {
     ...DEFAULT_SETTINGS,
     panelBgColor: "#1A0A00",
-    panelOpacity: "85",
-    panelBorderColor: "#8B3000",
+    panelOpacity: "60",
+    panelBorderColor: "#C05010",
     panelTitleColor: "#FFF5E6",
     subpageTitleColor: "#FFF5E6",
-    panelSubtitleColor: "#FF6B1A",
-    panelTextColor: "#C4936A",
+    panelSubtitleColor: "#FF8040",
+    panelTextColor: "#D8A87C",
     sliderBgColor: "#200D00",
-    sliderBorderColor: "#8B3000",
+    sliderBorderColor: "#C05010",
     advantageBgColor: "#8B3000",
-    infoTextColor: "#C4936A",
+    infoTextColor: "#D8A87C",
   },
   "Ciemny": {
     ...DEFAULT_SETTINGS,
     panelBgColor: "#1A1A1A",
-    panelOpacity: "85",
-    panelBorderColor: "#555555",
+    panelOpacity: "60",
+    panelBorderColor: "#707070",
     panelTitleColor: "#F0F0F0",
     subpageTitleColor: "#F0F0F0",
-    panelSubtitleColor: "#A8A8A8",
-    panelTextColor: "#787878",
+    panelSubtitleColor: "#C0C0C0",
+    panelTextColor: "#A8A8A8",
     sliderBgColor: "#111111",
-    sliderBorderColor: "#444444",
+    sliderBorderColor: "#606060",
     advantageBgColor: "#2E2E2E",
-    infoTextColor: "#909090",
+    infoTextColor: "#A8A8A8",
   },
   "Jasny": {
     ...DEFAULT_SETTINGS,
     panelBgColor: "#F5F5F0",
-    panelOpacity: "90",
-    panelBorderColor: "#B0A898",
+    panelOpacity: "60",
+    panelBorderColor: "#7A6C5C",
     panelTitleColor: "#1A1A1A",
     subpageTitleColor: "#FFFFFF",
-    panelSubtitleColor: "#7A5C2E",
+    panelSubtitleColor: "#6A4C1E",
     panelTextColor: "#4A4A4A",
     sliderBgColor: "#E8E5DF",
-    sliderBorderColor: "#B0A898",
-    advantageBgColor: "#D6D0C4",
-    infoTextColor: "#5A5A5A",
+    sliderBorderColor: "#7A6C5C",
+    advantageBgColor: "#C8C0B4",
+    infoTextColor: "#4A4A4A",
   },
 };
+
+const PRESET_BG_DEFAULTS: Record<string, string> = {
+  "Mario":  "/images/background_mario.jpg",
+  "Sky":    "/images/background_sky.jpg",
+  "Zachód": "/images/background_zachod.jpg",
+  "Ciemny": "/images/background_ciemny.jpg",
+  "Jasny":  "/images/background_jasny.jpg",
+};
+
+const CUSTOM_PRESETS_KEY = "fpv-custom-presets";
 
 // Resize image to max 1920×1080, JPEG 85% quality
 function resizeImage(file: File): Promise<string> {
@@ -101,11 +112,13 @@ function resizeImage(file: File): Promise<string> {
 
 // ─── Media Panel ────────────────────────────────────────────────────────────
 
-type MediaFolder = "panel_1_home" | "slider" | "videos";
+type MediaFolder = "panel_1_home" | "slider" | "videos" | "panel_drony_fpv";
 
-// Resize image to max 1920×1080 JPEG 85% and return as File
+// Resize image to max 1920×1080 and return as File.
+// PNGs are kept as PNG to preserve transparency; other formats are converted to JPEG 85%.
 function resizeImageFile(file: File): Promise<File> {
   return new Promise((resolve) => {
+    const isPng = file.type === "image/png";
     const img = document.createElement("img");
     const url = URL.createObjectURL(file);
     img.onload = () => {
@@ -122,11 +135,18 @@ function resizeImageFile(file: File): Promise<File> {
       URL.revokeObjectURL(url);
       if (!ctx) { resolve(file); return; }
       ctx.drawImage(img, 0, 0, w, h);
-      canvas.toBlob((blob) => {
-        if (!blob) { resolve(file); return; }
-        const outName = file.name.replace(/\.[^.]+$/, ".jpg");
-        resolve(new File([blob], outName, { type: "image/jpeg" }));
-      }, "image/jpeg", 0.85);
+      if (isPng) {
+        canvas.toBlob((blob) => {
+          if (!blob) { resolve(file); return; }
+          resolve(new File([blob], file.name, { type: "image/png" }));
+        }, "image/png");
+      } else {
+        canvas.toBlob((blob) => {
+          if (!blob) { resolve(file); return; }
+          const outName = file.name.replace(/\.[^.]+$/, ".jpg");
+          resolve(new File([blob], outName, { type: "image/jpeg" }));
+        }, "image/jpeg", 0.85);
+      }
     };
     img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
     img.src = url;
@@ -357,7 +377,7 @@ function MediaPanel({
                       height: thumbH,
                       objectFit: "cover",
                       borderRadius: 8,
-                      border: `1px solid ${bs}`,
+                      border: `2px solid ${hexToRgba(settings.panelBorderColor, 60)}`,
                       display: "block",
                     }}
                   />
@@ -373,7 +393,7 @@ function MediaPanel({
                       borderRadius: 8,
                       border: sortDragIdx === idx
                         ? `2px dashed ${settings.panelSubtitleColor}`
-                        : `1px solid ${bs}`,
+                        : `2px solid ${hexToRgba(settings.panelBorderColor, 60)}`,
                       display: "block",
                     }}
                   />
@@ -614,9 +634,15 @@ export default function SettingsClient() {
   const [settings, setSettings] = useState<HomepageSettings>(DEFAULT_SETTINGS);
   const [bgFileName, setBgFileName] = useState("");
   const [saved, setSaved] = useState(false);
+  const [presetBgs, setPresetBgs] = useState<Record<string, string>>({ ...PRESET_BG_DEFAULTS });
+  const [savedPresetBgs, setSavedPresetBgs] = useState<Record<string, string>>({ ...PRESET_BG_DEFAULTS });
+  const [presetBgFileNames, setPresetBgFileNames] = useState<Record<string, string>>({});
+  const [presetBgRowSaved, setPresetBgRowSaved] = useState<Record<string, boolean>>({});
+  const [customPresets, setCustomPresets] = useState<Record<string, HomepageSettings>>({});
+  const [newPresetName, setNewPresetName] = useState("");
 
   const panelStyle: React.CSSProperties = {
-    border: `2px solid ${settings.panelBorderColor}`,
+    border: `1px solid ${hexToRgba(settings.panelBorderColor, 30)}`,
     backgroundColor: hexToRgba(settings.panelBgColor, parseInt(settings.panelOpacity)),
     backdropFilter: "blur(10px)",
     WebkitBackdropFilter: "blur(10px)",
@@ -634,6 +660,14 @@ export default function SettingsClient() {
         setSettings(parsed);
         if (parsed.bgDataUrl) setBgFileName("(plik załadowany)");
       }
+      const storedPresetBgs = localStorage.getItem(PRESET_BACKGROUNDS_KEY);
+      if (storedPresetBgs) {
+        const merged = { ...PRESET_BG_DEFAULTS, ...JSON.parse(storedPresetBgs) };
+        setPresetBgs(merged);
+        setSavedPresetBgs(merged);
+      }
+      const storedCustom = localStorage.getItem(CUSTOM_PRESETS_KEY);
+      if (storedCustom) setCustomPresets(JSON.parse(storedCustom));
     } catch {
       /* ignore */
     }
@@ -676,13 +710,95 @@ export default function SettingsClient() {
   function applyPreset(name: string) {
     const preset = PRESETS[name];
     if (!preset) return;
-    const merged = { ...preset, bgApplyToSubpages: settings.bgApplyToSubpages, panelBgApplyToSubpages: true };
+    const presetBg = presetBgs[name] ?? PRESET_BG_DEFAULTS[name] ?? "";
+    const isDataUrl = presetBg.startsWith("data:");
+    const merged = {
+      ...preset,
+      bgApplyToSubpages: settings.bgApplyToSubpages,
+      panelBgApplyToSubpages: true,
+      bgDataUrl: isDataUrl ? presetBg : "",
+      bgImagePath: isDataUrl ? "" : presetBg,
+    };
     setSettings(merged);
-    setBgFileName("");
+    setBgFileName(isDataUrl ? (presetBgFileNames[name] ?? "(plik załadowany)") : "");
     try {
       localStorage.setItem(SETTINGS_KEY, JSON.stringify(merged));
-      setSaved(true);
-      setTimeout(() => setSaved(false), 2500);
+      window.location.reload();
+    } catch {
+      setSaved(false);
+    }
+  }
+
+  async function handlePresetBgFile(e: ChangeEvent<HTMLInputElement>, presetName: string) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    e.target.value = "";
+    try {
+      const dataUrl = await resizeImage(file);
+      setPresetBgs((prev) => ({ ...prev, [presetName]: dataUrl }));
+      setPresetBgFileNames((prev) => ({ ...prev, [presetName]: file.name }));
+    } catch {
+      alert("Nie udało się wczytać pliku.");
+    }
+  }
+
+  function resetPresetBg(presetName: string) {
+    setPresetBgs((prev) => ({ ...prev, [presetName]: PRESET_BG_DEFAULTS[presetName] ?? "" }));
+    setPresetBgFileNames((prev) => {
+      const next = { ...prev };
+      delete next[presetName];
+      return next;
+    });
+  }
+
+  function savePresetBg(presetName: string) {
+    try {
+      localStorage.setItem(PRESET_BACKGROUNDS_KEY, JSON.stringify(presetBgs));
+      setSavedPresetBgs({ ...presetBgs });
+      setPresetBgRowSaved((prev) => ({ ...prev, [presetName]: true }));
+      setTimeout(() => setPresetBgRowSaved((prev) => ({ ...prev, [presetName]: false })), 2500);
+    } catch {
+      alert("Nie można zapisać – plik tła może być zbyt duży. Spróbuj z mniejszym zdjęciem.");
+    }
+  }
+
+  function saveAsCustomPreset() {
+    const name = newPresetName.trim();
+    if (!name) return;
+    const presetToSave = { ...settings, bgDataUrl: "" };
+    const updated = { ...customPresets, [name]: presetToSave };
+    setCustomPresets(updated);
+    try {
+      localStorage.setItem(CUSTOM_PRESETS_KEY, JSON.stringify(updated));
+    } catch {
+      alert("Nie można zapisać presetu – spróbuj bez zdjęcia tła.");
+    }
+    setNewPresetName("");
+  }
+
+  function deleteCustomPreset(name: string) {
+    const updated = { ...customPresets };
+    delete updated[name];
+    setCustomPresets(updated);
+    localStorage.setItem(CUSTOM_PRESETS_KEY, JSON.stringify(updated));
+  }
+
+  function applyCustomPreset(name: string) {
+    const preset = customPresets[name];
+    if (!preset) return;
+    const presetBg = presetBgs[name] ?? "";
+    const isDataUrl = presetBg.startsWith("data:");
+    const merged = {
+      ...DEFAULT_SETTINGS,
+      ...preset,
+      bgDataUrl: isDataUrl ? presetBg : "",
+      bgImagePath: isDataUrl ? "" : presetBg,
+    };
+    setSettings(merged);
+    setBgFileName(isDataUrl ? "(plik załadowany)" : "");
+    try {
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(merged));
+      window.location.reload();
     } catch {
       setSaved(false);
     }
@@ -697,8 +813,13 @@ export default function SettingsClient() {
         letterSpacing: 2,
         textTransform: "uppercase",
         margin: "0 0 16px",
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
       }}
     >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, objectFit: "contain" }} />
       {text}
     </h3>
   );
@@ -706,12 +827,13 @@ export default function SettingsClient() {
   const rowBg = hexToRgba(settings.sliderBgColor, 60);
 
   return (
-    <div style={{ width: "100%", maxWidth: 900, margin: "0 auto", padding: "0 16px 60px" }}>
+    <div style={{ width: "100%", maxWidth: 1100, margin: "0 auto", padding: "0 24px 60px" }}>
 
         {/* Presety */}
         <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 20 }}>
           {sectionTitle("Szybkie presety")}
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+          <p style={{ fontSize: 11, color: settings.panelSubtitleColor, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", margin: "0 0 8px" }}>Wbudowane</p>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", marginBottom: 20 }}>
             {Object.keys(PRESETS).map((name) => (
               <button
                 key={name}
@@ -731,92 +853,345 @@ export default function SettingsClient() {
               </button>
             ))}
           </div>
+          <p style={{ fontSize: 11, color: settings.panelSubtitleColor, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", margin: "0 0 8px" }}>Własne presety</p>
+          {Object.keys(customPresets).length > 0 ? (
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginBottom: 12 }}>
+              {Object.keys(customPresets).map((name) => (
+                <div
+                  key={name}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    border: `1px solid ${borderSubtle}`,
+                    borderRadius: 20,
+                    overflow: "hidden",
+                  }}
+                >
+                  <button
+                    onClick={() => applyCustomPreset(name)}
+                    style={{
+                      background: "transparent",
+                      color: settings.panelTextColor,
+                      border: "none",
+                      borderRight: `1px solid ${borderSubtle}`,
+                      padding: "7px 16px",
+                      fontSize: 13,
+                      cursor: "pointer",
+                      fontWeight: 500,
+                    }}
+                  >
+                    {name}
+                  </button>
+                  <button
+                    onClick={() => deleteCustomPreset(name)}
+                    title="Usuń preset"
+                    style={{
+                      background: "transparent",
+                      color: hexToRgba(settings.panelTextColor, 60),
+                      border: "none",
+                      padding: "7px 10px",
+                      fontSize: 15,
+                      cursor: "pointer",
+                      lineHeight: 1,
+                    }}
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p style={{ fontSize: 12, color: hexToRgba(settings.panelTextColor, 50), marginBottom: 12, marginTop: 0 }}>
+              Brak własnych presetów.
+            </p>
+          )}
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <input
+              type="text"
+              value={newPresetName}
+              onChange={(e) => setNewPresetName(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && saveAsCustomPreset()}
+              placeholder="Nazwa nowego presetu…"
+              maxLength={40}
+              style={{
+                flex: 1,
+                maxWidth: 260,
+                background: hexToRgba(settings.sliderBgColor, 90),
+                border: `1px solid ${borderSubtle}`,
+                color: settings.panelTitleColor,
+                fontSize: 13,
+                borderRadius: 20,
+                padding: "7px 16px",
+                outline: "none",
+              }}
+            />
+            <button
+              onClick={saveAsCustomPreset}
+              disabled={!newPresetName.trim()}
+              style={{
+                background: newPresetName.trim() ? settings.panelSubtitleColor : hexToRgba(settings.panelBorderColor, 30),
+                color: newPresetName.trim() ? "#111" : hexToRgba(settings.panelTextColor, 40),
+                border: "none",
+                borderRadius: 20,
+                padding: "7px 20px",
+                fontSize: 13,
+                fontWeight: 700,
+                cursor: newPresetName.trim() ? "pointer" : "default",
+                transition: "all 0.15s",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Zapisz preset
+            </button>
+          </div>
+        </div>
+
+        {/* Tła stron dla presetów */}
+        <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 20 }}>
+          {sectionTitle("Tła stron dla presetów")}
+          <p style={{ fontSize: 12, color: settings.panelTextColor, marginBottom: 16, marginTop: -8 }}>
+            Każdy preset może mieć przypisane własne tło strony. Domyślnie używane są pliki z folderu <code style={{ background: "rgba(255,255,255,0.07)", padding: "1px 5px", borderRadius: 4 }}>/images/</code>. Kliknij "Wybierz plik" aby załadować własny obraz.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {Object.keys(PRESETS).map((presetName) => {
+              const bg = presetBgs[presetName] ?? PRESET_BG_DEFAULTS[presetName] ?? "";
+              const isDataUrl = bg.startsWith("data:");
+              const defaultBg = PRESET_BG_DEFAULTS[presetName] ?? "";
+              const isCustom = bg !== defaultBg;
+              const displayLabel = isDataUrl
+                ? (presetBgFileNames[presetName] ?? "(plik załadowany)")
+                : bg || "—";
+              return (
+                <div
+                  key={presetName}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 12,
+                    padding: "10px 14px",
+                    borderRadius: 10,
+                    backgroundColor: hexToRgba(settings.sliderBgColor, 60),
+                    border: `1px solid ${borderSubtle}`,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {/* Preset name */}
+                  <span
+                    style={{
+                      minWidth: 64,
+                      fontSize: 13,
+                      fontWeight: 700,
+                      color: settings.panelTitleColor,
+                    }}
+                  >
+                    {presetName}
+                  </span>
+
+                  {/* Thumbnail */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={bg || defaultBg}
+                    alt=""
+                    style={{
+                      width: 72,
+                      height: 46,
+                      objectFit: "cover",
+                      borderRadius: 5,
+                      border: `2px solid ${hexToRgba(settings.panelBorderColor, 60)}`,
+                      flexShrink: 0,
+                    }}
+                  />
+
+                  {/* File label */}
+                  <span
+                    style={{
+                      flex: 1,
+                      fontSize: 11,
+                      color: isCustom ? settings.panelSubtitleColor : hexToRgba(settings.panelTextColor, 65),
+                      wordBreak: "break-all",
+                      minWidth: 120,
+                    }}
+                  >
+                    {displayLabel}
+                  </span>
+
+                  {/* Buttons */}
+                  <div style={{ display: "flex", gap: 8, alignItems: "center", flexShrink: 0 }}>
+                    <label
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                        background: hexToRgba(settings.sliderBgColor, 90),
+                        border: `1px solid ${borderSubtle}`,
+                        color: settings.panelTextColor,
+                        padding: "6px 14px",
+                        borderRadius: 7,
+                        fontSize: 12,
+                        cursor: "pointer",
+                        fontWeight: 500,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      Wybierz plik z dysku
+                      <input
+                        type="file"
+                        accept="image/*"
+                        style={{ display: "none" }}
+                        onChange={(e) => handlePresetBgFile(e, presetName)}
+                      />
+                    </label>
+                    {isCustom && (
+                      <button
+                        onClick={() => resetPresetBg(presetName)}
+                        style={{
+                          background: "none",
+                          border: `1px solid ${hexToRgba(settings.panelBorderColor, 40)}`,
+                          color: hexToRgba(settings.panelTextColor, 70),
+                          borderRadius: 7,
+                          padding: "6px 12px",
+                          fontSize: 12,
+                          cursor: "pointer",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        ↩ Domyślne
+                      </button>
+                    )}
+                    <button
+                      onClick={() => savePresetBg(presetName)}
+                      disabled={savedPresetBgs[presetName] === presetBgs[presetName] && !presetBgRowSaved[presetName]}
+                      style={{
+                        background: presetBgRowSaved[presetName]
+                          ? hexToRgba(settings.panelSubtitleColor, 60)
+                          : savedPresetBgs[presetName] === presetBgs[presetName]
+                          ? hexToRgba(settings.panelBorderColor, 30)
+                          : settings.panelSubtitleColor,
+                        color: savedPresetBgs[presetName] === presetBgs[presetName] && !presetBgRowSaved[presetName]
+                          ? hexToRgba(settings.panelTextColor, 40)
+                          : "#111",
+                        border: "none",
+                        borderRadius: 7,
+                        padding: "6px 14px",
+                        fontWeight: 700,
+                        fontSize: 12,
+                        cursor: savedPresetBgs[presetName] === presetBgs[presetName] && !presetBgRowSaved[presetName] ? "default" : "pointer",
+                        whiteSpace: "nowrap",
+                        transition: "all 0.15s",
+                      }}
+                    >
+                      {presetBgRowSaved[presetName] ? "✓ Zapisano" : "Zapisz"}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+            {Object.keys(customPresets).length > 0 && (
+              <>
+                <p style={{ fontSize: 11, color: settings.panelSubtitleColor, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", margin: "12px 0 4px" }}>Własne presety</p>
+                {Object.keys(customPresets).map((presetName) => {
+                  const bg = presetBgs[presetName] ?? "";
+                  const isDataUrl = bg.startsWith("data:");
+                  const hasBg = bg !== "";
+                  const displayLabel = isDataUrl
+                    ? (presetBgFileNames[presetName] ?? "(plik załadowany)")
+                    : bg || "— brak tła";
+                  return (
+                    <div
+                      key={presetName}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 12,
+                        padding: "10px 14px",
+                        borderRadius: 10,
+                        backgroundColor: hexToRgba(settings.sliderBgColor, 60),
+                        border: `1px solid ${borderSubtle}`,
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <span style={{ minWidth: 64, fontSize: 13, fontWeight: 700, color: settings.panelTitleColor }}>
+                        {presetName}
+                      </span>
+                      {hasBg ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={bg}
+                          alt=""
+                          style={{
+                            width: 72, height: 46, objectFit: "cover",
+                            borderRadius: 5,
+                            border: `2px solid ${hexToRgba(settings.panelBorderColor, 60)}`,
+                            flexShrink: 0,
+                          }}
+                        />
+                      ) : (
+                        <div style={{
+                          width: 72, height: 46, borderRadius: 5,
+                          border: `2px dashed ${hexToRgba(settings.panelBorderColor, 40)}`,
+                          flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center",
+                          fontSize: 10, color: hexToRgba(settings.panelTextColor, 40),
+                        }}>brak</div>
+                      )}
+                      <span style={{ flex: 1, fontSize: 11, color: hasBg ? settings.panelSubtitleColor : hexToRgba(settings.panelTextColor, 40), wordBreak: "break-all", minWidth: 120 }}>
+                        {displayLabel}
+                      </span>
+                      <div style={{ display: "flex", gap: 8, alignItems: "center", flexShrink: 0 }}>
+                        <label style={{
+                          display: "inline-flex", alignItems: "center", gap: 6,
+                          background: hexToRgba(settings.sliderBgColor, 90),
+                          border: `1px solid ${borderSubtle}`,
+                          color: settings.panelTextColor, padding: "6px 14px", borderRadius: 7,
+                          fontSize: 12, cursor: "pointer", fontWeight: 500, whiteSpace: "nowrap",
+                        }}>
+                          Wybierz plik z dysku
+                          <input type="file" accept="image/*" style={{ display: "none" }} onChange={(e) => handlePresetBgFile(e, presetName)} />
+                        </label>
+                        {hasBg && (
+                          <button
+                            onClick={() => resetPresetBg(presetName)}
+                            style={{
+                              background: "none",
+                              border: `1px solid ${hexToRgba(settings.panelBorderColor, 40)}`,
+                              color: hexToRgba(settings.panelTextColor, 70),
+                              borderRadius: 7, padding: "6px 12px", fontSize: 12, cursor: "pointer", whiteSpace: "nowrap",
+                            }}
+                          >
+                            ✖ Usuń tło
+                          </button>
+                        )}
+                        <button
+                          onClick={() => savePresetBg(presetName)}
+                          disabled={savedPresetBgs[presetName] === presetBgs[presetName] && !presetBgRowSaved[presetName]}
+                          style={{
+                            background: presetBgRowSaved[presetName]
+                              ? hexToRgba(settings.panelSubtitleColor, 60)
+                              : savedPresetBgs[presetName] === presetBgs[presetName]
+                              ? hexToRgba(settings.panelBorderColor, 30)
+                              : settings.panelSubtitleColor,
+                            color: savedPresetBgs[presetName] === presetBgs[presetName] && !presetBgRowSaved[presetName]
+                              ? hexToRgba(settings.panelTextColor, 40) : "#111",
+                            border: "none", borderRadius: 7, padding: "6px 14px",
+                            fontWeight: 700, fontSize: 12,
+                            cursor: savedPresetBgs[presetName] === presetBgs[presetName] && !presetBgRowSaved[presetName] ? "default" : "pointer",
+                            whiteSpace: "nowrap", transition: "all 0.15s",
+                          }}
+                        >
+                          {presetBgRowSaved[presetName] ? "✓ Zapisano" : "Zapisz"}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </div>
+
         </div>
 
         {/* Wygląd – scalony panel */}
         <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 20 }}>
           {sectionTitle("Wygląd i ustawienia")}
-
-          {/* Tło strony */}
-          <p style={{ fontSize: 11, color: settings.panelSubtitleColor, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", margin: "0 0 8px" }}>Tło strony</p>
-          <div
-            style={{
-              padding: "14px 16px",
-              borderRadius: 10,
-              backgroundColor: rowBg,
-              border: `1px solid ${borderSubtle}`,
-              marginBottom: 20,
-            }}
-          >
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 14, alignItems: "center" }}>
-              <label
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  background: hexToRgba(settings.sliderBgColor, 90),
-                  border: `1px solid ${borderSubtle}`,
-                  color: settings.panelTextColor,
-                  padding: "7px 16px",
-                  borderRadius: 8,
-                  fontSize: 13,
-                  cursor: "pointer",
-                  fontWeight: 500,
-                }}
-              >
-                Wybierz plik z dysku
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleBgFile}
-                  style={{ display: "none" }}
-                />
-              </label>
-              {bgFileName ? (
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <span style={{ color: settings.panelSubtitleColor, fontSize: 12 }}>{bgFileName}</span>
-                  <button
-                    onClick={clearBg}
-                    style={{
-                      color: "#e05252",
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      fontSize: 12,
-                      padding: 0,
-                    }}
-                  >
-                    ✕ Usuń
-                  </button>
-                </div>
-              ) : (
-                <span style={{ color: hexToRgba(settings.panelBorderColor, 55), fontSize: 12 }}>
-                  Domyślnie: /images/background.jpg
-                </span>
-              )}
-            </div>
-            <label
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                cursor: "pointer",
-                fontSize: 13,
-                color: settings.bgApplyToSubpages ? settings.panelTextColor : hexToRgba(settings.panelBorderColor, 60),
-                marginTop: 12,
-              }}
-            >
-              <input
-                type="checkbox"
-                checked={settings.bgApplyToSubpages}
-                onChange={(e) =>
-                  setSettings((prev) => ({ ...prev, bgApplyToSubpages: e.target.checked }))
-                }
-                style={{ accentColor: settings.panelSubtitleColor, width: 15, height: 15, cursor: "pointer" }}
-              />
-              Zastosuj tło do podstron
-            </label>
-          </div>
 
           {/* Kolory paneli */}
           <p style={{ fontSize: 11, color: settings.panelSubtitleColor, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", margin: "0 0 8px" }}>Kolory paneli</p>
@@ -966,40 +1341,13 @@ export default function SettingsClient() {
               width: "100%",
             }}
           >
-            Zapisz ustawienia
+            Zapisz ustawienia wyglądu
           </button>
           {saved && (
             <span style={{ display: "block", color: settings.panelSubtitleColor, fontSize: 13, textAlign: "center", marginTop: 8 }}>
-              ✓ Zapisano — odśwież stronę główną, aby zobaczyć zmiany
+              ✓ Zapisano - odśwież stronę główną, aby zobaczyć zmiany
             </span>
           )}
-        </div>
-
-        {/* Media – Panel 1 strony home */}
-        <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 20 }}>
-          {sectionTitle("Panel 1 – strona home (zdjęcia)")}
-          <p style={{ fontSize: 12, color: settings.panelTextColor, marginBottom: 14, marginTop: -8 }}>
-            Zdjęcia wyświetlane w panelu 1 na stronie głównej. Przeciągnij lub kliknij "+" aby dodać.
-          </p>
-          <MediaPanel folder="panel_1_home" accept="image/jpeg,image/png,image/webp,image/gif" canSort saveLabel="Zapisz zmiany w panelu 1" settings={settings} borderSubtle={borderSubtle} />
-        </div>
-
-        {/* Media – Slider strony home */}
-        <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 20 }}>
-          {sectionTitle("Slider – strona home (zdjęcia)")}
-          <p style={{ fontSize: 12, color: settings.panelTextColor, marginBottom: 14, marginTop: -8 }}>
-            Zdjęcia wyświetlane w sliderze na stronie głównej.
-          </p>
-          <MediaPanel folder="slider" accept="image/jpeg,image/png,image/webp,image/gif" canSort canCaption saveLabel="Zapisz zmiany w sliderze" settings={settings} borderSubtle={borderSubtle} />
-        </div>
-
-        {/* Media – Filmy Warsztaty */}
-        <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 28 }}>
-          {sectionTitle("Warsztaty – filmy")}
-          <p style={{ fontSize: 12, color: settings.panelTextColor, marginBottom: 14, marginTop: -8 }}>
-            Filmy wideo wyświetlane na stronie Warsztaty (mp4, mov, webm – max 200 MB).
-          </p>
-          <MediaPanel folder="videos" accept="video/mp4,video/quicktime,video/webm,video/*" canSort canCaption saveLabel="Zapisz zmiany w filmach" settings={settings} borderSubtle={borderSubtle} />
         </div>
 
         <p style={{ marginTop: 20, fontSize: 12, color: hexToRgba(settings.panelBorderColor, 60), lineHeight: 1.7 }}>
@@ -1007,5 +1355,84 @@ export default function SettingsClient() {
           Zdjęcie tła jest skalowane do max 1920×1080 przed zapisem.
         </p>
       </div>
+  );
+}
+
+export function MediaSettingsClient() {
+  const [settings, setSettings] = useState<HomepageSettings>(DEFAULT_SETTINGS);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(SETTINGS_KEY);
+      if (stored) setSettings((prev) => ({ ...prev, ...JSON.parse(stored) }));
+    } catch { /* ignore */ }
+  }, []);
+
+  const panelStyle: React.CSSProperties = {
+    border: `1px solid ${hexToRgba(settings.panelBorderColor, 30)}`,
+    backgroundColor: hexToRgba(settings.panelBgColor, parseInt(settings.panelOpacity)),
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
+  };
+  const borderSubtle = hexToRgba(settings.panelBorderColor, 35);
+
+  const sectionTitle = (text: string) => (
+    <h3
+      style={{
+        color: settings.panelTitleColor,
+        fontSize: 14,
+        fontWeight: 700,
+        letterSpacing: 2,
+        textTransform: "uppercase",
+        margin: "0 0 16px",
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, objectFit: "contain" }} />
+      {text}
+    </h3>
+  );
+
+  return (
+    <div style={{ width: "100%", maxWidth: 1100, margin: "0 auto", padding: "0 24px 60px" }}>
+      {/* Media – Filmy Warsztaty */}
+      <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 20 }}>
+        {sectionTitle("Warsztaty – filmy")}
+        <p style={{ fontSize: 12, color: settings.panelTextColor, marginBottom: 14, marginTop: -8 }}>
+          Filmy wideo wyświetlane na stronie Warsztaty (mp4, mov, webm – max 200 MB).
+        </p>
+        <MediaPanel folder="videos" accept="video/mp4,video/quicktime,video/webm,video/*" canSort canCaption saveLabel="Zapisz zmiany w podpisach filmów" settings={settings} borderSubtle={borderSubtle} />
+      </div>
+
+      {/* Media – Panel 1 strony home */}
+      <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 20 }}>
+        {sectionTitle("Panel – strona home (zdjęcia)")}
+        <p style={{ fontSize: 12, color: settings.panelTextColor, marginBottom: 14, marginTop: -8 }}>
+          Zdjęcia wyświetlane w panelu 1 na stronie głównej. Przeciągnij lub kliknij "+" aby dodać.
+        </p>
+        <MediaPanel folder="panel_1_home" accept="image/jpeg,image/png,image/webp,image/gif" canSort saveLabel="Zapisz zmiany w panelu 1" settings={settings} borderSubtle={borderSubtle} />
+      </div>
+
+      {/* Media – Slider strony home */}
+      <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 20 }}>
+        {sectionTitle("Slider – strona home (zdjęcia)")}
+        <p style={{ fontSize: 12, color: settings.panelTextColor, marginBottom: 14, marginTop: -8 }}>
+          Zdjęcia wyświetlane w sliderze na stronie głównej.
+        </p>
+        <MediaPanel folder="slider" accept="image/jpeg,image/png,image/webp,image/gif" canSort canCaption saveLabel="Zapisz zmiany w podpisach zdjęć" settings={settings} borderSubtle={borderSubtle} />
+      </div>
+
+      {/* Media – Drony FPV */}
+      <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 28 }}>
+        {sectionTitle("Panel – strona Drony FPV – zdjęcia")}
+        <p style={{ fontSize: 12, color: settings.panelTextColor, marginBottom: 14, marginTop: -8 }}>
+          Zdjęcia przyporządkowane do 6 klocków na stronie Drony FPV.<br />Kolejność odpowiada kolejności klocków: Drony wyścigowe, Freestyle, Long range, HD, Budżetowe, Na zamówienie.
+        </p>
+        <MediaPanel folder="panel_drony_fpv" accept="image/jpeg,image/png,image/webp,image/gif" canSort saveLabel="Zapisz kolejność zdjęć" settings={settings} borderSubtle={borderSubtle} />
+      </div>
+    </div>
   );
 }

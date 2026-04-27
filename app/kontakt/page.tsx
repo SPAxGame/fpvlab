@@ -14,7 +14,7 @@ export default function KontaktPage() {
       <main
         style={{
           flex: 1,
-          maxWidth: 780,
+          maxWidth: 1100,
           width: "100%",
           margin: "0 auto",
           padding: "52px 24px",

@@ -6,24 +6,35 @@
     "name": "Speedybee Mario 5\"",
     "price": 225,
     "description": "SpeedyBee Mario 5 to wytrzymała rama FPV klasy 5 cali zaprojektowana do freestyle i cinematic. Wykonana z wysokiej jakości carbonu, oferuje dużą sztywność i odporność na crash’e.",
-    "image": "rama-speedybee-mario-5-20260404-231445.jpg",
+    "image": "rama-speedybee-mario-5-20260405-154311.jpg",
     "frameType": "DC",
     "includesStraps": false,
     "images": [
-      "rama-speedybee-mario-5-20260404-231445.jpg",
-      "rama-speedybee-mario-5-20260404-231702.webp"
+      "rama-speedybee-mario-5-20260405-154311.jpg",
+      "rama-speedybee-mario-5-20260405-154315.jpg"
     ]
   },
   {
     "id": "p-1775312843805",
     "inStock": true,
     "category": "motor",
-    "name": "T-Motor F60 Pro IV 2207",
+    "name": "T-Motor F60 Pro IV 2207 ",
     "price": 460,
-    "description": "Silnik bezszczotkowy od firmy T-Motor o rozmiarze 2207 przeznaczony do baterii 5-6s o mocy 1950kv.",
-    "image": "silniki-t-motor-f60-pro-iv-2207-20260404-171436.png",
+    "description": "Silnik bezszczotkowy od firmy T-Motor o rozmiarze 2207",
+    "image": "silniki-t-motor-f60-pro-iv-2207-1950kv-6s-20260406-131155.png",
     "includesStraps": false,
-    "kv": 1950
+    "kv": 1950,
+    "images": [
+      "silniki-t-motor-f60-pro-iv-2207-1950kv-6s-20260406-131155.png",
+      "silniki-t-motor-f60-pro-iv-2207-1950kv-6s-20260406-131258.jpg",
+      "silniki-t-motor-f60-pro-iv-2207-1950kv-6s-20260406-131300.jpg",
+      "silniki-t-motor-f60-pro-iv-2207-1950kv-6s-20260406-131303.jpg",
+      "silniki-t-motor-f60-pro-iv-2207-1950kv-6s-20260406-131305.jpg"
+    ],
+    "cellCount": "6s",
+    "kvOptions": [
+      1950
+    ]
   },
   {
     "id": "p-1775313219217",
@@ -60,22 +71,17 @@
   {
     "id": "p-1775313962832",
     "inStock": true,
-    "category": "battery",
-    "name": "2x akumulator LiPo Ovonic 1300mAh 6S 120C 22,2V ze wtyczką XT60",
-    "price": 145,
-    "description": "Akumulator LiPo Ovonic 1300 mAh 6S 120C to jeden z naszych najniezawodniejszych i najlepiej sprzedających się akumulatorów, któremu zaufały tysiące pilotów FPV na całym świecie. Zapewnia idealne połączenie wysokiej mocy rozładowania, lekkiej konstrukcji i solidnej wytrzymałości – idealny zarówno do dronów wyścigowych, jak i freestyle'owych.",
-    "image": "akumulator-2x-akumulator-lipo-ovonic-1300mah-6s-120c-22-2v-ze-wtyczka-xt60-20260404-164600.png",
-    "includesStraps": false
-  },
-  {
-    "id": "p-1775314360518",
-    "inStock": true,
     "category": "battery_strap",
     "name": "5x iFlight Nylon Lipo Battery Strap 20x200mm",
     "price": 13,
-    "description": "Nylonowa opaska do baterii Lipo zapewnia długotrwałe użytkowanie i wytrzymałość. Materiał nie niszczy baterii.",
-    "image": "paski-do-akumulatora-velcro-20260404-164947.png",
-    "includesStraps": false
+    "description": "Opaska do baterii Lipo zapewnia długotrwałe użytkowanie i wytrzymałość. Materiał nie niszczy baterii.",
+    "image": "paski-do-akumulatora-5x-iflight-nylon-lipo-battery-strap-20x200mm-20260406-143115.png",
+    "includesStraps": false,
+    "cellCount": "6s",
+    "images": [
+      "paski-do-akumulatora-5x-iflight-nylon-lipo-battery-strap-20x200mm-20260406-143115.png",
+      "paski-do-akumulatora-5x-iflight-nylon-lipo-battery-strap-20x200mm-20260406-143119.png"
+    ]
   },
   {
     "id": "p-1775314442590",
@@ -115,6 +121,998 @@
     "price": 120,
     "description": "Akumulator LiPo 6S 1300 mAh 100C firmy Ovonic to jeden z naszych najlepiej sprzedających się i najtańszych pakietów. Zaprojektowany dla pilotów, którzy oczekują najwyższej wydajności bez wygórowanej ceny , zapewnia idealną równowagę między mocą, wagą i wytrzymałością .",
     "image": "akumulator-akumulator-lipo-ovonic-6s-1300mah-100c-wtyczka-22-2v-xt60-20260404-171855.png",
+    "includesStraps": false,
+    "cellCount": "6s",
+    "images": [
+      "akumulator-akumulator-lipo-ovonic-6s-1300mah-100c-wtyczka-22-2v-xt60-20260404-171855.png"
+    ]
+  },
+  {
+    "id": "p-1780000000000",
+    "inStock": true,
+    "category": "frame",
+    "name": "Axisflying Squashed X Manta 5 PRO ",
+    "price": 335,
+    "description": "Absolutny hit w świecie ram.  Smukła, spłaszczona rama typu X. Wykonana z włókna węglowego oraz aluminium, ważąca 215g. Kompatybilna tylko z systemem cyfrowym DJI O4 Pro",
+    "image": "rama-axisflying-squashed-x-manta-5-pro-20260405-143059.png",
+    "frameType": "X",
+    "includesStraps": true,
+    "color": "Czarno-czerwony",
+    "images": [
+      "rama-axisflying-squashed-x-manta-5-pro-20260405-143059.png",
+      "rama-axisflying-squashed-x-manta-5-pro-20260405-143104.png",
+      "rama-axisflying-squashed-x-manta-5-pro-20260405-143110.png",
+      "rama-axisflying-squashed-x-manta-5-pro-20260405-143115.png",
+      "rama-axisflying-squashed-x-manta-5-pro-20260405-143118.png"
+    ]
+  },
+  {
+    "id": "p-1780000000001",
+    "inStock": true,
+    "category": "frame",
+    "name": "GEPRC Vapor X5 5\"",
+    "price": 249,
+    "description": "GEPRC Vapor D5 to smukła rama 5-calowa, zaprojektowana specjalnie pod system cyfrowy DJI O4 Pro. Wykonana z carbonu T700, zapewnia wyjątkową sztywność przy niskiej wadze. Posiada przestrzeń na elektronikę HD i wygodny dostęp do stacka.",
+    "image": "rama-geprc-vapor-x5-5-20260405-142318.jpg",
+    "frameType": "X",
+    "includesStraps": false,
+    "color": "Pomarańczowo-czarny",
+    "images": [
+      "rama-geprc-vapor-x5-5-20260405-142318.jpg",
+      "rama-geprc-vapor-x5-5-20260405-142329.jpg",
+      "rama-geprc-vapor-x5-5-20260405-142332.jpg",
+      "rama-geprc-vapor-x5-5-20260405-142335.jpg",
+      "rama-geprc-vapor-x5-5-20260405-142337.jpg"
+    ]
+  },
+  {
+    "id": "p-1780000000003",
+    "inStock": true,
+    "category": "frame",
+    "name": "Rama FlyFishRC Volador Ⅱ O4 PRO VD5 ",
+    "price": 295,
+    "description": "Rama Volador II zachowuje wysoką kompatybilność i prostą konstrukcję, wyposażona jest w niezbędne akcesoria do łatwego, wygodnego i zorganizowanego montażu.",
+    "image": "rama-rama-flyfishrc-volador-o4-pro-vd5-dc-20260405-204108.webp",
+    "frameType": "DC",
+    "includesStraps": false,
+    "color": "Czarny",
+    "images": [
+      "rama-rama-flyfishrc-volador-o4-pro-vd5-dc-20260405-204108.webp",
+      "rama-rama-flyfishrc-volador-o4-pro-vd5-dc-20260405-141804.webp",
+      "rama-rama-flyfishrc-volador-o4-pro-vd5-dc-20260405-141807.webp",
+      "rama-rama-flyfishrc-volador-o4-pro-vd5-dc-20260405-141832.webp"
+    ]
+  },
+  {
+    "id": "p-1780000000008",
+    "inStock": true,
+    "category": "frame",
+    "name": "GEPRC Mark5 HD 5\"",
+    "price": 296,
+    "description": "Ramka GEPRC MARK5 O4 Pro została zaprojektowana specjalnie dla DJI O4 Air Unit Pro.\n\nMa przeprojektowane mocowanie kamery i niestandardowy silikon amortyzujący wstrząsy, co poprawia kompatybilność i odporność na wibracje, zapewniając bardziej stabilne wrażenia z lotu.",
+    "frameType": "X",
+    "includesStraps": false,
+    "images": [
+      "rama-geprc-mark5-hd-5-20260405-143419.jpg",
+      "rama-geprc-mark5-hd-5-20260405-143426.jpg",
+      "rama-geprc-mark5-hd-5-20260405-143430.jpg",
+      "rama-geprc-mark5-hd-5-20260405-143435.jpg",
+      "rama-geprc-mark5-hd-5-20260405-143442.jpg"
+    ],
+    "color": "Zielony",
+    "image": "rama-geprc-mark5-hd-5-20260405-143419.jpg"
+  },
+  {
+    "id": "p-1780000000009",
+    "inStock": true,
+    "category": "motor",
+    "name": "T-Motor Velox V3 2207",
+    "price": 260,
+    "description": "T-Motor Velox V3 2207 to wysokiej jakości silnik freestyle dla baterii 6S występuje w 2 wariantach kv, spokojny lot - 1750kv, freestyle - 1950kv średnica/wysokość: 22×7 mm, masa: 34 g,  Solidna konstrukcja, długa żywotność łożysk, doskonały stosunek mocy do wagi.",
+    "image": "silniki-t-motor-velox-v3-2207-1750kv-20260405-135857.jpg",
+    "kv": 1750,
+    "includesStraps": false,
+    "images": [
+      "silniki-t-motor-velox-v3-2207-1750kv-20260405-135857.jpg",
+      "silniki-t-motor-velox-v3-2207-20260407-141822.png",
+      "silniki-t-motor-velox-v3-2207-1750kv-20260405-135859.jpg",
+      "silniki-t-motor-velox-v3-2207-20260407-142001.jpg",
+      "silniki-t-motor-velox-v3-2207-1750kv-20260405-135903.jpg"
+    ],
+    "cellCount": "6s",
+    "kvOptions": [
+      1750,
+      1950
+    ],
+    "kvVariants": [
+      {
+        "kv": 1950,
+        "price": 260,
+        "images": [
+          "silniki-t-motor-velox-v3-2207-20260407-141320.png",
+          "silniki-t-motor-velox-v3-2207-20260407-141347.jpg",
+          "silniki-t-motor-velox-v3-2207-20260407-141350.jpg",
+          "silniki-t-motor-velox-v3-2207-20260407-141352.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "p-1780000000011",
+    "inStock": true,
+    "category": "motor",
+    "name": "EMAX ECO II 2207 ",
+    "price": 260,
+    "description": "EMAX ECO II 2207 to budżetowy silnik wysokiej jakości. Rozmiar 2207, KV: 1700, idealny dla baterii 6S. Masa: 30 g, max moc: 950 W. Model polecany dla początkujących i pilotów szukających tanich ale niezawodnych silników do dronów 5\".",
+    "image": "silniki-emax-eco-ii-2207-1700kv-20260405-140508.jpg",
+    "kv": 1700,
+    "includesStraps": false,
+    "images": [
+      "silniki-emax-eco-ii-2207-1700kv-20260405-140508.jpg",
+      "silniki-emax-eco-ii-2207-1700kv-20260405-140519.jpg",
+      "silniki-emax-eco-ii-2207-1700kv-20260405-140524.jpg",
+      "silniki-emax-eco-ii-2207-1700kv-20260405-140528.jpg"
+    ],
+    "cellCount": "6s",
+    "kvOptions": [
+      1700
+    ]
+  },
+  {
+    "id": "p-1780000000012",
+    "inStock": true,
+    "category": "motor",
+    "name": "iFlight XING2 2207",
+    "price": 350,
+    "description": "iFlight XING2 2207 to ulepszona wersja popularnej serii XING. Rozmiar 2207, KV: 1855, masa: 32.9 g, max moc: 1252 W. Nowy układ wirnika z 12-biegunowym magnetycznym rdzeniem zapewnia płynne działanie i niski poziom hałasu. Idealny do 5\"",
+    "image": "silniki-iflight-xing2-2207-1855kv-20260405-140729.jpg",
+    "kv": 1855,
+    "includesStraps": false,
+    "images": [
+      "silniki-iflight-xing2-2207-1855kv-20260405-140729.jpg",
+      "silniki-iflight-xing2-2207-1855kv-20260405-140733.jpg",
+      "silniki-iflight-xing2-2207-1855kv-20260405-140736.jpg",
+      "silniki-iflight-xing2-2207-1855kv-20260405-140738.jpg"
+    ],
+    "cellCount": "6s",
+    "kvOptions": [
+      1855
+    ]
+  },
+  {
+    "id": "p-1780000000013",
+    "inStock": true,
+    "category": "motor",
+    "name": "RCINPower EX2207",
+    "price": 235,
+    "description": "RCINPower EX2207 2550KV to wysokoobratrowy silnik stworzony z myślą o wyścigach i szybkim freestyle. Rozmiar 2207, KV: 2550, przeznaczony dla baterii 4S. Zaktualizowana geometria wirnika i cewek zwiększa wydajność w porównaniu z poprzednią generacją.",
+    "image": "silniki-rcinpower-ex2207-2550kv-20260405-140934.png",
+    "kv": 2550,
+    "includesStraps": false,
+    "images": [
+      "silniki-rcinpower-ex2207-2550kv-20260405-140934.png",
+      "silniki-rcinpower-ex2207-2550kv-20260405-141029.png",
+      "silniki-rcinpower-ex2207-2550kv-20260405-141106.png"
+    ],
+    "cellCount": "4s",
+    "kvOptions": [
+      2550
+    ]
+  },
+  {
+    "id": "p-1780000000014",
+    "inStock": true,
+    "category": "motor",
+    "name": "BrotherHobby Returner R5 2207",
+    "price": 185,
+    "description": "BrotherHobby Returner R5 2207 to starannie wykonany silnik klasy freestyle. KV: 1700, masa: 34 g, optymalny dla baterii 6S i śmigieł 5\". Stator 9N12P z ulepszonymi uzwojeniami, łożyska NSK, zadbana jakość wykonania. Popularny wśród pilotów FPV.",
+    "kv": 1700,
+    "includesStraps": false,
+    "images": [
+      "silniki-brotherhobby-returner-r5-2207-1700kv-20260405-135329.jpg",
+      "silniki-brotherhobby-returner-r5-2207-1700kv-20260405-135332.jpg",
+      "silniki-brotherhobby-returner-r5-2207-1700kv-20260405-135334.jpg"
+    ],
+    "image": "silniki-brotherhobby-returner-r5-2207-1700kv-20260405-135329.jpg",
+    "cellCount": "6s",
+    "kvOptions": [
+      1700
+    ]
+  },
+  {
+    "id": "p-1780000000025",
+    "inStock": true,
+    "category": "stack",
+    "name": "SpeedyBee F7 V3 55A Stack",
+    "price": 455,
+    "description": "SpeedyBee F7 V3 to zaawansowany stack FC+ESC z STM32F745, 55A BLHeli_32 ESC na 4-6S. Wbudowany bluetooth, barometr i czujnik napięcia. Obsługuje DJI Air Unit.  Świetna opcja dla zaawansowanych frameów HD freestyle.",
+    "includesStraps": false,
+    "images": [
+      "stack-fc-esc-speedybee-f7-v3-55a-stack-20260406-124013.jpg",
+      "stack-fc-esc-speedybee-f7-v3-55a-stack-20260406-124019.jpg",
+      "stack-fc-esc-speedybee-f7-v3-55a-stack-20260406-124022.jpg",
+      "stack-fc-esc-speedybee-f7-v3-55a-stack-20260406-124025.jpg"
+    ],
+    "image": "stack-fc-esc-speedybee-f7-v3-55a-stack-20260406-124013.jpg"
+  },
+  {
+    "id": "p-1780000000028",
+    "inStock": false,
+    "category": "video_bundle",
+    "name": "HDZero Race V2 Kit",
+    "price": 649,
+    "description": "HDZero Race V2 to cyfrowy system FPV z zerowym opóźnieniem (sub-ms), idealny dla wyścigów i freestyle. Rozdzielczość 720p/60fps, transmisja w czasie rzeczywistym. Zestaw zawiera VTX i kamerę Runcam Nano 90. Kompatybilny z goglami HDZero.",
+    "image": "",
+    "videoType": "digital",
+    "includesStraps": false,
+    "images": [
+      "zestaw-video-walksnail-moonlight-kit-20260405-100014.jpg"
+    ]
+  },
+  {
+    "id": "p-1780000000037",
+    "inStock": true,
+    "category": "camera",
+    "name": "Caddx Ratel 2 Micro 1200TVL",
+    "price": 95,
+    "description": "Caddx Ratel 2 Micro to popularna kamera startlight z matrycą STARVIS 1/1.8\". Rozmiar micro (19 mm), FOV 155° (2.1 mm), 1200 TVL, szeroki zakres dynamiczny WDR. Naturalne kolory, minimalne szumy w słabym świetle. Napięcie 5–36V. Łatwy montaż.",
+    "image": "kamera-caddx-ratel-2-1200tvl-20260405-100016.jpg",
+    "includesStraps": false,
+    "images": [
+      "kamera-caddx-ratel-2-1200tvl-20260405-100016.jpg"
+    ],
+    "videoType": "analog"
+  },
+  {
+    "id": "p-1780000000038",
+    "inStock": true,
+    "category": "camera",
+    "name": "Foxeer Razer Micro 1200TVL",
+    "price": 75,
+    "description": "Foxeer Razer Micro to budżetowa kamera FPV z sensorem SuperNight. Rozmiar micro (19 mm), FOV 120°/145° (do wyboru), 1200 TVL. Najlepsza cena w tej klasie kamery micro. Napięcie 5–40V, waga 10 g. Idealna dla zaczynających przygodę z FPV.",
+    "image": "kamera-foxeer-razer-micro-1200tvl-20260405-100017.jpg",
+    "includesStraps": false,
+    "images": [
+      "kamera-foxeer-razer-micro-1200tvl-20260405-100017.jpg"
+    ],
+    "videoType": "analog"
+  },
+  {
+    "id": "p-1780000000039",
+    "inStock": true,
+    "category": "camera",
+    "name": "Caddx Ant Lite Nano 1200TVL",
+    "price": 65,
+    "description": "Caddx Ant Lite Nano to ultralekka kamera nano (14×14 mm) przeznaczona do micro dronów i TinyWhoop. Sensor 1/3\", FOV 150°, 1200 TVL, waga zaledwie 4 g. Wbudowana w wiele BNF modeli jako kamera domyślna. Napięcie 5–36V.",
+    "image": "kamera-caddx-ant-lite-nano-1200tvl-20260405-100018.jpg",
+    "includesStraps": false,
+    "images": [
+      "kamera-caddx-ant-lite-nano-1200tvl-20260405-100018.jpg"
+    ],
+    "videoType": "analog"
+  },
+  {
+    "id": "p-1780000000040",
+    "inStock": true,
+    "category": "camera",
+    "name": "Foxeer Predator Micro V5 1000TVL",
+    "price": 90,
+    "description": "Foxeer Predator Micro V5 to kamera wyścigowa z niskim opóźnieniem i wysokim kontrastem, najlepsza dla pilotów skupionych na szybkości. Rozmiar micro (19 mm), sensor globalny Super WDR, FOV 128°, 1000 TVL. Żywe kolory, ostre krawędzie obiektów.",
+    "image": "kamera-foxeer-predator-micro-v5-20260405-100019.jpg",
+    "includesStraps": false,
+    "images": [
+      "kamera-foxeer-predator-micro-v5-20260405-100019.jpg"
+    ],
+    "videoType": "analog"
+  },
+  {
+    "id": "p-1780000000041",
+    "inStock": true,
+    "category": "camera",
+    "name": "RunCam Night Eagle 3 1200TVL",
+    "price": 119,
+    "description": "RunCam Night Eagle 3 to czarno-biała kamera FPV z wyjątkową czułością na światło, idealna do nocnych lotów. Sensor STARVIS Gen3 1/2\", 1200 TVL, FOV 155°, min. czułość 0.00001 Lux. Najlepsze w klasie widzenie nocne w środowisku analogowym.",
+    "image": "kamera-runcam-night-eagle-3-20260405-100020.jpg",
+    "includesStraps": false,
+    "images": [
+      "kamera-runcam-night-eagle-3-20260405-100020.jpg"
+    ],
+    "videoType": "analog"
+  },
+  {
+    "id": "p-1780000000042",
+    "inStock": true,
+    "category": "camera",
+    "name": "Foxeer Arrow Micro Pro 1200TVL",
+    "price": 85,
+    "description": "Foxeer Arrow Micro Pro to analogowa kamera FPV z wyjątkowym WDR i kolorowymi tonami. Sensor 1/2.9\" CMOS, 1200 TVL, FOV 115°, rozmiar micro (19 mm). Napięcie 5–40V, waga 9.6 g. Bardzo dobra jakość obrazu na treningach freestyle.",
     "includesStraps": false
+  },
+  {
+    "id": "p-1780000000043",
+    "inStock": true,
+    "category": "camera",
+    "name": "RunCam Phoenix 2 Micro 1000TVL",
+    "price": 109,
+    "description": "RunCam Phoenix 2 Micro to kamera FPV do freestyle i racing z ultra-low latency i szerokim WDR. Sensor 1/2\" CMOS, 1000 TVL, FOV 155° (2.1 mm), rozmiar micro (19 mm). Jedno z najniższych opóźnień w klasie analogowej. Napięcie 5–36V.",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000044",
+    "inStock": true,
+    "category": "camera",
+    "name": "Caddx Ratel Pro Micro 1200TVL",
+    "price": 105,
+    "description": "Caddx Ratel Pro Micro to ulepszona wersja Ratel 2 z lepszą wydajnością w słabym oświetleniu. Sensor 1/1.8\" StarLight, FOV 160° (1.8 mm), 1200 TVL, rozmiar micro. WDR 130 dB, cyfrowy reduktor szumów. Jeden z najlepszych wyborów dla freestyle dzień/noc.",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000045",
+    "inStock": true,
+    "category": "camera",
+    "name": "Foxeer Cat 3 Micro 1200TVL",
+    "price": 79,
+    "description": "Foxeer Cat 3 Micro to kompaktowa kamera do budżetowych dronów FPV. Sensor 1/3\" CMOS, 1200 TVL, FOV 130°, rozmiar micro (19 mm). Minimalna czułość 0.0001 Lux, wbudowany filtr IR. Prosta instalacja, niska waga 10 g. Napięcie 5–40V.",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000046",
+    "inStock": true,
+    "category": "vtx",
+    "name": "TBS Unify Pro32 HV 1000mW",
+    "price": 219,
+    "description": "TBS Unify Pro32 HV to topowy nadajnik VTX marki Team BlackSheep. Moc 25–1000 mW, pasmo 5.8 GHz, 48 kanałów. Obsługa SmartAudio V2, złącze MMCX. Napięcie 5–26V (HV). Masa 7 g. Doskonała jakość sygnału i stabilność częstotliwości. Klasa premium.",
+    "image": "nadajnik-vtx-tbs-unify-pro32-hv-1000mw-20260405-100021.jpg",
+    "videoType": "analog",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000047",
+    "inStock": true,
+    "category": "vtx",
+    "name": "Rush Tank Ultimate Plus 800mW",
+    "price": 165,
+    "description": "Rush Tank Ultimate Plus to niezawodny VTX analogowy z mocą 25–800 mW i wbudowanym mikrofonem. Pasmo 5.8 GHz, 48 kanałów, SmartAudio V2. Montaż 30×30 mm lub compact. Napięcie 7–24V, masa 8 g. Doskonały wybór do dronów freestyle i miejskich lotów.",
+    "image": "nadajnik-vtx-rush-tank-ultimate-plus-800mw-20260405-100022.jpg",
+    "videoType": "analog",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000048",
+    "inStock": true,
+    "category": "vtx",
+    "name": "Eachine TX805 800mW",
+    "price": 55,
+    "description": "Eachine TX805 to najtańszy VTX analogowy godny polecenia. Moc 25–800 mW, pasmo 5.8 GHz, 48 kanałów, SmartAudio V1. Montaż 30×30 mm, napięcie 7–24V, masa 9 g. Idealny do pierwszego drona freestyle lub jako zapasowy VTX w szafce pilota.",
+    "image": "nadajnik-vtx-eachine-tx805-800mw-20260405-100023.jpg",
+    "videoType": "analog",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000049",
+    "inStock": true,
+    "category": "vtx",
+    "name": "HGLRC Zeus Nano VTX 400mW",
+    "price": 79,
+    "description": "HGLRC Zeus Nano to kompaktowy VTX analogowy z wbudowanym mikrofonem. Moc 25–400 mW, pasmo 5.8 GHz, 48 kanałów, SmartAudio. Elastyczny montaż (opaski, pady), napięcie 5–24V, masa 5.5 g. Dobry budżetowy wybór dla dronów freestyle 3-5 cali.",
+    "image": "nadajnik-vtx-hglrc-zeus-nano-400mw-20260405-100024.jpg",
+    "videoType": "analog",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000050",
+    "inStock": true,
+    "category": "vtx",
+    "name": "TBS Unify Pro32 Nano 5G8 500mW",
+    "price": 189,
+    "description": "TBS Unify Pro32 Nano to najmniejszy VTX premium na rynku (15×13×2 mm, 1 g). Moc 25–500 mW, pasmo 5.8 GHz, złącze U.FL. Zasilanie 2S–3S LiPo bezpośrednio lub 5V. SmartAudio V2, TBS Crossfire integration. Ideał dla micro dronów i TinyWhoop HD.",
+    "image": "nadajnik-vtx-tbs-unify-pro32-nano-500mw-20260405-100025.jpg",
+    "videoType": "analog",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000051",
+    "inStock": true,
+    "category": "vtx",
+    "name": "Rush Tank SOLO 1600mW",
+    "price": 289,
+    "description": "Rush Tank SOLO to najpotężniejszy klasyczny VTX analogowy na rynku. Moc 25–1600 mW (wersja 1.6W SOLO). Obudowa aluminiowa jako radiator, pasmo 5.8 GHz. Idealny do długodystansowych lotów i penetracji obiektów. SmartAudio V2, napięcie 7–25V.",
+    "videoType": "analog",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000052",
+    "inStock": true,
+    "category": "vtx",
+    "name": "ImmersionRC Tramp HV 600mW",
+    "price": 239,
+    "description": "ImmersionRC Tramp HV to niezawodny VTX premium klas wyścigowej. Moc 25–600 mW, pasmo 5.8 GHz, 48 kanałów, Tramp protocol (i SmartAudio). Napięcie 5.5–9V, masa 6.8 g, złącze SMA. Wysoka precyzja częstotliwości transmisji, minimalne zakłócenia sąsiednich kanałów.",
+    "videoType": "analog",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000053",
+    "inStock": true,
+    "category": "vtx",
+    "name": "SpeedyBee TX500 SA V2 500mW",
+    "price": 119,
+    "description": "SpeedyBee TX500 to budżetowy VTX analogowy z mocą do 500 mW. Pasmo 5.8 GHz, 48 kanałów, SmartAudio V2. Złącze U.FL, napięcie 5–26V, masa 6 g. Montaż przez kabel lub pady. Dobry stosunek jakości do ceny dla dronów freestyle i wyścigowych.",
+    "videoType": "analog",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000054",
+    "inStock": true,
+    "category": "vtx",
+    "name": "AKK FX3 Ultimate 7W",
+    "price": 139,
+    "description": "AKK FX3 Ultimate to VTX analogowy z największą mocą w klasie budżetowej — do 7W (wymagana licencja HAM). Standardowo 25–1200 mW bez licencji. Pasmo 5.8 GHz. Obudowa z radiatorem. Zasilanie 5–36V. Dobry zasięg w terenie zurbanizowanym.",
+    "videoType": "analog",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000055",
+    "inStock": true,
+    "category": "antenna",
+    "name": "Foxeer Lollipop 4+ RHCP SMA",
+    "price": 35,
+    "description": "Foxeer Lollipop 4+ RHCP SMA to popularna antena FPV do nadajnika wideo. Pasmo 5.8 GHz, polaryzacja prawoskrętna RHCP. Wytrzymała plastikowa osłona, złącze SMA. Waga 5 g, długość 70 mm. Sprawdzona we freestyle, jedna z najlepszych w budżetowej kategorii.",
+    "polarization": "RHCP",
+    "includesStraps": false,
+    "image": "antena-foxeer-lollipop-4-plus-rhcp-20260405-100026.jpg"
+  },
+  {
+    "id": "p-1780000000056",
+    "inStock": true,
+    "category": "antenna",
+    "name": "TrueRC Matchstick 5.8G RHCP",
+    "price": 75,
+    "description": "TrueRC Matchstick to premium antena VTX z wzmocnioną obudową dla lepszej odporności na crash'e. Pasmo 5.8 GHz, polaryzacja RHCP. Sprawność 99%, doskonały axial ratio. Złącze SMA, waga 5 g. Najwyższa jakość w segmencie omni CP anteny do VTX.",
+    "polarization": "RHCP",
+    "includesStraps": false,
+    "image": "antena-truerc-matchstick-rhcp-20260405-100027.jpg"
+  },
+  {
+    "id": "p-1780000000057",
+    "inStock": true,
+    "category": "antenna",
+    "name": "Foxeer Micro Lollipop RHCP U.FL",
+    "price": 28,
+    "description": "Foxeer Micro Lollipop RHCP to miniaturowa antena CP do micro dronów i VTX z złączem U.FL. Pasmo 5.8 GHz, polaryzacja RHCP. Bardzo mała i lekka (ok. 2 g), krótsza gałąź. Doskonały wybór dla TinyWhoop czy micro quadów z U.FL VTX.",
+    "polarization": "RHCP",
+    "includesStraps": false,
+    "image": "antena-foxeer-micro-lollipop-rhcp-20260405-100028.jpg"
+  },
+  {
+    "id": "p-1780000000058",
+    "inStock": true,
+    "category": "antenna",
+    "name": "TrueRC Singularity Short 40mm U.FL RHCP",
+    "price": 59,
+    "description": "TrueRC Singularity Short RHCP to kompaktowa, 40-mm antena premium do U.FL VTX w micro dronach. Pasmo 5.8 GHz, polaryzacja RHCP. Sprawność >98%, zysk 1.5 dBi, waga 2.4 g. Klasa premium dla wymagających pilotów micro FPV.",
+    "polarization": "RHCP",
+    "includesStraps": false,
+    "image": "antena-truerc-singularity-short-ufl-20260405-100029.jpg"
+  },
+  {
+    "id": "p-1780000000059",
+    "inStock": true,
+    "category": "antenna",
+    "name": "TrueRC Singularity Stubby RHCP SMA",
+    "price": 65,
+    "description": "TrueRC Singularity Stubby RHCP SMA to antena premium klasy stub do VTX. Pasmo 5.8 GHz, polaryzacja RHCP. Bardzo krótka (30 mm), idealna do ciasnych dronów freestyle. Sprawność >98%, axial ratio <1 dB. Masa 3 g. Polecana alternatywa dla Lollipop do FPV.",
+    "polarization": "RHCP",
+    "includesStraps": false,
+    "image": "antena-truerc-singularity-stubby-rhcp-20260405-100030.jpg"
+  },
+  {
+    "id": "p-1780000000060",
+    "inStock": true,
+    "category": "antenna",
+    "name": "Rush Cherry RHCP SMA",
+    "price": 30,
+    "description": "Rush Cherry RHCP SMA to solidna antena VTX dla pilotów poza rynkiem USA (dostępna globalnie). Pasmo 5.8 GHz, polaryzacja RHCP. Twarda obudowa chroni elementy przed crash'em. Złącze SMA lub RP-SMA do wyboru. Waga 7 g.",
+    "polarization": "RHCP",
+    "includesStraps": false,
+    "image": "antena-rush-cherry-rhcp-20260405-100031.jpg"
+  },
+  {
+    "id": "p-1780000000061",
+    "inStock": true,
+    "category": "antenna",
+    "name": "Lumenier AXII 2 RHCP SMA",
+    "price": 55,
+    "description": "Lumenier AXII 2 to najpopularniejsza antena VTX premium na rynku. Mała, wytrzymała, równomierny zasięg w każdym kierunku. 5.8 GHz, RHCP, złącza SMA/RP-SMA/MMCX/UFL do wyboru. Waga 3.6–6.2 g w zależności od wersji. Sprawdzona w setkach konfiguracji.",
+    "polarization": "RHCP",
+    "includesStraps": false,
+    "image": "antena-lumenier-axii-2-rhcp-20260405-100032.jpg"
+  },
+  {
+    "id": "p-1780000000062",
+    "inStock": true,
+    "category": "antenna",
+    "name": "TrueRC X-Air MKII RHCP Patch (kierunkowa)",
+    "price": 195,
+    "description": "TrueRC X-Air MKII to premium kierunkowa antena patch do gogli/VRX. Pasmo 5.8 GHz, RHCP, zysk 10 dBi, kąt przyjęcia 120°. Waga 35 g. Idealna do gogli DJI jako antena kierunkowa. Doskonała dla lotów długodystansowych i penetracji obiektów.",
+    "polarization": "RHCP",
+    "includesStraps": false,
+    "image": "antena-truerc-x-air-mkii-rhcp-20260405-100033.jpg"
+  },
+  {
+    "id": "p-1780000000063",
+    "inStock": true,
+    "category": "antenna",
+    "name": "Foxeer Pagoda Pro RHCP SMA",
+    "price": 39,
+    "description": "Foxeer Pagoda Pro RHCP SMA to antena PCB o cylindrycznym kształcie. Pasmo 5.8 GHz, polaryzacja RHCP, wytrzymała obudowa. Dobra odporność na crash, lekka (8 g). Tradycyjna sprawdzona konstrukcja pagoda, doskonała do standardowych freestyle i analogowych aplikacji FPV.",
+    "polarization": "RHCP",
+    "includesStraps": false,
+    "image": "antena-foxeer-pagoda-pro-rhcp-20260405-100034.jpg"
+  },
+  {
+    "id": "p-1780000000064",
+    "inStock": true,
+    "category": "antenna",
+    "name": "Foxeer Lollipop 4+ LHCP SMA",
+    "price": 35,
+    "description": "Foxeer Lollipop 4+ LHCP SMA to odpowiednik RHCP, przeznaczony dla systemów cyfrowych DJI i Walksnail. Pasmo 5.8 GHz, polaryzacja lewoskrętna LHCP. Producenci DJI i Walksnail zalecają LHCP do swoich systemów. Wytrzymała osłona plastikowa, złącze SMA.",
+    "polarization": "LHCP",
+    "includesStraps": false
+  },
+  {
+    "id": "p-1780000000067",
+    "inStock": true,
+    "category": "elrs",
+    "name": "Odbiornik ELRS SpeedyBee Nano Rx 2.4GHz",
+    "price": 50,
+    "description": "Częstotliwość: 2.4Ghz,\nAntena: \"T\" (54*78mm, 0.6g),\nChip: SX1280 + ESP8285,\nMoc telemetrii: 100mW,\nNapięcie zasilania: 5V,\nZłącze antenowe: IPEX1,",
+    "includesStraps": false,
+    "images": [
+      "modul-elrs-odbiornik-elrs-speedybee-nano-rx-2-4ghz-20260405-150956.png",
+      "modul-elrs-odbiornik-elrs-speedybee-nano-rx-2-4ghz-20260405-150959.png",
+      "modul-elrs-odbiornik-elrs-speedybee-nano-rx-2-4ghz-20260405-151002.png"
+    ],
+    "image": "modul-elrs-odbiornik-elrs-speedybee-nano-rx-2-4ghz-20260405-150956.png"
+  },
+  {
+    "id": "p-1780000000071",
+    "inStock": true,
+    "category": "elrs",
+    "name": "RadioMaster Odbiornik RP3 V2 nano ExpressLRS 2.4 GHz ",
+    "price": 105,
+    "description": "Odbiorniki serii RadioMaster RP mają wbudowany TCXO (temperaturowo kompensowany oscylator kwarcowy), co zapewnia niezawodne, stabilne i dokładne odbieranie sygnału, umożliwiając doskonałą wydajność w wymagających środowiskach i poprawiając doświadczenie z lotu.",
+    "includesStraps": false,
+    "images": [
+      "modul-elrs-radiomaster-odbiornik-rp3-v2-nano-expresslrs-2-4-ghz-20260405-151240.jpg",
+      "modul-elrs-radiomaster-odbiornik-rp3-v2-nano-expresslrs-2-4-ghz-20260405-151242.jpg",
+      "modul-elrs-radiomaster-odbiornik-rp3-v2-nano-expresslrs-2-4-ghz-20260405-151244.jpg",
+      "modul-elrs-radiomaster-odbiornik-rp3-v2-nano-expresslrs-2-4-ghz-20260405-151246.jpg"
+    ],
+    "image": "modul-elrs-radiomaster-odbiornik-rp3-v2-nano-expresslrs-2-4-ghz-20260405-151240.jpg"
+  },
+  {
+    "id": "p-1780000000075",
+    "inStock": true,
+    "category": "gps",
+    "name": "Flywoo GOKU GM10 Nano V3 GPS",
+    "price": 100,
+    "description": "GOKU GM10 Nano GPS w wersji 3.1 to idealny wybór dla pilotów poszukujących kompaktowego i lekkiego modułu GPS. Waży zaledwie 2,5 g, jest niezwykle lekki i łatwy w instalacji.",
+    "image": "modul-gps-flywoo-goku-gm10-nano-v3-gps-20260405-145515.png",
+    "includesStraps": false,
+    "images": [
+      "modul-gps-flywoo-goku-gm10-nano-v3-gps-20260405-145515.png",
+      "modul-gps-flywoo-goku-gm10-nano-v3-gps-20260405-145520.png",
+      "modul-gps-flywoo-goku-gm10-nano-v3-gps-20260405-145522.png",
+      "modul-gps-flywoo-goku-gm10-nano-v3-gps-20260405-145525.png"
+    ]
+  },
+  {
+    "id": "p-1780000000083",
+    "inStock": true,
+    "category": "buzzer",
+    "name": "ViFly Finder Mini - 2,7g 100dB",
+    "price": 60,
+    "description": "ViFly Finder Mini to lekki, autonomiczny buzzer z własnym akumulatorem wbudowanym. Waga: 2,7g, głośność: 100 dB. Po wyłączeniu napięcia cyka przez kilka godzin aż do momentu wyłączenia. Idealny do odnajdywania zgubionego drona w trudnym terenie.",
+    "image": "buzzer-vifly-finder-mini-3g-100db-20260405-144623.png",
+    "includesStraps": false,
+    "images": [
+      "buzzer-vifly-finder-mini-3g-100db-20260405-144623.png"
+    ]
+  },
+  {
+    "id": "p-1780000000094",
+    "inStock": true,
+    "category": "battery_strap",
+    "name": "ETHIX Battery Strap 16x250mm",
+    "price": 15,
+    "description": "Paski Ethix to jedne z najtrwalszych pasków na rynku. Rozmiar 16×250 mm, silikon, rzepowe zamknięcie. Długość 250 mm pozwala na mocowanie nawet większych akumulatorów 6S.",
+    "includesStraps": true,
+    "images": [
+      "paski-do-akumulatora-ethix-battery-strap-16x250mm-20260405-144854.png",
+      "paski-do-akumulatora-ethix-battery-strap-16x250mm-20260405-144856.png"
+    ],
+    "image": "paski-do-akumulatora-ethix-battery-strap-16x250mm-20260405-144854.png"
+  },
+  {
+    "id": "p-1780000000099",
+    "inStock": true,
+    "category": "battery_strap",
+    "name": "GEPRC New Version Battery Strap Żółty 20mm/250mm ",
+    "price": 28,
+    "description": "Oryginalne paski GEPRC\nRozmiar: 20mm * 250mm\nKolor: żółty",
+    "includesStraps": true,
+    "images": [
+      "paski-do-akumulatora-geprc-new-version-battery-strap-zolty-20mm-250mm-20260405-145153.png"
+    ],
+    "image": "paski-do-akumulatora-geprc-new-version-battery-strap-zolty-20mm-250mm-20260405-145153.png"
+  },
+  {
+    "id": "p-1780000000102",
+    "inStock": true,
+    "category": "battery",
+    "name": "Tattu R-Line V4.0 1050mAh 6S 120C XT60",
+    "price": 129,
+    "description": "Nowa Seria akumulatorów Tattu R-Line dedykowana dla quadrocopterów wyścigowych. Znajdą uznanie wśród początkujących jak i profesjonalnych pilotów. Dzięki wysokiemu prądowi rozładowania wyciągniemy z naszej maszyny maksimum możliwości!",
+    "image": "akumulator-tattu-r-line-v4-0-1050mah-6s-120c-xt60-20260405-144104.png",
+    "includesStraps": false,
+    "images": [
+      "akumulator-tattu-r-line-v4-0-1050mah-6s-120c-xt60-20260405-144104.png"
+    ],
+    "cellCount": "6s"
+  },
+  {
+    "id": "p-1780000000108",
+    "inStock": true,
+    "category": "battery",
+    "name": "2 x OVONIC 100C 14,8 V 1550 mAh 4S Akumulator LiPo z wtyczką XT60",
+    "price": 130,
+    "description": "kumulator litowo-polimerowy Ovonic 1550 mAh 4S 100C, specjalnie zaprojektowany do dronów wyścigowych FPV RC o średnicy 210–285 mm i zdalnie sterowanych quadrocopterów FPV, idealny do ćwiczeń FPV i freestyle'u. Pasuje do silników o wysokim kv.",
+    "includesStraps": false,
+    "images": [
+      "akumulator-2-x-ovonic-100c-14-8-v-1550-mah-4s-akumulator-lipo-z-wtyczka-xt60-20260405-144348.png",
+      "akumulator-2-x-ovonic-100c-14-8-v-1550-mah-4s-akumulator-lipo-z-wtyczka-xt60-20260405-144351.png"
+    ],
+    "image": "akumulator-2-x-ovonic-100c-14-8-v-1550-mah-4s-akumulator-lipo-z-wtyczka-xt60-20260405-144348.png",
+    "cellCount": "4s"
+  },
+  {
+    "id": "p-1775390263703",
+    "inStock": true,
+    "category": "motor",
+    "name": "Silnik FPV Flash 2207",
+    "price": 380,
+    "description": "Silnik FlyFishRC Flash 2207 wykorzystuje konstrukcję Uni-Bell, zapewniającą wysoką odporność na uderzenia bez zwiększania masy. Oferuje niezawodność, potężną moc i wysoką siłę ciągu dla pilotów FPV w przystępnej cenie.",
+    "image": "silniki-silnik-fpv-flash-2207-1850kv-6s-20260405-135726.webp",
+    "images": [
+      "silniki-silnik-fpv-flash-2207-1850kv-6s-20260405-135726.webp",
+      "silniki-silnik-fpv-flash-2207-1850kv-6s-20260405-135728.webp",
+      "silniki-silnik-fpv-flash-2207-1850kv-6s-20260405-135731.webp",
+      "silniki-silnik-fpv-flash-2207-1850kv-6s-20260405-135733.webp",
+      "silniki-silnik-fpv-flash-2207-1850kv-6s-20260405-135737.webp"
+    ],
+    "includesStraps": false,
+    "kv": 1850,
+    "cellCount": "6s",
+    "kvOptions": [
+      1850
+    ]
+  },
+  {
+    "id": "p-1775393846076",
+    "inStock": true,
+    "category": "gps",
+    "name": "Moduł GPS iFlight BLITZ M10 V2",
+    "price": 200,
+    "description": "",
+    "image": "modul-gps-modul-gps-iflight-blitz-m10-v2-20260405-145657.png",
+    "images": [
+      "modul-gps-modul-gps-iflight-blitz-m10-v2-20260405-145657.png",
+      "modul-gps-modul-gps-iflight-blitz-m10-v2-20260405-145659.png"
+    ],
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775471837971",
+    "inStock": true,
+    "category": "stack",
+    "name": "GEPRC TAKER F722 HD v2 BLS 50A STACK",
+    "price": 360,
+    "description": "GEPRC TAKER F722 BLS 50A STACK to stack zaprojektowany specjalnie do DJI Air Unit. Wykorzystuje układ STM32F722, żyroskop ICM42688-P, zintegrowany blackbox 16M i regulator GEP-BLS50A-4IN1. ",
+    "image": "stack-fc-esc-geprc-taker-f722-hd-v2-bls-50a-stack-20260406-123452.jpg",
+    "images": [
+      "stack-fc-esc-geprc-taker-f722-hd-v2-bls-50a-stack-20260406-123452.jpg",
+      "stack-fc-esc-geprc-taker-f722-hd-v2-bls-50a-stack-20260406-123454.jpg",
+      "stack-fc-esc-geprc-taker-f722-hd-v2-bls-50a-stack-20260406-123503.jpg",
+      "stack-fc-esc-geprc-taker-f722-hd-v2-bls-50a-stack-20260406-123527.jpg",
+      "stack-fc-esc-geprc-taker-f722-hd-v2-bls-50a-stack-20260406-123500.jpg"
+    ],
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775472715454",
+    "inStock": true,
+    "category": "stack",
+    "name": "Flywoo GOKU F722 Pro V2 55A 32Bit 128K 30X30",
+    "price": 399,
+    "description": "Nowa generacja kontrolera lotu F722 PRO V2 od FLYWOO oferuje nie tylko standardowy rozmiar 30,5 mm, zaawansowany wydajnościowo główny układ STM32 F722 oraz żyroskop ICM42688, ale także obsługę 8 wyjść silnikowych i dwa złącza do 4-w-1 ESC, co zapewnia jeszcze większe możliwości konfiguracji. Plug & Play pod O4 Pro.",
+    "image": "stack-fc-esc-flywoo-goku-f722-pro-v2-55a-32bit-128k-30x30-20260406-125119.webp",
+    "images": [
+      "stack-fc-esc-flywoo-goku-f722-pro-v2-55a-32bit-128k-30x30-20260406-125119.webp",
+      "stack-fc-esc-flywoo-goku-f722-pro-v2-55a-32bit-128k-30x30-20260406-125135.webp",
+      "stack-fc-esc-flywoo-goku-f722-pro-v2-55a-32bit-128k-30x30-20260406-125149.webp",
+      "stack-fc-esc-flywoo-goku-f722-pro-v2-55a-32bit-128k-30x30-20260406-125137.webp",
+      "stack-fc-esc-flywoo-goku-f722-pro-v2-55a-32bit-128k-30x30-20260406-125140.webp"
+    ],
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775473485834",
+    "inStock": true,
+    "category": "stack",
+    "name": "GEPRC TAKER F405 BLS 65A V2 STACK",
+    "price": 310,
+    "description": "Czip STM32F405, black-box 16M i żyroskop 42688-P. 6 UARTów, input 3-6s. Wysoka wytrzymałość na full throttle dzięki wysokiemu peak-current - 70A.",
+    "image": "stack-fc-esc-geprc-taker-f405-bls-65a-v2-stack-20260406-130358.jpg",
+    "images": [
+      "stack-fc-esc-geprc-taker-f405-bls-65a-v2-stack-20260406-130358.jpg",
+      "stack-fc-esc-geprc-taker-f405-bls-65a-v2-stack-20260406-130406.jpg",
+      "stack-fc-esc-geprc-taker-f405-bls-65a-v2-stack-20260406-130409.jpg",
+      "stack-fc-esc-geprc-taker-f405-bls-65a-v2-stack-20260406-130430.jpg",
+      "stack-fc-esc-geprc-taker-f405-bls-65a-v2-stack-20260406-130433.jpg"
+    ],
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775474339193",
+    "inStock": true,
+    "category": "frame",
+    "name": "DeepSpace SEEKER5 ",
+    "price": 350,
+    "description": "Rama DeepSpace SEEKER5 w wersji Dead Cat (przednie ramiona szersze w celu wyeliminowania śmigieł z kadru kamery) dedykowana do systemu DJI Air Unit O4 Pro.  Zaprojektowana do latania cinematic i freestyle.",
+    "image": "rama-deepspace-seeker5-dc-20260406-131617.webp",
+    "images": [
+      "rama-deepspace-seeker5-dc-20260406-131617.webp",
+      "rama-deepspace-seeker5-dc-20260406-131550.png",
+      "rama-deepspace-seeker5-dc-20260406-131552.png",
+      "rama-deepspace-seeker5-dc-20260406-131548.png"
+    ],
+    "frameType": "DC",
+    "includesStraps": false,
+    "color": "Czarny"
+  },
+  {
+    "id": "p-1775474497378",
+    "inStock": true,
+    "category": "motor",
+    "name": "Silnik FPV Flash 2306",
+    "price": 380,
+    "description": "Silnik FlyFishRC Flash 2306 wykorzystuje konstrukcję Uni-Bell, zapewniającą wysoką odporność na uderzenia bez zwiększania masy. Oferuje niezawodność, potężną moc i wysoką siłę ciągu dla pilotów FPV w przystępnej cenie.",
+    "image": "silniki-silnik-fpv-flash-2306-2550kv-4s-20260406-132119.webp",
+    "images": [
+      "silniki-silnik-fpv-flash-2306-2550kv-4s-20260406-132119.webp",
+      "silniki-silnik-fpv-flash-2306-2550kv-4s-20260406-132128.webp",
+      "silniki-silnik-fpv-flash-2306-2550kv-4s-20260406-132123.webp"
+    ],
+    "includesStraps": false,
+    "kv": 2550,
+    "cellCount": "4s",
+    "kvOptions": [
+      2550
+    ]
+  },
+  {
+    "id": "p-1775478586794",
+    "inStock": true,
+    "category": "battery_strap",
+    "name": "5x FlyFishRC Lipo Battery Strap (20*200mm)",
+    "price": 35,
+    "description": "Pasek na akumulator FlyFishRC  skutecznie zapobiega przesuwaniu się akumulatora. Wyposażony w metalową klamrę, oferuje wyjątkową trwałość i stabilny chwyt.",
+    "image": "paski-do-akumulatora-5x-flyfishrc-lipo-battery-strap-20-200mm-20260406-142918.png",
+    "images": [
+      "paski-do-akumulatora-5x-flyfishrc-lipo-battery-strap-20-200mm-20260406-142918.png"
+    ],
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775505264491",
+    "inStock": true,
+    "category": "propeller",
+    "name": "HQProp R38 HeadsUp Racing 5138",
+    "price": 25,
+    "description": "Komplet 4szt śmigieł HQProp R38 HeadsUp Racing 5138. Wysoki skok (3,8) pozwala na latanie cinematic, cruise\nZestaw zawiera:\n2 x CCW HQProp R38\n2 x CW HQProp R38",
+    "image": "20260406-215134-te3k4.png",
+    "images": [
+      "20260406-215134-te3k4.png"
+    ],
+    "includesStraps": false,
+    "color": "Czarno-niebieskie",
+    "pitch": 3.8
+  },
+  {
+    "id": "p-1775505441849",
+    "inStock": true,
+    "category": "propeller",
+    "name": "Śmigła HQProp Ethix P3.3 Mango Lassi",
+    "price": 25,
+    "description": "Śmigła HQProp Ethix w kolorze czarno-żółtym, świetnie nadają się do latania cinematic z lekką agresywnością.\nZestaw zawiera:\n2 x CW Ethix P3.3 Mango Lassi\n2 x CCW Ethix P3.3 Mango Lassi",
+    "image": "smigla-smigla-hqprop-ethix-p3-3-mango-lassi-20260406-215531.jpg",
+    "images": [
+      "smigla-smigla-hqprop-ethix-p3-3-mango-lassi-20260406-215531.jpg",
+      "smigla-smigla-hqprop-ethix-p3-3-mango-lassi-20260406-215559.png"
+    ],
+    "includesStraps": false,
+    "color": "Czarno-żółte",
+    "pitch": 3.3
+  },
+  {
+    "id": "p-1775506790968",
+    "inStock": true,
+    "category": "propeller",
+    "name": "HQProp Ethix P2 Pickle Prop 5129",
+    "price": 25,
+    "description": "Śmigła HQProp Ethix P2 Pickle Prop 5129 - 5,1\" i 2,9 skoku pitch pozwala na latanie freestyle\nZestaw zawiera:\n2 x CW Ethix P2 Pickle Prop Prop\n2 x CCW Ethix P2 Pickle Prop Prop",
+    "image": "smigla-hqprop-ethix-p2-pickle-prop-5129-20260406-221903.webp",
+    "images": [
+      "smigla-hqprop-ethix-p2-pickle-prop-5129-20260406-221903.webp",
+      "smigla-hqprop-ethix-p2-pickle-prop-5129-20260406-221905.webp"
+    ],
+    "includesStraps": false,
+    "color": "Żółto-zielone",
+    "pitch": 2.9
+  },
+  {
+    "id": "p-1775507144415",
+    "inStock": true,
+    "category": "propeller",
+    "name": "HQProp Ethix P3.5 RAD Berry",
+    "price": 25,
+    "description": "Śmigła HQProp Ethix P3.5 RAD Berry - wykonane z wytrzymałego materiału - poliwęglanu. Skok 3,5 pozwala na spokojne latanie z nutą freestyle'u",
+    "image": "smigla-hqprop-ethix-p3-5-rad-berry-20260406-222343.jpg",
+    "images": [
+      "smigla-hqprop-ethix-p3-5-rad-berry-20260406-222343.jpg",
+      "smigla-hqprop-ethix-p3-5-rad-berry-20260406-222345.jpg",
+      "smigla-hqprop-ethix-p3-5-rad-berry-20260406-222347.jpg",
+      "smigla-hqprop-ethix-p3-5-rad-berry-20260406-222348.jpg"
+    ],
+    "includesStraps": false,
+    "color": "Żółto-różowe",
+    "pitch": 3.5
+  },
+  {
+    "id": "p-1775507377958",
+    "inStock": true,
+    "category": "propeller",
+    "name": "HQProp Ethix S4 Lemon Lime",
+    "price": 25,
+    "description": "Komplet 4 szt. śmigieł HQProp Ethix S4 Lemon Lime. Wysoki skok (3,7) zapewnia dużą moc, szybką reakcję na gaz oraz dynamiczny lot - idealne do freestyle i szybkiego cruise.",
+    "image": "smigla-hqprop-ethix-s4-lemon-lime-20260406-222908.jpg",
+    "images": [
+      "smigla-hqprop-ethix-s4-lemon-lime-20260406-222908.jpg"
+    ],
+    "includesStraps": false,
+    "color": "Cytryna-limonka",
+    "pitch": 3.7
+  },
+  {
+    "id": "p-1775510329278",
+    "inStock": true,
+    "category": "battery",
+    "name": "2x akumulator LiPo Ovonic 1300mAh 6S",
+    "price": 150,
+    "description": "Akumulator LiPo Ovonic 1300 mAh 6S 120C to jeden z naszych najniezawodniejszych i najlepiej sprzedających się akumulatorów, któremu zaufały tysiące pilotów FPV na całym świecie.",
+    "image": "akumulator-2x-akumulator-lipo-ovonic-1300mah-6s-20260406-231817.jpg",
+    "images": [
+      "akumulator-2x-akumulator-lipo-ovonic-1300mah-6s-20260406-231817.jpg",
+      "akumulator-2x-akumulator-lipo-ovonic-1300mah-6s-20260406-231819.webp"
+    ],
+    "includesStraps": false,
+    "cellCount": "6s"
+  },
+  {
+    "id": "p-1775510638719",
+    "inStock": true,
+    "category": "elrs",
+    "name": "RP4TD-M ExpressLRS 2.4GHz Mini True Diversity",
+    "price": 85,
+    "description": "Kompaktową i lekka wersję zaprojektowana z myślą o optymalnej wydajności. Ten odbiornik, ważący zaledwie 1 gram, idealnie nadaje się do konstrukcji, w których minimalizacja masy jest kluczowa, a jednocześnie wykorzystuje technologię „Gemini” dla doskonałej redukcji zakłóceń. Dzięki zoptymalizowanej konstrukcji obwodów, RP4TD-M oferuje dwukanałowe radio 2,4 GHz, zapewniając wyjątkową czułość sygnału, stosunek sygnału do szumu i ogólną wydajność",
+    "image": "modul-elrs-rp4td-m-expresslrs-2-4ghz-mini-true-diversity-20260406-232156.webp",
+    "images": [
+      "modul-elrs-rp4td-m-expresslrs-2-4ghz-mini-true-diversity-20260406-232156.webp",
+      "modul-elrs-rp4td-m-expresslrs-2-4ghz-mini-true-diversity-20260406-232158.webp",
+      "modul-elrs-rp4td-m-expresslrs-2-4ghz-mini-true-diversity-20260406-232200.webp",
+      "modul-elrs-rp4td-m-expresslrs-2-4ghz-mini-true-diversity-20260406-232202.webp",
+      "modul-elrs-rp4td-m-expresslrs-2-4ghz-mini-true-diversity-20260406-232204.webp"
+    ],
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775510967505",
+    "inStock": true,
+    "category": "gps",
+    "name": "GPS Walksnail WS-M181",
+    "price": 100,
+    "description": "Dzięki niewielkim rozmiarom, niewielkiej wadze, szybkiemu pozycjonowaniu i stabilnemu połączeniu. Nadaje się do FPV, samolotów RC, quadkopterów i innych, aby poprawić wrażenia z lotu.",
+    "image": "modul-gps-gps-walksnail-ws-m181-20260406-232906.png",
+    "images": [
+      "modul-gps-gps-walksnail-ws-m181-20260406-232906.png",
+      "modul-gps-gps-walksnail-ws-m181-20260406-232914.png",
+      "modul-gps-gps-walksnail-ws-m181-20260406-232918.png",
+      "modul-gps-gps-walksnail-ws-m181-20260406-232921.png",
+      "modul-gps-gps-walksnail-ws-m181-20260406-232924.png"
+    ],
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775511075047",
+    "inStock": true,
+    "category": "gps",
+    "name": "Moduł GPS FlyFishRC M10 Mini",
+    "price": 60,
+    "description": "FlyfishRC-M10 Mini to niewielki, szybki i łatwy w obsłudze odbiornik GPS. Wyposażony jest w ceramiczną antenę RHCP o wymiarach 12x12 mm, która zapewnia doskonały odbiór i bardzo stabilną łączność. Układ UBLOX 10. generacji pozwala na pomijanie drobnych zmian wysokości, co poprawia stabilność.",
+    "image": "modul-gps-modul-gps-flyfishrc-m10-mini-20260406-233034.png",
+    "images": [
+      "modul-gps-modul-gps-flyfishrc-m10-mini-20260406-233034.png",
+      "modul-gps-modul-gps-flyfishrc-m10-mini-20260406-233037.png",
+      "modul-gps-modul-gps-flyfishrc-m10-mini-20260406-233042.png",
+      "modul-gps-modul-gps-flyfishrc-m10-mini-20260406-233044.png"
+    ],
+    "includesStraps": false
+  },
+  {
+    "id": "p-1775512248706",
+    "inStock": true,
+    "category": "frame",
+    "name": "Nazgul Evoque F5 V3",
+    "price": 320,
+    "description": "Innowacyjna, przełączalna konstrukcja ramy DC/X oferuje niezrównaną wszechstronność. Niezależnie od tego, czy wolisz geometrię DC do ujęć kinowych bez widocznych śmigieł, czy też zwinną geometrię X do dynamicznych manewrów freestyle, Nazgul Evoque F5 V3 dopasuje się do każdego scenariusza lotu.",
+    "image": "rama-nazgul-evoque-f5-v3-20260406-234925.jpg",
+    "images": [
+      "rama-nazgul-evoque-f5-v3-20260406-234925.jpg",
+      "rama-nazgul-evoque-f5-v3-20260406-234932.jpg",
+      "rama-nazgul-evoque-f5-v3-20260406-234935.jpg",
+      "rama-nazgul-evoque-f5-v3-20260406-234937.jpg",
+      "rama-nazgul-evoque-f5-v3-20260406-234939.jpg"
+    ],
+    "frameType": "DC/X",
+    "includesStraps": true,
+    "color": "Czarno-zielony"
+  },
+  {
+    "id": "p-1775560352740",
+    "inStock": true,
+    "category": "motor",
+    "name": "Silnik T-Motor VELOX V2 V2207",
+    "price": 280,
+    "description": "Velox 2207 V2 to nowa wersja budżetowej linii Velox wysokiej jakości marki T-motor. Główną zmianą w modelu 2 jest zmieniona konstrukcja całego silnika. Lepsze, mocniejsze magnesy dodają mocy silnikom, a mniejsze przerwy między nimi zapewniają jeszcze szybszą reakcję na drążek oraz bardziej płynny i precyzyjny lot. Nowa wersja silników Velox to idealna propozycja dla osób, które chcą posiadać silniki niezawodne, o dobrej jakości wykoniania, dobrych osiągach oraz świetnej cenie w stosunku do jakości.",
+    "image": "silniki-silnik-t-motor-velox-v2-v2207-20260407-131132.jpg",
+    "images": [
+      "silniki-silnik-t-motor-velox-v2-v2207-20260407-131132.jpg",
+      "silniki-silnik-t-motor-velox-v2-v2207-20260407-131133.jpg",
+      "silniki-silnik-t-motor-velox-v2-v2207-20260407-131135.jpg"
+    ],
+    "includesStraps": false,
+    "kv": 1950,
+    "cellCount": "6s"
+  },
+  {
+    "id": "p-1775564700843",
+    "inStock": true,
+    "category": "motor",
+    "name": "Silnik XING 2 2207 Unibell ",
+    "price": 360,
+    "description": "Występują 2 warianty kv dostępne do wyboru.\n- Wał ze stopu tytanu 5 mm, najmocniejszy wał napędowy w historii iFlight\n- Odporny na uderzenia dzwonek aluminiowy 7075\n- Gładkie i trwałe łożyska NSK 9x4x4\n- Centralnie szczelinowe magnesy łukowe N52H\n- Ochrona szczeliny łożyska XING O-ring\n- Ochraniacz przewodów silnika\n- Dynamicznie wyważony",
+    "image": "silniki-silnik-xing-2-2207-unibell-20260407-142232.jpg",
+    "images": [
+      "silniki-silnik-xing-2-2207-unibell-20260407-142232.jpg",
+      "silniki-silnik-xing-2-2207-unibell-20260407-142230.jpg",
+      "silniki-silnik-xing-2-2207-unibell-20260407-142236.jpg",
+      "silniki-silnik-xing-2-2207-unibell-20260407-142234.jpg"
+    ],
+    "includesStraps": false,
+    "kvOptions": [
+      1750,
+      2050
+    ],
+    "cellCount": "6s"
   }
 ]

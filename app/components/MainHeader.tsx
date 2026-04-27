@@ -19,7 +19,6 @@ const NAV_LINKS = [
   { label: "Warsztaty", href: "/warsztaty" },
   { label: "Kontakt", href: "/kontakt" },
   { label: "Admin", href: "/admin", target: "_blank" },
-  { label: "Ustawienia", href: "/settings", target: "_blank" },
 ];
 
 export default function MainHeader() {
@@ -57,7 +56,7 @@ export default function MainHeader() {
           backgroundColor: headerBg,
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
-          border: `2px solid ${settings.panelBorderColor}`,
+          border: `1px solid ${borderFaint}`,
         }}
       >
         {/* Main header row */}

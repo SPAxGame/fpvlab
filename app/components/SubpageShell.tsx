@@ -14,7 +14,7 @@ export default function SubpageShell({ children }: { children: React.ReactNode }
     } catch {}
   }, []);
 
-  const bgUrl = settings.bgDataUrl || "/images/background_mono.jpg";
+  const bgUrl = settings.bgDataUrl || settings.bgImagePath || "/images/background_mario.jpg";
 
   const bgStyle = settings.bgApplyToSubpages
     ? {

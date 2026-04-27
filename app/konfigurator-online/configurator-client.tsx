@@ -15,9 +15,9 @@ import type { Category, Product } from "../lib/products";
 type ConfigStep =
   | "frame"
   | "motor"
+  | "propeller"
   | "stack"
   | "video_type"
-  | "video_mode"
   | "video_bundle"
   | "camera"
   | "vtx"
@@ -30,15 +30,14 @@ type ConfigStep =
   | "summary"
   | "koniec";
 
-type VideoType = "analog" | "digital";
-type VideoMode = "bundle" | "separate";
+type VideoType = "digital" | "analog";
 
 interface Selections {
   frame?: Product | null;
   motor?: Product | null;
+  propeller?: Product | null;
   stack?: Product | null;
   videoType?: VideoType | null;
-  videoMode?: VideoMode | null;
   videoBundle?: Product | null;
   camera?: Product | null;
   vtx?: Product | null;
@@ -54,7 +53,7 @@ interface Selections {
 
 function totalPrice(sel: Selections): number {
   const items: (Product | null | undefined)[] = [
-    sel.frame, sel.motor, sel.stack,
+    sel.frame, sel.motor, sel.propeller, sel.stack,
     sel.videoBundle, sel.camera, sel.vtx, sel.antenna,
     sel.elrs, sel.gps, sel.buzzer, sel.batteryStrap, sel.battery,
   ];
@@ -62,14 +61,9 @@ function totalPrice(sel: Selections): number {
 }
 
 function buildSteps(sel: Selections): ConfigStep[] {
-  const steps: ConfigStep[] = ["frame", "motor", "stack", "video_type"];
+  const steps: ConfigStep[] = ["frame", "motor", "propeller", "stack", "video_type"];
   if (sel.videoType) {
-    steps.push("video_mode");
-    if (sel.videoMode === "bundle") {
-      steps.push("video_bundle");
-    } else if (sel.videoMode === "separate") {
-      steps.push("camera", "vtx", "antenna");
-    }
+    steps.push("video_bundle");
   }
   steps.push("elrs", "gps", "buzzer");
   if (sel.frame && !sel.frame.includesStraps) {
@@ -83,9 +77,9 @@ function stepLabel(step: ConfigStep): string {
   const map: Record<ConfigStep, string> = {
     frame: "Rama",
     motor: "Silniki",
+    propeller: "Śmigła",
     stack: "Stack",
     video_type: "Typ video",
-    video_mode: "Tryb video",
     video_bundle: "Zestaw video",
     camera: "Kamera",
     vtx: "Nadajnik VTX",
@@ -101,7 +95,7 @@ function stepLabel(step: ConfigStep): string {
   return map[step];
 }
 
-const OPTIONAL_STEPS: ConfigStep[] = ["gps", "buzzer", "battery_strap"];
+const OPTIONAL_STEPS: ConfigStep[] = ["video_type", "video_bundle", "camera", "vtx", "antenna", "gps", "buzzer", "battery_strap"];
 
 function stepHasSelection(step: ConfigStep, sel: Selections): boolean {
   switch (step) {
@@ -109,7 +103,6 @@ function stepHasSelection(step: ConfigStep, sel: Selections): boolean {
     case "motor": return sel.motor !== undefined;
     case "stack": return sel.stack !== undefined;
     case "video_type": return sel.videoType !== undefined;
-    case "video_mode": return sel.videoMode !== undefined;
     case "video_bundle": return sel.videoBundle !== undefined;
     case "camera": return sel.camera !== undefined;
     case "vtx": return sel.vtx !== undefined;
@@ -117,6 +110,7 @@ function stepHasSelection(step: ConfigStep, sel: Selections): boolean {
     case "elrs": return sel.elrs !== undefined;
     case "gps": return sel.gps !== undefined;
     case "buzzer": return sel.buzzer !== undefined;
+    case "propeller": return sel.propeller !== undefined;
     case "battery_strap": return sel.batteryStrap !== undefined;
     case "battery": return sel.battery !== undefined;
     case "summary": return true;
@@ -130,11 +124,13 @@ function ProductCard({
   product,
   selected,
   onSelect,
+  onZoom,
   settings,
 }: {
   product: Product;
   selected: boolean;
   onSelect: () => void;
+  onZoom: (images: string[], startIdx: number) => void;
   settings: HomepageSettings;
 }) {
   const borderColor = selected
@@ -146,78 +142,8 @@ function ProductCard({
 
   const allImages = product.images?.length ? product.images : product.image ? [product.image] : [];
   const [activeImg, setActiveImg] = useState(0);
-  const [lightbox, setLightbox] = useState(false);
 
   return (
-    <>
-      {/* Lightbox */}
-      {lightbox && allImages.length > 0 && (
-        <div
-          onClick={() => setLightbox(false)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 9999,
-            backgroundColor: "transparent",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "zoom-out",
-          }}
-        >
-          <div
-            style={{
-              display: "inline-flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 8,
-              filter: "drop-shadow(0 8px 40px rgba(0,0,0,0.85))",
-            }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`/products/${allImages[activeImg]}`}
-              alt={product.name}
-              onClick={() => setLightbox(false)}
-              style={{
-                maxWidth: "92vw",
-                maxHeight: "88vh",
-                borderRadius: 12,
-                objectFit: "contain",
-                display: "block",
-                cursor: "zoom-out",
-              }}
-            />
-            {allImages.length > 1 && (
-              <div
-                onClick={(e) => e.stopPropagation()}
-                style={{ display: "flex", gap: 8 }}
-              >
-                {allImages.map((img, i) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={img}
-                    src={`/products/${img}`}
-                    alt=""
-                    onClick={(e) => { e.stopPropagation(); setActiveImg(i); }}
-                    style={{
-                      width: 52,
-                      height: 40,
-                      objectFit: "cover",
-                      borderRadius: 6,
-                      cursor: "pointer",
-                      border: i === activeImg ? "2px solid #fff" : "2px solid rgba(255,255,255,0.25)",
-                      opacity: i === activeImg ? 1 : 0.6,
-                      transition: "all 0.15s",
-                    }}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
       <div
         style={{
           border: `2px solid ${borderColor}`,
@@ -263,7 +189,7 @@ function ProductCard({
               <img
                 src={`/products/${allImages[activeImg]}`}
                 alt={product.name}
-                onClick={(e) => { e.stopPropagation(); setLightbox(true); }}
+                onClick={(e) => { e.stopPropagation(); onZoom(allImages, activeImg); }}
                 style={{
                   width: "100%",
                   height: 140,
@@ -326,6 +252,44 @@ function ProductCard({
         )}
         <div style={{ fontWeight: 700, fontSize: 14, color: settings.panelTitleColor, lineHeight: 1.3 }}>
           {product.name}
+          {(product.cellCount || (product.category === "motor" && (product.kvOptions?.length ? product.kvOptions.join(" / ") : product.kv))) && (
+            <span style={{
+              marginLeft: 6,
+              fontWeight: 900,
+              fontSize: 13,
+              color: "#ffd700",
+              letterSpacing: "0.04em",
+              whiteSpace: "nowrap",
+            }}>
+              {product.cellCount && product.cellCount.toUpperCase()}
+              {product.cellCount && product.category === "motor" && (product.kvOptions?.length ? product.kvOptions.join(" / ") : product.kv) && " · "}
+              {product.category === "motor" && (product.kvOptions?.length ? product.kvOptions.join(" / ") : product.kv) && `${product.kvOptions?.length ? product.kvOptions.join(" / ") : product.kv} KV`}
+            </span>
+          )}
+          {product.category === "frame" && product.frameType && (
+            <span style={{
+              marginLeft: 6,
+              fontWeight: 900,
+              fontSize: 13,
+              color: "#ffd700",
+              letterSpacing: "0.04em",
+              whiteSpace: "nowrap",
+            }}>
+              {product.frameType}
+            </span>
+          )}
+          {product.category === "propeller" && product.pitch != null && (
+            <span style={{
+              marginLeft: 6,
+              fontWeight: 900,
+              fontSize: 13,
+              color: "#ffd700",
+              letterSpacing: "0.04em",
+              whiteSpace: "nowrap",
+            }}>
+              Skok {product.pitch}
+            </span>
+          )}
         </div>
         {product.description && (
           <div style={{ fontSize: 12, color: settings.panelTextColor, lineHeight: 1.4 }}>
@@ -361,7 +325,6 @@ function ProductCard({
           {selected ? "✓ WYBRANO" : "WYBIERZ"}
         </button>
       </div>
-    </>
   );
 }
 
@@ -375,6 +338,8 @@ export default function ConfiguratorClient() {
   const [selections, setSelections] = useState<Selections>({});
   const [returnToSummary, setReturnToSummary] = useState(false);
   const [savedConfigs, setSavedConfigs] = useState<Array<{ key: string; ts: number; selections: Selections; total: number; note?: string }>>([]);
+  const [compatRules, setCompatRules] = useState<Array<{ id: string; productA: string; productB: string; reason: string }>>([]);
+  const [compatToast, setCompatToast] = useState<{ reason: string; alternatives: string[] } | null>(null);
 
   useEffect(() => {
     try {
@@ -389,6 +354,10 @@ export default function ConfiguratorClient() {
       .then((data: Product[]) => setProducts(data))
       .catch(() => setProducts([]))
       .finally(() => setLoading(false));
+    fetch("/api/compatibility")
+      .then((r) => r.json())
+      .then(setCompatRules)
+      .catch(() => {});
   }, []);
 
   const loadSavedConfigs = () => {
@@ -408,11 +377,19 @@ export default function ConfiguratorClient() {
 
   useEffect(() => { loadSavedConfigs(); }, []);
 
+  const [lightboxData, setLightboxData] = useState<{ images: string[]; activeImg: number } | null>(null);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") setLightboxData(null); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
   const steps = buildSteps(selections);
   const stepIndex = steps.indexOf(currentStep);
 
   const panelStyle = {
-    border: `2px solid ${settings.panelBorderColor}`,
+    border: `1px solid ${hexToRgba(settings.panelBorderColor, 30)}`,
     backgroundColor: hexToRgba(settings.panelBgColor, parseInt(settings.panelOpacity)),
     backdropFilter: "blur(10px)",
     WebkitBackdropFilter: "blur(10px)",
@@ -421,11 +398,74 @@ export default function ConfiguratorClient() {
   // ── Selections handlers ──────────────────────────────────────────────────
 
   const selectProduct = useCallback((step: ConfigStep, product: Product) => {
+    // Gather all currently selected product IDs (excluding the one being replaced in this step)
+    const currentlySelected = Object.values({
+      frame: selections.frame,
+      motor: selections.motor,
+      propeller: selections.propeller,
+      stack: selections.stack,
+      videoBundle: selections.videoBundle,
+      camera: selections.camera,
+      vtx: selections.vtx,
+      antenna: selections.antenna,
+      elrs: selections.elrs,
+      gps: selections.gps,
+      buzzer: selections.buzzer,
+      batteryStrap: selections.batteryStrap,
+      battery: selections.battery,
+    } as Record<string, Product | null | undefined>)
+      .filter((p): p is Product => !!p)
+      .filter((p) => {
+        // exclude the product currently in this slot (it's being replaced)
+        const slotProduct =
+          step === "frame" ? selections.frame :
+          step === "motor" ? selections.motor :
+          step === "propeller" ? selections.propeller :
+          step === "stack" ? selections.stack :
+          step === "video_bundle" ? selections.videoBundle :
+          step === "camera" ? selections.camera :
+          step === "vtx" ? selections.vtx :
+          step === "antenna" ? selections.antenna :
+          step === "elrs" ? selections.elrs :
+          step === "gps" ? selections.gps :
+          step === "buzzer" ? selections.buzzer :
+          step === "battery_strap" ? selections.batteryStrap :
+          step === "battery" ? selections.battery : undefined;
+        return p.id !== slotProduct?.id;
+      });
+
+    // Check for conflicts with existing selections
+    const conflict = compatRules.find((rule) =>
+      (rule.productA === product.id && currentlySelected.some((p) => p.id === rule.productB)) ||
+      (rule.productB === product.id && currentlySelected.some((p) => p.id === rule.productA))
+    );
+
+    if (conflict) {
+      // Find compatible alternatives: same category, not blocked by any rule with current selections
+      const selectedIds = currentlySelected.map((p) => p.id);
+      const alternatives = (products as Product[])
+        .filter((p) =>
+          p.category === product.category &&
+          p.id !== product.id &&
+          p.inStock &&
+          !compatRules.some((rule) =>
+            (rule.productA === p.id && selectedIds.some((id) => id === rule.productB)) ||
+            (rule.productB === p.id && selectedIds.some((id) => id === rule.productA))
+          )
+        )
+        .map((p) => p.name);
+
+      setCompatToast({ reason: conflict.reason, alternatives });
+      const timer = setTimeout(() => setCompatToast(null), 5000);
+      return () => clearTimeout(timer);
+    }
+
     setSelections((prev) => {
       const next = { ...prev };
       switch (step) {
         case "frame": next.frame = product; break;
         case "motor": next.motor = product; break;
+        case "propeller": next.propeller = product; break;
         case "stack": next.stack = product; break;
         case "video_bundle": next.videoBundle = product; break;
         case "camera": next.camera = product; break;
@@ -439,12 +479,13 @@ export default function ConfiguratorClient() {
       }
       return next;
     });
-  }, []);
+  }, [compatRules, products, selections]);
 
   const getSelected = (step: ConfigStep): Product | null | undefined => {
     switch (step) {
       case "frame": return selections.frame;
       case "motor": return selections.motor;
+      case "propeller": return selections.propeller;
       case "stack": return selections.stack;
       case "video_bundle": return selections.videoBundle;
       case "camera": return selections.camera;
@@ -461,7 +502,7 @@ export default function ConfiguratorClient() {
 
   const getProductsForStep = (step: ConfigStep): Product[] => {
     const catMap: Partial<Record<ConfigStep, Category>> = {
-      frame: "frame", motor: "motor", stack: "stack",
+      frame: "frame", motor: "motor", propeller: "propeller", stack: "stack",
       video_bundle: "video_bundle", camera: "camera",
       vtx: "vtx", antenna: "antenna", elrs: "elrs",
       gps: "gps", buzzer: "buzzer",
@@ -474,14 +515,17 @@ export default function ConfiguratorClient() {
       filtered = filtered.filter((p) => p.videoType === selections.videoType);
     }
     if (step === "antenna" && selections.videoType) {
-      const requiredPol = selections.videoType === "analog" ? "RHCP" : "LHCP";
-      filtered = filtered.filter((p) => !p.polarization || p.polarization === requiredPol);
+      const expectedPolarization = selections.videoType === "analog" ? "RHCP" : "LHCP";
+      filtered = filtered.filter((p) => !p.polarization || p.polarization === expectedPolarization);
+    }
+    if (step === "battery" && selections.motor?.cellCount) {
+      filtered = filtered.filter((p) => !p.cellCount || p.cellCount === selections.motor!.cellCount);
     }
     return filtered;
   };
 
-  const canGoNext = stepHasSelection(currentStep, selections);
   const isOptional = OPTIONAL_STEPS.includes(currentStep);
+  const canGoNext = isOptional || stepHasSelection(currentStep, selections);
 
   const goNext = () => {
     if (returnToSummary) {
@@ -526,17 +570,7 @@ export default function ConfiguratorClient() {
       else if (currentStep === "stack") next.stack = null;
       else if (currentStep === "video_type") {
         next.videoType = null;
-        next.videoMode = undefined;
         next.videoBundle = undefined;
-        next.camera = undefined;
-        next.vtx = undefined;
-        next.antenna = undefined;
-      } else if (currentStep === "video_mode") {
-        next.videoMode = null;
-        next.videoBundle = undefined;
-        next.camera = undefined;
-        next.vtx = undefined;
-        next.antenna = undefined;
       } else if (currentStep === "video_bundle") next.videoBundle = null;
       else if (currentStep === "camera") next.camera = null;
       else if (currentStep === "vtx") next.vtx = null;
@@ -701,7 +735,7 @@ export default function ConfiguratorClient() {
   return (
     <>
       {/* ── Progress bar ── */}
-      <div style={{ padding: "0 16px 16px" }}>
+      <div style={{ padding: "0 24px 16px", maxWidth: 1100, margin: "0 auto", width: "100%" }}>
         <div style={{ ...panelStyle, borderRadius: 12, padding: "12px 20px" }}>
           <div
             style={{
@@ -709,6 +743,9 @@ export default function ConfiguratorClient() {
               flexWrap: "nowrap",
               alignItems: "center",
               width: "100%",
+              overflowX: "auto",
+              WebkitOverflowScrolling: "touch" as React.CSSProperties["WebkitOverflowScrolling"],
+              paddingBottom: 4,
             }}
           >
         {steps.filter((s) => s !== "summary").map((s, i) => {
@@ -719,7 +756,7 @@ export default function ConfiguratorClient() {
             ? (currentStep === "summary" || currentStep === "koniec")
             : s === currentStep;
           return (
-            <div key={s} style={{ display: "flex", alignItems: "center", flex: "1 1 0", minWidth: 0 }}>
+            <div key={s} style={{ display: "flex", alignItems: "center", flex: "1 1 0", minWidth: 44 }}>
               <button
                 onClick={() => {
                   const si = steps.indexOf(s);
@@ -790,7 +827,7 @@ export default function ConfiguratorClient() {
         </div>
       </div>
 
-      <div style={{ width: "100%", maxWidth: 900, margin: "0 auto", padding: "0 16px 48px" }}>
+      <div style={{ width: "100%", maxWidth: 1100, margin: "0 auto", padding: "0 24px 48px" }}>
 
       {/* ── Price counter ── */}
       {currentStep !== "koniec" && (
@@ -809,7 +846,7 @@ export default function ConfiguratorClient() {
           {currentStep === "summary" ? (
             <b style={{ color: settings.panelTitleColor }}>{stepLabel(currentStep)}</b>
           ) : (
-            <>Krok {stepIndex + 1} / {steps.length - 2} — <b style={{ color: settings.panelTitleColor }}>{stepLabel(currentStep)}</b></>
+            <>Krok {stepIndex + 1} / {steps.length - 2} - <b style={{ color: settings.panelTitleColor }}>{stepLabel(currentStep)}</b></>
           )}
         </span>
         <span style={{ color: settings.panelSubtitleColor, fontWeight: 700, fontSize: 18 }}>
@@ -819,7 +856,7 @@ export default function ConfiguratorClient() {
       )}
 
       {/* ── Step content ── */}
-      <div style={{ ...panelStyle, borderRadius: 16, padding: "24px 20px", minHeight: 300 }}>
+      <div style={{ ...panelStyle, borderRadius: 16, padding: "24px 20px", minHeight: currentStep === "video_type" ? undefined : 300 }}>
         <StepContent
           step={currentStep}
           selections={selections}
@@ -829,6 +866,7 @@ export default function ConfiguratorClient() {
           getProductsForStep={getProductsForStep}
           getSelected={getSelected}
           selectProduct={selectProduct}
+          onZoom={(imgs, idx) => setLightboxData({ images: imgs, activeImg: idx })}
           onChangeStep={(step) => {
             setReturnToSummary(true);
             setCurrentStep(step);
@@ -992,6 +1030,112 @@ export default function ConfiguratorClient() {
         </div>
       )}
       </div>
+
+      {/* ── Compatibility toast ── */}
+      {compatToast && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 28,
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 9998,
+            maxWidth: 480,
+            width: "calc(100% - 32px)",
+            padding: "16px 20px",
+            borderRadius: 14,
+            backgroundColor: "#7b1a1a",
+            border: "1.5px solid #c0392b",
+            color: "#fff",
+            boxShadow: "0 6px 32px rgba(0,0,0,0.6)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+            <span style={{ fontSize: 22, flexShrink: 0 }}>🚫</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 6 }}>
+                Nie można wybrać tego produktu
+              </div>
+              <div style={{ fontSize: 13, opacity: 0.9, marginBottom: compatToast.alternatives.length > 0 ? 10 : 0 }}>
+                {compatToast.reason}
+              </div>
+              {compatToast.alternatives.length > 0 && (
+                <div style={{ fontSize: 12, opacity: 0.85 }}>
+                  <span style={{ fontWeight: 600 }}>Kompatybilne opcje: </span>
+                  {compatToast.alternatives.join(", ")}
+                </div>
+              )}
+            </div>
+            <button
+              onClick={() => setCompatToast(null)}
+              style={{
+                flexShrink: 0, marginLeft: "auto", background: "none", border: "none",
+                color: "#fff", cursor: "pointer", fontSize: 18, opacity: 0.7, padding: 0,
+              }}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
+      {lightboxData && (
+        <div
+          onClick={() => setLightboxData(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 10000,
+            backgroundColor: "rgba(0,0,0,0.85)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 12,
+            cursor: "zoom-out",
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`/products/${lightboxData.images[lightboxData.activeImg]}`}
+            alt=""
+            style={{
+              maxWidth: "90vw",
+              maxHeight: lightboxData.images.length > 1 ? "calc(90vh - 72px)" : "90vh",
+              objectFit: "contain",
+              borderRadius: 10,
+              boxShadow: "0 8px 40px rgba(0,0,0,0.7)",
+              pointerEvents: "none",
+            }}
+          />
+          {lightboxData.images.length > 1 && (
+            <div
+              style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {lightboxData.images.map((img, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={img}
+                  src={`/products/${img}`}
+                  alt=""
+                  onClick={(e) => { e.stopPropagation(); setLightboxData((prev) => prev ? { ...prev, activeImg: i } : null); }}
+                  style={{
+                    width: 60,
+                    height: 48,
+                    objectFit: "cover",
+                    borderRadius: 6,
+                    cursor: "pointer",
+                    border: i === lightboxData.activeImg ? "2px solid #fff" : "2px solid rgba(255,255,255,0.25)",
+                    opacity: i === lightboxData.activeImg ? 1 : 0.55,
+                    transition: "all 0.12s",
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 }
@@ -1006,6 +1150,7 @@ function StepContent({
   getSelected,
   selectProduct,
   settings,
+  onZoom,
   onChangeStep,
 }: {
   step: ConfigStep;
@@ -1016,6 +1161,7 @@ function StepContent({
   getProductsForStep: (s: ConfigStep) => Product[];
   getSelected: (s: ConfigStep) => Product | null | undefined;
   selectProduct: (s: ConfigStep, p: Product) => void;
+  onZoom: (images: string[], activeImg: number) => void;
   onChangeStep: (step: ConfigStep) => void;
 }) {
   if (step === "summary") {
@@ -1030,43 +1176,16 @@ function StepContent({
       <ChoiceStep
         title="Wybierz typ systemu wideo"
         options={[
-          { value: "analog", label: "Analogowy", desc: "Klasyczny system FPV. Niski koszt, szeroka kompatybilność. Typowe opóźnienie ~30ms." },
-          { value: "digital", label: "Cyfrowy", desc: "Obraz HD w czasie rzeczywistym (np. DJI O3, Walksnail). Droższy, ale jakość obrazu bez porównania." },
+          { value: "digital", label: "Cyfrowy", desc: "Obraz HD w czasie rzeczywistym (np. DJI O3, Walksnail). Niskie opóźnienie, doskonała jakość obrazu." },
+          { value: "analog", label: "Analogowy", desc: "Klasyczny system FPV (np. VTX 5.8GHz + gogle analogowe). Niższy koszt, wyższa kompatybilność." },
+          { value: "none", label: "Nie potrzebuję", desc: "Brak systemu wideo – tylko sterowanie dronem." },
         ]}
-        selected={selections.videoType ?? undefined}
+        selected={selections.videoType === null ? "none" : selections.videoType ?? undefined}
         onSelect={(v) => {
           setSelections((prev) => ({
             ...prev,
-            videoType: v as VideoType,
-            videoMode: undefined,
+            videoType: v === "none" ? null : (v as VideoType),
             videoBundle: undefined,
-            camera: undefined,
-            vtx: undefined,
-            antenna: undefined,
-          }));
-        }}
-        settings={settings}
-      />
-    );
-  }
-
-  if (step === "video_mode") {
-    return (
-      <ChoiceStep
-        title="Wybierz sposób doboru systemu wideo"
-        options={[
-          { value: "bundle", label: "Zestaw (kamera + VTX + antena)", desc: "Gotowy, sprawdzony zestaw. Wszystkie elementy dobrane do siebie." },
-          { value: "separate", label: "Elementy oddzielnie", desc: "Wybierz kamerę, VTX i antenę osobno. Większa elastyczność." },
-        ]}
-        selected={selections.videoMode ?? undefined}
-        onSelect={(v) => {
-          setSelections((prev) => ({
-            ...prev,
-            videoMode: v as VideoMode,
-            videoBundle: undefined,
-            camera: undefined,
-            vtx: undefined,
-            antenna: undefined,
           }));
         }}
         settings={settings}
@@ -1078,9 +1197,10 @@ function StepContent({
   const selectedProduct = getSelected(step);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
-  const groupByKv = step === "motor" && stepProductList.some((p) => p.kv);
+  const groupByKv = step === "motor" && stepProductList.some((p) => p.kv || p.kvOptions?.length);
+  const groupByPitch = step === "propeller" && stepProductList.some((p) => p.pitch);
 
-  const sortedProductList = groupByKv
+  const sortedProductList = (groupByKv || groupByPitch)
     ? stepProductList
     : [...stepProductList].sort((a, b) =>
         sortOrder === "asc" ? a.price - b.price : b.price - a.price
@@ -1094,7 +1214,7 @@ function StepContent({
         <h2 style={{ color: settings.panelTitleColor, fontSize: 18, fontWeight: 700, margin: 0 }}>
           {stepLabel(step)}
         </h2>
-        {!groupByKv && stepProductList.length > 1 && (
+        {!groupByKv && !groupByPitch && stepProductList.length > 1 && (
           <select
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
@@ -1109,14 +1229,14 @@ function StepContent({
               outline: "none",
             }}
           >
-            <option value="asc">od najtańszych</option>
-            <option value="desc">od najdroższych</option>
+            <option value="asc">cena rosnąco</option>
+            <option value="desc">cena malejąco</option>
           </select>
         )}
       </div>
       {OPTIONAL_STEPS.includes(step) && (
         <p style={{ color: settings.panelSubtitleColor, fontSize: 12, marginBottom: 16 }}>
-          Opcjonalny — możesz pominąć ten krok
+          Opcjonalny - możesz pominąć ten krok
         </p>
       )}
       {stepProductList.length === 0 ? (
@@ -1128,6 +1248,15 @@ function StepContent({
           products={stepProductList}
           selected={selectedProduct ?? undefined}
           onSelect={(p) => selectProduct(step, p)}
+          onZoom={onZoom}
+          settings={settings}
+        />
+      ) : groupByPitch ? (
+        <PitchGroups
+          products={stepProductList}
+          selected={selectedProduct ?? undefined}
+          onSelect={(p) => selectProduct(step, p)}
+          onZoom={onZoom}
           settings={settings}
         />
       ) : (
@@ -1145,6 +1274,7 @@ function StepContent({
               product={p}
               selected={selectedProduct?.id === p.id}
               onSelect={() => selectProduct(step, p)}
+              onZoom={onZoom}
               settings={settings}
             />
           ))}
@@ -1160,14 +1290,16 @@ function KvGroups({
   products,
   selected,
   onSelect,
+  onZoom,
   settings,
 }: {
   products: Product[];
   selected?: Product;
   onSelect: (p: Product) => void;
+  onZoom: (images: string[], startIdx: number) => void;
   settings: HomepageSettings;
 }) {
-  const kvValues = [...new Set(products.map((p) => p.kv ?? 0))].sort((a, b) => a - b);
+  const kvValues = [...new Set(products.flatMap((p) => p.kvOptions?.length ? p.kvOptions : (p.kv ? [p.kv] : [])))].sort((a, b) => a - b);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, marginTop: 16 }}>
@@ -1195,19 +1327,83 @@ function KvGroups({
             }}
           >
             {products
-              .filter((p) => p.kv === kv)
+              .filter((p) => p.kvOptions?.length ? p.kvOptions.includes(kv) : p.kv === kv)
               .map((p) => (
                 <ProductCard
                   key={p.id}
                   product={p}
                   selected={selected?.id === p.id}
                   onSelect={() => onSelect(p)}
+                  onZoom={onZoom}
                   settings={settings}
                 />
               ))}
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+// ─── Pitch groups ──────────────────────────────────────────────────────────
+
+function PitchGroups({
+  products,
+  selected,
+  onSelect,
+  onZoom,
+  settings,
+}: {
+  products: Product[];
+  selected?: Product;
+  onSelect: (p: Product) => void;
+  onZoom: (images: string[], startIdx: number) => void;
+  settings: HomepageSettings;
+}) {
+  const pitchValues = [...new Set(products.map((p) => p.pitch).filter((v): v is number => v != null))].sort((a, b) => a - b);
+  const noPitch = products.filter((p) => p.pitch == null);
+
+  const renderGroup = (label: string, items: Product[], key: string | number) => (
+    <div key={key}>
+      <div
+        style={{
+          fontSize: 12,
+          fontWeight: 700,
+          color: settings.panelSubtitleColor,
+          letterSpacing: 1,
+          textTransform: "uppercase",
+          marginBottom: 10,
+          paddingBottom: 6,
+          borderBottom: `1px solid ${hexToRgba(settings.panelBorderColor, 30)}`,
+        }}
+      >
+        {label}
+      </div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+          gap: 14,
+        }}
+      >
+        {items.map((p) => (
+          <ProductCard
+            key={p.id}
+            product={p}
+            selected={selected?.id === p.id}
+            onSelect={() => onSelect(p)}
+            onZoom={onZoom}
+            settings={settings}
+          />
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24, marginTop: 16 }}>
+      {pitchValues.map((pitch) => renderGroup(`Skok ${pitch}`, products.filter((p) => p.pitch === pitch), pitch))}
+      {noPitch.length > 0 && renderGroup("Inne", noPitch, "none")}
     </div>
   );
 }
@@ -1276,19 +1472,12 @@ function buildSummaryLines(sel: Selections) {
   };
   add("Rama", sel.frame, "frame");
   add("Silniki", sel.motor, "motor");
+  add("Śmigła", sel.propeller, "propeller");
   add("Stack", sel.stack, "stack");
   if (sel.videoType === null) {
     lines.push({ label: "System wideo", value: "Pominięto", step: "video_type" });
   } else if (sel.videoType !== undefined) {
-    if (sel.videoMode === null) {
-      lines.push({ label: "Tryb systemu wideo", value: "Pominięto", step: "video_mode" });
-    } else if (sel.videoMode === "bundle") {
-      add("Zestaw video", sel.videoBundle, "video_bundle");
-    } else if (sel.videoMode === "separate") {
-      add("Kamera", sel.camera, "camera");
-      add("Nadajnik VTX", sel.vtx, "vtx");
-      add("Antena", sel.antenna, "antenna");
-    }
+    add("Zestaw video", sel.videoBundle, "video_bundle");
   }
   add("Moduł ELRS", sel.elrs, "elrs");
   add("GPS", sel.gps, "gps");

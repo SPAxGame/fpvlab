@@ -2,7 +2,7 @@ import { readdirSync, unlinkSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import { type NextRequest } from "next/server";
 
-const ALLOWED_FOLDERS = ["panel_1_home", "slider", "videos"] as const;
+const ALLOWED_FOLDERS = ["panel_1_home", "slider", "videos", "panel_drony_fpv"] as const;
 type AllowedFolder = (typeof ALLOWED_FOLDERS)[number];
 
 function isAllowed(folder: string | null): folder is AllowedFolder {
