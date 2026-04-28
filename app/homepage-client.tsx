@@ -259,7 +259,7 @@ export default function HomepageClient({
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[
               "Intuicyjna obsługa – szybki proces bez zbędnych kroków.",
-              "Gwarancja kompatybilności – system blokujący wybór niepasujących części",
+              "Gwarancja zgodności – system blokujący wybór niepasujących części",
               "Inteligentny dobór komponentów – wsparcie w wyborze podzespołów",
               "Optymalizacja kosztów – pełna kontrola nad budżetem",
               "Wycena w czasie rzeczywistym – kosztorys widoczny przy każdej zmianie",
