@@ -53,6 +53,19 @@ export default function HomepageClient({
     return () => clearInterval(id);
   }, [panel1Images.length]);
 
+  // responsive: show fewer images at once on mobile to avoid squeezing
+  const [visibleCount, setVisibleCount] = useState(5);
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth < 640) setVisibleCount(3);
+      else if (window.innerWidth < 1024) setVisibleCount(5);
+      else setVisibleCount(7);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
   const panelBgRgba = hexToRgba(
     settings.panelBgColor,
     parseInt(settings.panelOpacity)
@@ -67,9 +80,8 @@ export default function HomepageClient({
   };
 
   const n = sliderImages.length;
-  // Strip holds 2 copies; each image = 1/7 of visible container
-  // Strip width = (2n/7)*100% of container so that each image = 100%/container/7
-  const stripWidthPercent = n > 0 ? (2 * n / 7) * 100 : 200;
+  // Strip holds 2 copies; each image = 1/visibleCount of visible container
+  const stripWidthPercent = n > 0 ? (2 * n / visibleCount) * 100 : 200;
   const durationSeconds = Math.max(n * 2, 10);
 
   const bgStyle: CSSProperties = settings.bgDataUrl
@@ -200,7 +212,7 @@ export default function HomepageClient({
                       alt={`Slide ${(i % n) + 1}`}
                       style={{
                         width: "100%",
-                        height: "180px",
+                        height: "clamp(100px, 18vw, 180px)",
                         objectFit: "cover",
                         objectPosition: "top",
                         borderRadius: "10px",
@@ -259,7 +271,7 @@ export default function HomepageClient({
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[
               "Intuicyjna obsługa – szybki proces bez zbędnych kroków.",
-              "Gwarancja zgodności – system blokujący wybór niepasujących części",
+              "Gwarancja kompatybilności – system blokujący wybór niepasujących części",
               "Inteligentny dobór komponentów – wsparcie w wyborze podzespołów",
               "Optymalizacja kosztów – pełna kontrola nad budżetem",
               "Wycena w czasie rzeczywistym – kosztorys widoczny przy każdej zmianie",
@@ -276,6 +288,8 @@ export default function HomepageClient({
                   alignItems: "flex-start",
                   gap: 8,
                   padding: "12px 14px",
+                  overflowWrap: "break-word",
+                  wordBreak: "break-word",
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -296,7 +310,7 @@ export default function HomepageClient({
           </h2>
           <div className="flex flex-col gap-3 text-sm">
             {[
-              ["Wsparcie techniczne", "support@fpvlab.pl"],
+              ["Wsparcie techniczne", "mail@fpvlab.pl"],
               ["Wersja aplikacji", "2.5.1"],
               ["Typ licencji użytkownika", "Professional"],
             ].map(([label, value]) => (

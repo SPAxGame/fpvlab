@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import MainHeader from "../components/MainHeader";
 import MainFooter from "../components/MainFooter";
 import SubpageShell from "../components/SubpageShell";
+import ContactFormClient from "./ContactFormClient";
 
 export const metadata: Metadata = {
   title: "Kontakt",
@@ -65,62 +66,7 @@ export default function KontaktPage() {
           >
             Wyślij wiadomość
           </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            {["Imię", "e-mail", "Temat"].map((placeholder) => (
-              <input
-                key={placeholder}
-                placeholder={placeholder}
-                readOnly
-                style={{
-                  backgroundColor: "var(--sub-bg)",
-                  border: "1px solid var(--sub-border-subtle)",
-                  borderRadius: 6,
-                  padding: "10px 14px",
-                  color: "var(--sub-border)",
-                  fontSize: 13,
-                  outline: "none",
-                  width: "100%",
-                  boxSizing: "border-box",
-                }}
-              />
-            ))}
-            <textarea
-              placeholder="Treść"
-              readOnly
-              rows={4}
-              style={{
-                backgroundColor: "var(--sub-bg)",
-                border: "1px solid var(--sub-border-subtle)",
-                borderRadius: 6,
-                padding: "10px 14px",
-                color: "var(--sub-border)",
-                fontSize: 13,
-                outline: "none",
-                width: "100%",
-                resize: "none",
-                boxSizing: "border-box",
-                fontFamily: "inherit",
-              }}
-            />
-            <div>
-              <button
-                style={{
-                  backgroundColor: "var(--sub-subtitle)",
-                  color: "var(--sub-bg)",
-                  border: "none",
-                  borderRadius: 7,
-                  padding: "11px 28px",
-                  fontWeight: 700,
-                  fontSize: 13,
-                  letterSpacing: "0.08em",
-                  cursor: "not-allowed",
-                  textTransform: "uppercase",
-                }}
-              >
-                Wyślij (wkrótce)
-              </button>
-            </div>
-          </div>
+          <ContactFormClient />
         </div>
       </main>
 

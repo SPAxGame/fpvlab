@@ -147,7 +147,7 @@ export default function Drukuj3DPage() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/stanowisko_prusa.jpg"
+                  src="/images/stanowisko_prusa.png"
                   alt="Stanowisko Prusa MK4S+"
                   style={{ width: "100%", display: "block", borderRadius: 10 }}
                 />
