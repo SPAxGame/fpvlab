@@ -10,6 +10,7 @@ import {
 import type { HomepageSettings } from "./lib/settings";
 import MainHeader from "./components/MainHeader";
 import MainFooter from "./components/MainFooter";
+import { getEmail } from "./lib/email";
 
 const CROSSFADE_INTERVAL = 3000;
 const CROSSFADE_DURATION = 1200;
@@ -310,7 +311,7 @@ export default function HomepageClient({
           </h2>
           <div className="flex flex-col gap-3 text-sm">
             {[
-              ["Wsparcie techniczne", "mail@fpvlab.pl"],
+              ["Wsparcie techniczne", getEmail()],
               ["Wersja aplikacji", "2.5.1"],
               ["Typ licencji użytkownika", "Professional"],
             ].map(([label, value]) => (

@@ -827,7 +827,7 @@ export default function SettingsClient() {
   const rowBg = hexToRgba(settings.sliderBgColor, 60);
 
   return (
-    <div style={{ width: "100%", maxWidth: 1100, margin: "0 auto", padding: "0 24px 60px" }}>
+    <div style={{ width: "100%", padding: "0 0 60px" }}>
 
         {/* Presety */}
         <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 20 }}>
@@ -1397,7 +1397,7 @@ export function MediaSettingsClient() {
   );
 
   return (
-    <div style={{ width: "100%", maxWidth: 1100, margin: "0 auto", padding: "0 24px 60px" }}>
+    <div style={{ width: "100%", padding: "0 0 60px" }}>
       {/* Media – Filmy Warsztaty */}
       <div style={{ ...panelStyle, borderRadius: 16, padding: "20px 24px", marginBottom: 20 }}>
         {sectionTitle("Warsztaty – filmy")}

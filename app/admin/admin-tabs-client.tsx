@@ -25,8 +25,8 @@ export default function AdminTabsClient() {
   const tabs: { key: Tab; label: string }[] = [
     { key: "admin", label: "Produkty" },
     { key: "compatibility", label: "Zgodności" },
-    { key: "settings", label: "Ustawienia wyglądu stron" },
-    { key: "media", label: "Ustawienia mediów na stronach" },
+    { key: "settings", label: "Motywy" },
+    { key: "media", label: "Media" },
   ];
 
   return (
@@ -34,12 +34,16 @@ export default function AdminTabsClient() {
       {/* Tabs navigation */}
       <div
         style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "0 24px",
           display: "flex",
-          borderBottom: `1px solid ${borderSubtle}`,
+          flexWrap: "wrap",
           marginBottom: 24,
+          borderRadius: 16,
+          border: `1px solid ${borderSubtle}`,
+          backgroundColor: hexToRgba(settings.panelBgColor, parseInt(settings.panelOpacity)),
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          padding: "4px 0 0",
+          gap: 0,
         }}
       >
         {tabs.map((tab) => {
@@ -49,21 +53,24 @@ export default function AdminTabsClient() {
               key={tab.key}
               onClick={() => setActiveTab(tab.key as Tab)}
               style={{
-                flex: 1,
-                padding: "10px 16px",
+                flex: "0 0 auto",
+                padding: "10px 24px",
                 background: "transparent",
                 border: "none",
                 borderBottom: active
                   ? `2px solid ${settings.panelSubtitleColor}`
-                  : "2px solid transparent",
+                  : `1px solid transparent`,
                 color: active ? settings.panelSubtitleColor : settings.panelTextColor,
                 cursor: "pointer",
                 fontSize: 14,
                 fontWeight: active ? 700 : 400,
                 letterSpacing: 0.5,
                 transition: "all 0.15s",
-                marginBottom: -1,
+                marginBottom: 8,
+                marginLeft: 8,
+                marginRight: 8,
                 textAlign: "center",
+                whiteSpace: "nowrap",
               }}
             >
               {tab.label}

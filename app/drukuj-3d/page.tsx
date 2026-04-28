@@ -3,6 +3,7 @@ import MainHeader from "../components/MainHeader";
 import MainFooter from "../components/MainFooter";
 import SubpageShell from "../components/SubpageShell";
 import StlPanelClient from "./stl-panel-client";
+import { getMailtoHref } from "../lib/email";
 
 export const metadata: Metadata = {
   title: "Drukuj 3D",
@@ -256,7 +257,7 @@ export default function Drukuj3DPage() {
               }}
             >
               <a
-                href="mailto:kontakt@fpvlab.pl?subject=Zamówienie wydruku 3D z www.fpvlab.pl"
+                href={getMailtoHref("Zamówienie wydruku 3D z www.fpvlab.pl")}
                 style={{
                   display: "inline-block",
                   padding: "12px 28px",

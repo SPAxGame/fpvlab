@@ -28,7 +28,7 @@ export default function AdminPage() {
           </h1>
           <p
             style={{
-              color: "var(--sub-subtitle)",
+              color: "#CCCCCC",
               fontSize: 13,
               letterSpacing: 1,
               marginBottom: 24,
@@ -37,8 +37,8 @@ export default function AdminPage() {
           >
             Zarządzaj asortymentem konfiguratora drona FPV, ustawieniami stron i mediami
           </p>
+          <AdminTabsClient />
         </div>
-        <AdminTabsClient />
       </main>
       <MainFooter />
     </SubpageShell>

@@ -205,7 +205,7 @@ export default function AdminClient() {
   // ── Render ─────────────────────────────────────────────────────────────
 
   return (
-    <div style={{ width: "100%", maxWidth: 1100, margin: "0 auto", padding: "0 24px 60px" }}>
+    <div style={{ width: "100%", padding: "0 0 60px" }}>
 
       {/* Toast */}
       {msg && (

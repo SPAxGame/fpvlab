@@ -51,3 +51,8 @@ body {
     background-attachment: scroll;
   }
 }
+
+/* Hide scrollbar for horizontally scrollable containers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
