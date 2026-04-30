@@ -18,7 +18,7 @@ const NAV_LINKS = [
   { label: "O FPV LAB", href: "/o-mnie" },
   { label: "Warsztaty", href: "/warsztaty" },
   { label: "Kontakt", href: "/kontakt" },
-  { label: "Admin", href: "/admin", target: "_blank" },
+ // { label: "Admin", href: "/admin", target: "_blank" },
 ];
 
 export default function MainHeader() {
@@ -88,15 +88,14 @@ export default function MainHeader() {
 
           {/* Desktop Nav — hidden below md */}
           <nav className="hidden md:flex" style={{ gap: 6, alignItems: "flex-start", flexWrap: "wrap", flex: 1, justifyContent: "flex-end" }}>
-            {NAV_LINKS.map(({ label, href, target }) => {
-              const isActive = pathname === href;
-              const isHovered = hovered === href;
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              const isHovered = hovered === link.href;
               return (
                 <Link
-                  key={href}
-                  href={href}
-                  target={target}
-                  rel={target === "_blank" ? "noopener noreferrer" : undefined}
+                  key={link.href}
+                  href={link.href}
+                  {...(link.target ? { target: link.target, rel: "noopener noreferrer" } : {})}
                   style={{
                     backgroundColor: settings.sliderBgColor,
                     color:
@@ -113,10 +112,10 @@ export default function MainHeader() {
                     transition: "color 0.15s, border-color 0.15s",
                     whiteSpace: "nowrap",
                   }}
-                  onMouseEnter={() => setHovered(href)}
+                  onMouseEnter={() => setHovered(link.href)}
                   onMouseLeave={() => setHovered(null)}
                 >
-                  {label}
+                  {link.label}
                 </Link>
               );
             })}
@@ -182,14 +181,13 @@ export default function MainHeader() {
               overflowY: "auto",
             }}
           >
-            {NAV_LINKS.map(({ label, href, target }) => {
-              const isActive = pathname === href;
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
               return (
                 <Link
-                  key={href}
-                  href={href}
-                  target={target}
-                  rel={target === "_blank" ? "noopener noreferrer" : undefined}
+                  key={link.href}
+                  href={link.href}
+                  {...(link.target ? { target: link.target, rel: "noopener noreferrer" } : {})}
                   style={{
                     backgroundColor: settings.sliderBgColor,
                     color: isActive ? settings.panelSubtitleColor : settings.panelTitleColor,
@@ -203,7 +201,7 @@ export default function MainHeader() {
                     display: "block",
                   }}
                 >
-                  {label}
+                  {link.label}
                 </Link>
               );
             })}
