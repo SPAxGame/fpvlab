@@ -103,7 +103,7 @@ export default function HomepageClient({
       <MainHeader />
       <main className="flex-1 flex flex-col gap-4 p-4">
         {/* ── Panel 1: Konfigurator ── */}
-        <div className="rounded-2xl px-7 pb-7 pt-3.5" style={panelStyle}>
+        <div className="rounded-2xl panel1-konfigurator" style={panelStyle}>
           <h1
             className="text-2xl font-bold tracking-wide mb-1 uppercase text-center"
             style={{ color: settings.panelTitleColor }}

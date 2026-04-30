@@ -56,3 +56,35 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* --- Responsive fixes for Panel 1: Konfigurator drona FPV --- */
+.panel1-konfigurator {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  padding: 2.2rem 1.5rem 2.7rem 1.5rem;
+}
+.panel1-konfigurator ul {
+  padding-left: 0;
+  margin: 0;
+}
+.panel1-konfigurator li {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+@media (max-width: 640px) {
+  .panel1-konfigurator {
+    padding: 1.2rem 0.7rem 1.7rem 0.7rem;
+  }
+  .panel1-konfigurator h1 {
+    font-size: 1.2rem;
+  }
+  .panel1-konfigurator p {
+    font-size: 0.95rem;
+  }
+  .panel1-konfigurator li {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+}
