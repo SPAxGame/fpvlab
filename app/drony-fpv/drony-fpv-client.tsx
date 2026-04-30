@@ -51,7 +51,8 @@ export default function DronyFPVClient({ cards }: { cards: DroneCard[] }) {
                 onClick={() => setLightbox(`/panel_drony_fpv/${image}`)}
                 style={{
                   width: "100%",
-                  height: 160,
+                  height: 300,
+                  maxHeight: "50vh",
                   objectFit: "cover",
                   borderRadius: 8,
                   marginBottom: 12,

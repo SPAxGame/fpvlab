@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import MainHeader from "../components/MainHeader";
 import MainFooter from "../components/MainFooter";
 import SubpageShell from "../components/SubpageShell";
@@ -118,6 +118,14 @@ function VideoCard({ label, src }: { label: string; src: string }) {
 }
 
 export default function WarsztatyClient({ videos, captions = {} }: { videos: string[]; captions?: Record<string, string> }) {
+  const [columns, setColumns] = useState(1);
+  useEffect(() => {
+    const update = () => setColumns(window.innerWidth >= 900 ? 2 : 1);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
   return (
     <SubpageShell>
       <MainHeader />
@@ -283,7 +291,8 @@ export default function WarsztatyClient({ videos, captions = {} }: { videos: str
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+                // FIX APPLIED HERE: Use the state variable `columns` instead of `window.innerWidth`
+                gridTemplateColumns: `repeat(${columns}, 1fr)`,
                 gap: 16,
               }}
             >

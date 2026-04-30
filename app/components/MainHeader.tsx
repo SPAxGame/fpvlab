@@ -10,7 +10,13 @@ import {
 } from "../lib/settings";
 import type { HomepageSettings } from "../lib/settings";
 
-const NAV_LINKS = [
+type LinkItem = {
+  label: string;
+  href: string;
+  target?: string;
+};
+
+const NAV_LINKS: LinkItem[] = [
   { label: "Home", href: "/" },
   { label: "Drony FPV", href: "/drony-fpv" },
   { label: "Konfigurator", href: "/konfigurator-online" },
@@ -18,7 +24,6 @@ const NAV_LINKS = [
   { label: "O FPV LAB", href: "/o-mnie" },
   { label: "Warsztaty", href: "/warsztaty" },
   { label: "Kontakt", href: "/kontakt" },
- // { label: "Admin", href: "/admin", target: "_blank" },
 ];
 
 export default function MainHeader() {

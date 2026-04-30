@@ -55,12 +55,12 @@ export default function HomepageClient({
   }, [panel1Images.length]);
 
   // responsive: show fewer images at once on mobile to avoid squeezing
-  const [visibleCount, setVisibleCount] = useState(5);
+  const [visibleCount, setVisibleCount] = useState(4);
   useEffect(() => {
     const update = () => {
       if (window.innerWidth < 640) setVisibleCount(3);
-      else if (window.innerWidth < 1024) setVisibleCount(5);
-      else setVisibleCount(7);
+      else if (window.innerWidth < 1024) setVisibleCount(4);
+      else setVisibleCount(5);
     };
     update();
     window.addEventListener("resize", update);
@@ -117,17 +117,19 @@ export default function HomepageClient({
             zbuduj własnego drona FPV online w kilka minut
           </p>
           {/* Responsive layout: image on top on mobile, right on sm+ */}
-          <div className="flex flex-col sm:flex-row-reverse sm:items-start gap-5">
+          <div className="flex flex-col sm:flex-row-reverse sm:items-start gap-5 flex-wrap min-w-0">
             {/* Crossfade slideshow */}
             <div
-              className="w-full sm:w-[380px] sm:flex-shrink-0 mx-auto sm:mx-0 sm:-mt-24"
+              className="w-full sm:max-w-[380px] sm:w-auto sm:flex-shrink-0 mx-auto sm:mx-0"
               style={{
+                width: "100%",
                 maxWidth: 380,
-                aspectRatio: "4/3",
+                aspectRatio: "9/7",
                 borderRadius: 12,
                 border: `0px solid ${settings.panelBorderColor}`,
                 overflow: "hidden",
                 position: "relative",
+                paddingTop: 32,
               }}
             >
               {panel1Images.map((src, i) => (
@@ -151,7 +153,7 @@ export default function HomepageClient({
             </div>
             <ul
               className="flex-1 space-y-2 leading-relaxed list-none"
-              style={{ color: settings.panelTextColor, fontSize: 15 }}
+              style={{ color: settings.panelTextColor, fontSize: 15, minWidth: 200, maxWidth: '100%', wordBreak: 'break-word' }}
             >
               {[
                 "Skonfiguruj swojego drona FPV według własnych potrzeb i preferencji.",
@@ -197,65 +199,75 @@ export default function HomepageClient({
                   animation: `slideRTL ${durationSeconds}s linear infinite`,
                 }}
               >
-                {[...sliderImages, ...sliderImages].map((src, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      width: `${100 / (2 * n)}%`,
-                      flexShrink: 0,
-                      padding: "4px",
-                      position: "relative",
-                    }}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={src}
-                      alt={`Slide ${(i % n) + 1}`}
-                      style={{
-                        width: "100%",
-                        height: "clamp(100px, 18vw, 180px)",
-                        objectFit: "cover",
-                        objectPosition: "top",
-                        borderRadius: "10px",
-                        border: `1px solid ${hexToRgba(settings.sliderBorderColor, 30)}`,
-                        display: "block",
-                        backgroundColor: settings.sliderBgColor,
-                      }}
-                    />
+                {[...sliderImages, ...sliderImages].map((src, i) => {
+                  const filename = src.split("/").pop() ?? "";
+                  const custom = sliderCaptions[filename];
+                  const label = (custom !== undefined && custom !== "")
+                    ? custom
+                    : (filename
+                        .replace(/\.[^.]+$/, "")
+                        .replace(/^\d+_/, "")
+                        .replace(/^slider_/i, "")
+                        .replace(/[_-]+/g, " ")
+                        .replace(/\b\w/g, (c) => c.toUpperCase())
+                        .trim() || `Zdjęcie ${(i % n) + 1}`);
+                  return (
                     <div
+                      key={i}
                       style={{
-                        position: "absolute",
-                        bottom: 10,
-                        left: 8,
-                        right: 8,
-                        textAlign: "center",
-                        fontSize: 12,
-                        fontWeight: 700,
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        color: "#fff",
-                        backgroundColor: "rgba(0,0,0,0.45)",
-                        borderRadius: 6,
-                        padding: "3px 6px",
-                        backdropFilter: "blur(4px)",
+                        width: `${100 / (2 * n)}%`,
+                        flexShrink: 0,
+                        padding: "4px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "stretch",
                       }}
                     >
-                      {(() => {
-                        const filename = src.split("/").pop() ?? "";
-                        const custom = sliderCaptions[filename];
-                        if (custom !== undefined && custom !== "") return custom;
-                        // derive readable label from filename: strip ext, numbers, "slider_"
-                        return filename
-                          .replace(/\.[^.]+$/, "")
-                          .replace(/^\d+_/, "")
-                          .replace(/^slider_/i, "")
-                          .replace(/[_-]+/g, " ")
-                          .replace(/\b\w/g, (c) => c.toUpperCase())
-                          .trim() || `Zdjęcie ${(i % n) + 1}`;
-                      })()}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <div style={{
+                        width: "100%",
+                        aspectRatio: "1/1",
+                        borderRadius: "10px",
+                        border: `1px solid ${hexToRgba(settings.sliderBorderColor, 30)}`,
+                        backgroundColor: settings.sliderBgColor,
+                        overflow: "hidden",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}>
+                        <img
+                          src={src}
+                          alt={`Slide ${(i % n) + 1}`}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            objectPosition: "top",
+                            display: "block",
+                          }}
+                        />
+                      </div>
+                      <div
+                        style={{
+                          textAlign: "center",
+                          fontSize: 13,
+                          fontWeight: 700,
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase",
+                          color: settings.panelTitleColor,
+                          background: "none",
+                          borderRadius: 6,
+                          padding: "6px 2px 0 2px",
+                          minHeight: 32,
+                          lineHeight: 1.2,
+                          wordBreak: "break-word",
+                        }}
+                      >
+                        {label}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>

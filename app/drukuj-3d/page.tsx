@@ -152,32 +152,6 @@ export default function Drukuj3DPage() {
                   alt="Stanowisko Prusa MK4S+"
                   style={{ width: "100%", display: "block", borderRadius: 10 }}
                 />
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    padding: "10px 14px",
-                    background: "linear-gradient(0deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 100%)",
-                    display: "flex",
-                    alignItems: "center",
-                    borderRadius: "0 0 10px 10px",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: 12,
-                      fontWeight: 700,
-                      color: "#fff",
-                      letterSpacing: 2,
-                      textTransform: "uppercase",
-                      textShadow: "0 1px 4px rgba(0,0,0,0.6)",
-                    }}
-                  >
-                    Stanowisko Prusa MK4S+
-                  </span>
-                </div>
               </div>
 
               <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: "0 0 16px" }}>
