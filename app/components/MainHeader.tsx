@@ -27,6 +27,7 @@ export default function MainHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
+
   useEffect(() => {
     try {
       const stored = localStorage.getItem(SETTINGS_KEY);
@@ -177,6 +178,8 @@ export default function MainHeader() {
               display: "flex",
               flexDirection: "column",
               gap: 8,
+              maxHeight: "70vh",
+              overflowY: "auto",
             }}
           >
             {NAV_LINKS.map(({ label, href, target }) => {
