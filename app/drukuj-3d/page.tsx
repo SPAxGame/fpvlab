@@ -130,31 +130,8 @@ export default function Drukuj3DPage() {
               drukujemy najczęściej na Prusa MK4S+
             </p>
 
-            {/* Tekst + zdjęcie z prawej */}
-            <div style={{ overflow: "hidden", marginBottom: 20 }}>
-
-              {/* Zdjęcie stanowiska – float right */}
-              <div
-                style={{
-                  float: "right",
-                  position: "relative",
-                  borderRadius: 10,
-                  overflow: "hidden",
-                  marginLeft: 24,
-                  marginBottom: 12,
-                  lineHeight: 0,
-                  maxWidth: 340,
-                  width: "45%",
-                  minWidth: 180,
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/stanowisko_prusa.png"
-                  alt="Stanowisko Prusa MK4S+"
-                  style={{ width: "100%", display: "block", borderRadius: 10 }}
-                />
-              </div>
+            {/* Tekst pełna szerokość */}
+            <div style={{ marginBottom: 20 }}>
 
               <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: "0 0 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -167,7 +144,7 @@ export default function Drukuj3DPage() {
                 do Ciebie kurierem.</span>
               </p>
 
-              <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0, display: "flex", alignItems: "flex-start", gap: 10 }}>
+              <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: "0 0 20px", display: "flex", alignItems: "flex-start", gap: 10 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, marginTop: 6, objectFit: "contain" }} />
                 <span>Przyjmujemy zamówienia jednostkowe i seryjne - od jednej sztuki po kilkudziesięcioelementowe
@@ -175,6 +152,35 @@ export default function Drukuj3DPage() {
                 mocowania kamer, stopki ramy, osłony stacków i wszystko, co możesz
                 sobie wyobrazić.</span>
               </p>
+
+              {/* Zdjęcia stanowiska – 3 kolumny */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gap: 12,
+                }}
+              >
+                {["stanowisko_prusa_1", "stanowisko_prusa_2", "stanowisko_prusa_3"].map((name) => (
+                  <div
+                    key={name}
+                    style={{
+                      borderRadius: 10,
+                      border: "1px solid rgba(114,122,136,0.30)",
+                      backgroundColor: "#23272F",
+                      overflow: "hidden",
+                      aspectRatio: "4/3",
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/images/${name}.png`}
+                      alt={`Stanowisko Prusa MK4S+ – ${name.slice(-1)}`}
+                      style={{ width: "100%", height: "100%", display: "block", objectFit: "cover" }}
+                    />
+                  </div>
+                ))}
+              </div>
 
             </div>
 
