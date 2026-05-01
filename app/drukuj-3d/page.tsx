@@ -156,7 +156,7 @@ export default function Drukuj3DPage() {
 
               <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: "0 0 16px" }}>
                 Do dyspozycji drukarka{" "}
-                <strong style={{ color: "var(--sub-subtitle)" }}>Prusa MK4S+</strong> —
+                <strong style={{ color: "var(--sub-subtitle)" }}>Prusa MK4S+</strong> -
                 jedna z najdokładniejszych i najbardziej niezawodnych maszyn FDM na rynku.
                 Możesz przesłać własny plik <strong>.STL</strong>, <strong>.STEP</strong> lub
                 {" "}<strong>.3MF</strong>, wybrać materiał i kolor, a gotowy element dotrze

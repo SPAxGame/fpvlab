@@ -157,7 +157,7 @@ export default function HomepageClient({
             >
               {[
                 "Skonfiguruj swojego drona FPV według własnych potrzeb i preferencji.",
-                "Nieograniczone możliwości. Wybieraj z najlepszych przetestowanychpodzespołów.",
+                "Nieograniczone możliwości. Wybieraj z najlepszych przetestowanych podzespołów.",
                 "Porównuj buildy między sobą, by wybrać najlepszy dla siebie.",
                 "Wycena od ręki, bez konieczności logowania.",
                 "Zapisz w pdf, wydrukuj lub wyślij do nas swoją konfigurację do konsultacji.",
@@ -283,12 +283,12 @@ export default function HomepageClient({
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[
-              "Intuicyjna obsługa – szybki proces bez zbędnych kroków.",
-              "Gwarancja kompatybilności – system blokujący wybór niepasujących części",
-              "Inteligentny dobór komponentów – wsparcie w wyborze podzespołów",
-              "Optymalizacja kosztów – pełna kontrola nad budżetem",
-              "Wycena w czasie rzeczywistym – kosztorys widoczny przy każdej zmianie",
-              "Łatwość modyfikacji – błyskawiczna podmiana elementów w projekcie",
+              "Intuicyjna obsługa - szybki proces bez zbędnych kroków.",
+              "Gwarancja kompatybilności - system blokujący wybór niepasujących części",
+              "Inteligentny dobór komponentów - wsparcie w wyborze podzespołów",
+              "Optymalizacja kosztów - pełna kontrola nad budżetem",
+              "Wycena w czasie rzeczywistym - kosztorys widoczny przy każdej zmianie",
+              "Łatwość modyfikacji - błyskawiczna podmiana elementów w projekcie",
             ].map((word) => (
               <div
                 key={word}

@@ -66,7 +66,9 @@ export default function DronyFPVPage() {
             fontWeight: 500,
           }}
         >
-          First Person View - to wspaniałe wrażenia z lotu, które oferują drony FPV. Dzięki kamerze na pokładzie i goglom, możesz poczuć się jakbyś był pilotem, przemierzając niebo z niesamowitą prędkością i precyzją. Oferta obejmuje różnorodne modele dronów FPV, dostosowane do różnych stylów latania i poziomów zaawansowania. Niezależnie od tego, czy jesteś początkującym entuzjastą, czy doświadczonym pilotem, możesz zaprojektować drona FPV idealnego dla Ciebie. Konfigurator daje możliwość budowy drona według własnych preferencji. Dołącz do świata FPV i odkryj nowe horyzonty latania!
+          First Person View - to wspaniałe wrażenia z lotu, które oferują drony FPV. Dzięki kamerze na pokładzie i goglom, możesz poczuć się jakbyś był pilotem, przemierzając niebo z niesamowitą prędkością i precyzją.
+          <p>Oferta obejmuje różnorodne modele dronów FPV, dostosowane do różnych stylów latania i poziomów zaawansowania. Niezależnie od tego, czy jesteś początkującym entuzjastą, czy doświadczonym pilotem, możesz zaprojektować drona FPV idealnego dla Ciebie.</p>
+          <p>Konfigurator daje możliwość budowy drona według własnych preferencji. Dołącz do świata FPV i odkryj nowe horyzonty latania!</p>
         </p>
 
         <DronyFPVClient
@@ -88,17 +90,17 @@ export default function DronyFPVPage() {
             },
             {
               title: "Drony konsumenckie",
-              desc: "Łatwe w obsłudze, z trybami wspomagającymi. Dobre dla osób, które chcą latać rekreacyjnie i podziwiać świat z lotu ptaka bez posiadania pełnej kontroli nad dronem.",
+              desc: "Łatwe w obsłudze, z trybami wspomagającymi. Dobre dla osób, które chcą latać rekreacyjnie i podziwiać świat z lotu ptaka bez konieczności posiadania umiejętności pełnej kontroli nad dronem.",
               image: images[3],
             },
             {
               title: "Drony budżetowe/tinywhoop",
-              desc: "Małe, lekkie drony do latania w pomieszczeniach. Często używane do nauki podstaw latania FPV. Rozwijają małą prędkość i nie dają dużo satysfakcji oraz przyjemności z latania.",
+              desc: "Małe, lekkie drony do latania w pomieszczeniach. Często używane do nauki podstaw latania FPV. Rozwijają małą prędkość i dają dużo satysfakcji oraz przyjemności z latania.",
               image: images[4],
             },
             {
               title: "Drony na zamówienie",
-              desc: "Drony składane według preferencji użytkownika. Nie wybieraj kompromisów. Zaprojektuj drona idealnie pod siebie, a my zadbamy o to, żeby osiągi dorównały Twoim oczekiwaniom.",
+              desc: "Drony składane według preferencji użytkownika. Nie wybieraj kompromisów. Zaprojektuj drona idealnie pod siebie, a my zadbamy o to, żeby osiągi spełniały Twoje oczekiwania.",
               image: images[5],
             },
           ]}
