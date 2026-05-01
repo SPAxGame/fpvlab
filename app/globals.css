@@ -72,16 +72,7 @@ body {
   -moz-appearance: textfield;
 }
 
-/* Parallax background — disabled on iOS Safari (background-attachment: fixed unsupported) */
-.bg-parallax {
-  background-attachment: fixed;
-}
-
-@supports (-webkit-touch-callout: none) {
-  .bg-parallax {
-    background-attachment: scroll;
-  }
-}
+/* bg-parallax — kept for reference, background is now handled via fixed-position div */
 
 /* Hide scrollbar for horizontally scrollable containers */
 .no-scrollbar::-webkit-scrollbar {

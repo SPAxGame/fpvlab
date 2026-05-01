@@ -80,13 +80,21 @@ export default function HomepageClient({
 
   return (
     <div
-      className="min-h-screen flex flex-col bg-parallax"
-      style={{
+      className="min-h-screen flex flex-col"
+      style={{ position: "relative" }}
+    >
+      {/* Fixed background layer — works on all mobile browsers */}
+      <div style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100lvh",
+        zIndex: -1,
         ...bgStyle,
         backgroundSize: "cover",
         backgroundPosition: "center",
-      }}
-    >
+      }} />
       <MainHeader />
       <main className="flex-1 flex flex-col gap-4 p-4">
         {/* ── Panel 1: Konfigurator ── */}

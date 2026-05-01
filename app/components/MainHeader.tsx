@@ -47,6 +47,12 @@ export default function MainHeader() {
     setMobileOpen(false);
   }, [pathname]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
   const headerBg = hexToRgba(
     settings.panelBgColor,
     parseInt(settings.panelOpacity)
@@ -55,6 +61,21 @@ export default function MainHeader() {
   const borderActive = hexToRgba(settings.panelBorderColor, 80);
 
   return (
+    <>
+      {/* Overlay backdrop */}
+      {mobileOpen && (
+        <div
+          onClick={() => setMobileOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 99,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            backdropFilter: "blur(2px)",
+            WebkitBackdropFilter: "blur(2px)",
+          }}
+        />
+      )}
     <div style={{ padding: "16px 16px 0", position: "sticky", top: 0, zIndex: 100 }}>
       <header
         className="rounded-2xl"
@@ -214,5 +235,6 @@ export default function MainHeader() {
         )}
       </header>
     </div>
+    </>
   );
 }

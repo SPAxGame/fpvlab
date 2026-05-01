@@ -29,7 +29,6 @@ export default function SubpageShell({ children }: { children: React.ReactNode }
 
   return (
     <div
-      className={settings.bgApplyToSubpages ? "bg-parallax" : undefined}
       style={
         {
           "--sub-bg": panelBgRgba,
@@ -45,10 +44,24 @@ export default function SubpageShell({ children }: { children: React.ReactNode }
           color: "var(--sub-text)",
           display: "flex",
           flexDirection: "column",
-          ...bgStyle,
+          position: "relative",
         } as React.CSSProperties
       }
     >
+      {/* Fixed background layer — works on all mobile browsers */}
+      {settings.bgApplyToSubpages && (
+        <div style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100lvh",
+          zIndex: -1,
+          ...bgStyle,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }} />
+      )}
       {children}
     </div>
   );
