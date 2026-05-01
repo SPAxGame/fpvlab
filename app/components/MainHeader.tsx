@@ -21,7 +21,7 @@ const NAV_LINKS: LinkItem[] = [
   { label: "Drony FPV", href: "/drony-fpv" },
   { label: "Konfigurator", href: "/konfigurator-online" },
   { label: "Drukuj 3D", href: "/drukuj-3d" },
-  { label: "O FPV LAB", href: "/o-mnie" },
+  { label: "O FPV LAB", href: "/o-firmie" },
   { label: "Warsztaty", href: "/warsztaty" },
   { label: "Kontakt", href: "/kontakt" },
 ];

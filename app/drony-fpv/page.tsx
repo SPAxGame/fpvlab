@@ -60,16 +60,43 @@ export default function DronyFPVPage() {
         <p
           style={{
             color: "var(--sub-subtitle)",
-            fontSize: 13,
+            fontSize: 15,
             letterSpacing: 1,
             marginBottom: 40,
             fontWeight: 500,
           }}
         >
-          First Person View - to wspaniałe wrażenia z lotu, które oferują drony FPV. Dzięki kamerze na pokładzie i goglom, możesz poczuć się jakbyś był pilotem, przemierzając niebo z niesamowitą prędkością i precyzją.
-          <p>Oferta obejmuje różnorodne modele dronów FPV, dostosowane do różnych stylów latania i poziomów zaawansowania. Niezależnie od tego, czy jesteś początkującym entuzjastą, czy doświadczonym pilotem, możesz zaprojektować drona FPV idealnego dla Ciebie.</p>
-          <p>Konfigurator daje możliwość budowy drona według własnych preferencji. Dołącz do świata FPV i odkryj nowe horyzonty latania!</p>
+          kilka słów o
         </p>
+        <div
+          className="subpage-card"
+          style={{
+            backgroundColor: "var(--sub-card-bg)",
+            border: "1px solid var(--sub-border-subtle)",
+            borderRadius: 12,
+            padding: "22px 20px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+            marginBottom: 40,
+          }}
+        >
+          <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0, display: "flex", alignItems: "flex-start", gap: 10 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, marginTop: 6, objectFit: "contain" }} />
+            <span>First Person View - to wspaniałe wrażenia z lotu, które oferują drony FPV. Dzięki kamerze na pokładzie i goglom, możesz poczuć się jakbyś był pilotem, przemierzając niebo z niesamowitą prędkością i precyzją.</span>
+          </p>
+          <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0, display: "flex", alignItems: "flex-start", gap: 10 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, marginTop: 6, objectFit: "contain" }} />
+            <span>Oferta obejmuje różnorodne modele dronów FPV, dostosowane do różnych stylów latania i poziomów zaawansowania. Niezależnie od tego, czy jesteś początkującym entuzjastą, czy doświadczonym pilotem, możesz zaprojektować drona FPV idealnego dla Ciebie.</span>
+          </p>
+          <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0, display: "flex", alignItems: "flex-start", gap: 10 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, marginTop: 6, objectFit: "contain" }} />
+            <span>Konfigurator daje możliwość budowy drona według własnych preferencji. Dołącz do świata FPV i odkryj nowe horyzonty latania!</span>
+          </p>
+        </div>
 
         <DronyFPVClient
           cards={[

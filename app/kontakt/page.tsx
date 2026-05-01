@@ -36,7 +36,7 @@ export default function KontaktPage() {
         <p
           style={{
             color: "var(--sub-subtitle)",
-            fontSize: 13,
+            fontSize: 15,
             letterSpacing: 1,
             marginBottom: 40,
             fontWeight: 500,

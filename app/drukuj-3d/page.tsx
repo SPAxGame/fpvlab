@@ -85,7 +85,7 @@ export default function Drukuj3DPage() {
         <p
           style={{
             color: "var(--sub-subtitle)",
-            fontSize: 13,
+            fontSize: 15,
             letterSpacing: 1,
             marginBottom: 40,
             fontWeight: 500,
@@ -103,30 +103,32 @@ export default function Drukuj3DPage() {
               backgroundColor: "var(--sub-card-bg)",
               border: "1px solid var(--sub-border-subtle)",
               borderRadius: 12,
-              padding: "28px 24px",
+              padding: "22px 24px",
             }}
           >
-            <div
+            <h2
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                marginBottom: 20,
+                fontSize: 22,
+                fontWeight: 700,
+                color: "var(--sub-title)",
+                letterSpacing: 2,
+                textTransform: "uppercase",
+                marginBottom: 4,
               }}
             >
-              <span style={{ fontSize: 28 }}>🖨️</span>
-              <h2
-                style={{
-                  fontSize: 18,
-                  fontWeight: 700,
-                  color: "var(--sub-title)",
-                  margin: 0,
-                  letterSpacing: 1,
-                }}
-              >
-                Zamów wydruk 3D online
-              </h2>
-            </div>
+              Zamów wydruk 3D online
+            </h2>
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--sub-subtitle)",
+                letterSpacing: 1,
+                marginBottom: 20,
+                fontWeight: 500,
+              }}
+            >
+              drukujemy najczęściej na Prusa MK4S+
+            </p>
 
             {/* Tekst + zdjęcie z prawej */}
             <div style={{ overflow: "hidden", marginBottom: 20 }}>
@@ -154,20 +156,24 @@ export default function Drukuj3DPage() {
                 />
               </div>
 
-              <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: "0 0 16px" }}>
-                Do dyspozycji drukarka{" "}
+              <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: "0 0 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, marginTop: 6, objectFit: "contain" }} />
+                <span>Do dyspozycji drukarka{" "}
                 <strong style={{ color: "var(--sub-subtitle)" }}>Prusa MK4S+</strong> -
                 jedna z najdokładniejszych i najbardziej niezawodnych maszyn FDM na rynku.
                 Możesz przesłać własny plik <strong>.STL</strong>, <strong>.STEP</strong> lub
                 {" "}<strong>.3MF</strong>, wybrać materiał i kolor, a gotowy element dotrze
-                do Ciebie kurierem.
+                do Ciebie kurierem.</span>
               </p>
 
-              <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0 }}>
-                Przyjmujemy zamówienia jednostkowe i seryjne - od jednej sztuki po kilkudziesięcioelementowe
+              <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0, display: "flex", alignItems: "flex-start", gap: 10 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, marginTop: 6, objectFit: "contain" }} />
+                <span>Przyjmujemy zamówienia jednostkowe i seryjne - od jednej sztuki po kilkudziesięcioelementowe
                 serie. Specjalizujemy się w częściach do dronów FPV: uchwyty anten,
                 mocowania kamer, stopki ramy, osłony stacków i wszystko, co możesz
-                sobie wyobrazić.
+                sobie wyobrazić.</span>
               </p>
 
             </div>

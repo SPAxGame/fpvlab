@@ -157,9 +157,9 @@ export default function WarsztatyClient({ videos, captions = {} }: { videos: str
           <p
             style={{
               color: "var(--sub-subtitle)",
-              fontSize: 13,
+              fontSize: 15,
               letterSpacing: 1,
-              marginBottom: 0,
+              marginBottom: 12,
               fontWeight: 500,
             }}
           >
@@ -190,7 +190,7 @@ export default function WarsztatyClient({ videos, captions = {} }: { videos: str
           </h1>
           <p
             style={{
-              fontSize: 13,
+              fontSize: 15,
               color: "var(--sub-subtitle)",
               letterSpacing: 1,
               marginBottom: 20,
@@ -234,7 +234,7 @@ export default function WarsztatyClient({ videos, captions = {} }: { videos: str
           </h2>
           <p
             style={{
-              fontSize: 13,
+              fontSize: 15,
               color: "var(--sub-subtitle)",
               letterSpacing: 1,
               marginBottom: 20,
@@ -279,7 +279,7 @@ export default function WarsztatyClient({ videos, captions = {} }: { videos: str
             </h2>
             <p
               style={{
-                fontSize: 13,
+                fontSize: 15,
                 color: "var(--sub-subtitle)",
                 letterSpacing: 1,
                 marginBottom: 20,

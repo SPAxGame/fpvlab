@@ -21,7 +21,7 @@ export default function KonfiguratorOnlinePage() {
               color: "var(--sub-title)",
               letterSpacing: 3,
               textTransform: "uppercase",
-              marginBottom: 4,
+              marginBottom: 8,
             }}
           >
             Konfigurator drona FPV
@@ -29,9 +29,9 @@ export default function KonfiguratorOnlinePage() {
           <p
             style={{
               color: "var(--sub-subtitle)",
-              fontSize: 12,
+              fontSize: 15,
               letterSpacing: 1,
-              marginBottom: 24,
+              marginBottom: 40,
               fontWeight: 500,
             }}
           >

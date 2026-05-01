@@ -35,7 +35,7 @@ export default function OMniePage() {
         <p
           style={{
             color: "var(--sub-subtitle)",
-            fontSize: 13,
+            fontSize: 15,
             letterSpacing: 1,
             marginBottom: 40,
             fontWeight: 500,
@@ -57,10 +57,33 @@ export default function OMniePage() {
               gap: 16,
             }}
           >
+            <h2
+              style={{
+                fontSize: 22,
+                fontWeight: 700,
+                color: "var(--sub-title)",
+                letterSpacing: 2,
+                textTransform: "uppercase",
+                marginBottom: 4,
+              }}
+            >
+              Kim jesteśmy
+            </h2>
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--sub-subtitle)",
+                letterSpacing: 1,
+                marginBottom: 4,
+                fontWeight: 500,
+              }}
+            >
+              pasja do FPV zamieniona w rzemiosło
+            </p>
             <p style={{ fontSize: 14, lineHeight: 2, color: "var(--sub-text)", margin: 0, display: "flex", alignItems: "flex-start", gap: 10 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, minWidth: 16, marginTop: 6, objectFit: "contain" }} />
-              <span>CEO działu FPV LAB to pilot statków powietrznych z ponad 8-letnim doświadczeniem w 
+              <span>CEO działu FPV LAB to pilot statków powietrznych z ponad 9-letnim doświadczeniem w 
               składaniu, programowaniu i pilotażu dronów. Zaczynał od prostych quadrocopterów,
               a dziś buduje maszyny wyczynowe dla siebie i innych entuzjastów. 
               Jego pasja do latania FPV przerodziła się w pełnowymiarowy warsztat.</span>

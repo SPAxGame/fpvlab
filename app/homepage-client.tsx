@@ -26,7 +26,6 @@ export default function HomepageClient({
     useState<HomepageSettings>(DEFAULT_SETTINGS);
   const [activePanel1, setActivePanel1] = useState(0);
   const [sliderCaptions, setSliderCaptions] = useState<Record<string, string>>({});
-
   useEffect(() => {
     try {
       const stored = localStorage.getItem(SETTINGS_KEY);
@@ -55,17 +54,7 @@ export default function HomepageClient({
   }, [panel1Images.length]);
 
   // responsive: show fewer images at once on mobile to avoid squeezing
-  const [visibleCount, setVisibleCount] = useState(4);
-  useEffect(() => {
-    const update = () => {
-      if (window.innerWidth < 640) setVisibleCount(3);
-      else if (window.innerWidth < 1024) setVisibleCount(4);
-      else setVisibleCount(5);
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
+  // (now handled via CSS .slider-item, no JS state needed)
 
   const panelBgRgba = hexToRgba(
     settings.panelBgColor,
@@ -81,8 +70,6 @@ export default function HomepageClient({
   };
 
   const n = sliderImages.length;
-  // Strip holds 2 copies; each image = 1/visibleCount of visible container
-  const stripWidthPercent = n > 0 ? (2 * n / visibleCount) * 100 : 200;
   const durationSeconds = Math.max(n * 2, 10);
 
   const bgStyle: CSSProperties = settings.bgDataUrl
@@ -111,25 +98,26 @@ export default function HomepageClient({
             Konfigurator drona FPV
           </h1>
           <p
-            className="text-sm tracking-wide mb-6 font-medium text-center"
+            className="text-base tracking-wide mb-6 font-medium text-center"
             style={{ color: settings.panelSubtitleColor }}
           >
             zbuduj własnego drona FPV online w kilka minut
           </p>
-          {/* Responsive layout: image on top on mobile, right on sm+ */}
-          <div className="flex flex-col sm:flex-row-reverse sm:items-start gap-5 flex-wrap min-w-0">
-            {/* Crossfade slideshow */}
+          <div style={{ overflow: "hidden" }}>
+            {/* Crossfade slideshow – float right */}
             <div
-              className="w-full sm:max-w-[380px] sm:w-auto sm:flex-shrink-0 mx-auto sm:mx-0"
               style={{
-                width: "100%",
-                maxWidth: 380,
+                float: "right",
+                width: "40%",
+                maxWidth: 300,
+                minWidth: 140,
                 aspectRatio: "9/7",
-                borderRadius: 12,
-                border: `0px solid ${settings.panelBorderColor}`,
-                overflow: "hidden",
                 position: "relative",
-                paddingTop: 32,
+                borderRadius: 12,
+                overflow: "hidden",
+                marginLeft: 20,
+                marginBottom: 12,
+                lineHeight: 0,
               }}
             >
               {panel1Images.map((src, i) => (
@@ -151,10 +139,7 @@ export default function HomepageClient({
                 />
               ))}
             </div>
-            <ul
-              className="flex-1 space-y-2 leading-relaxed list-none"
-              style={{ color: settings.panelTextColor, fontSize: 15, minWidth: 200, maxWidth: '100%', wordBreak: 'break-word' }}
-            >
+            <ul style={{ color: settings.panelTextColor, fontSize: 15, lineHeight: 1.6, listStyle: "none", padding: 0, margin: 0 }}>
               {[
                 "Skonfiguruj swojego drona FPV według własnych potrzeb i preferencji.",
                 "Nieograniczone możliwości. Wybieraj z najlepszych przetestowanych podzespołów.",
@@ -164,10 +149,10 @@ export default function HomepageClient({
                 "Możesz zamówić gotowy zestaw do montażu, lub zlecić montaż nam.",
                 "Prosty proces, od pomysłu do lotu w parę chwil.",
               ].map((item) => (
-                <li key={item} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                <li key={item} style={{ marginBottom: 10, display: "flex", alignItems: "flex-start" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/propeller_ico.png" alt="" style={{ width: 18, height: 18, minWidth: 18, marginTop: 1, objectFit: "contain" }} />
-                  {item}
+                  <img src="/images/propeller_ico.png" alt="" style={{ width: 16, height: 16, flexShrink: 0, marginRight: 8, marginTop: 3, objectFit: "contain" }} />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -183,7 +168,7 @@ export default function HomepageClient({
             Dobór elementów
           </h2>
           <p
-            className="text-sm tracking-wide mb-4 font-medium text-center"
+            className="text-base tracking-wide mb-4 font-medium text-center"
             style={{ color: settings.panelSubtitleColor }}
           >
             dobierz elementy na miarę potrzeb ze sprawdzonego asortymentu
@@ -193,9 +178,8 @@ export default function HomepageClient({
           >
             {n > 0 && (
               <div
+                className="slider-strip"
                 style={{
-                  display: "flex",
-                  width: `${stripWidthPercent}%`,
                   animation: `slideRTL ${durationSeconds}s linear infinite`,
                 }}
               >
@@ -214,16 +198,8 @@ export default function HomepageClient({
                   return (
                     <div
                       key={i}
-                      style={{
-                        width: `${100 / (2 * n)}%`,
-                        flexShrink: 0,
-                        padding: "4px",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "stretch",
-                      }}
+                      className="slider-item"
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <div style={{
                         width: "100%",
                         aspectRatio: "1/1",
@@ -283,12 +259,12 @@ export default function HomepageClient({
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[
-              "Intuicyjna obsługa - szybki proces bez zbędnych kroków.",
-              "Gwarancja kompatybilności - system blokujący wybór niepasujących części",
-              "Inteligentny dobór komponentów - wsparcie w wyborze podzespołów",
-              "Optymalizacja kosztów - pełna kontrola nad budżetem",
-              "Wycena w czasie rzeczywistym - kosztorys widoczny przy każdej zmianie",
-              "Łatwość modyfikacji - błyskawiczna podmiana elementów w projekcie",
+              "Intuicyjna obsługa- szybki proces bez zbędnych kroków.",
+              "Gwarancja kompatybilności- system blokujący wybór niepasujących części",
+              "Inteligentny dobór komponentów- wsparcie w wyborze podzespołów",
+              "Optymalizacja kosztów- pełna kontrola nad budżetem",
+              "Wycena w czasie rzeczywistym- kosztorys widoczny przy każdej zmianie",
+              "Łatwość modyfikacji- błyskawiczna podmiana elementów w projekcie",
             ].map((word) => (
               <div
                 key={word}
