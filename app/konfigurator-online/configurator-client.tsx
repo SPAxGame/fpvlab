@@ -597,7 +597,7 @@ export default function ConfiguratorClient() {
     const total = totalPrice(selections);
     const subject = "Konfiguracja drona FPV- zapytanie ofertowe ze strony fpvlab.pl";
     const fullBody = `Zapytanie dotyczy następującej konfiguracji:\n\n${body}\n\nŁączna kwota: ${total.toFixed(2)} zł\n\nUWAGI do zapytania:\n\nDzień dobry, `;
-    window.location.href = `mailto:kontakt@fpvlab.pl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
+    window.location.href = `mailto:mail@fpvlab.pl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
   };
 
   const saveConfig = (note: string) => {
