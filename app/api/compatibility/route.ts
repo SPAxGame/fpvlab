@@ -23,7 +23,7 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  const body = await req.json() as { productA: string; productB: string; reason: string };
   const { productA, productB, reason } = body;
   if (!productA || !productB || !reason?.trim()) {
     return Response.json({ error: "Missing fields" }, { status: 400 });

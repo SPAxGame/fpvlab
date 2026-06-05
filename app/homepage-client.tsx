@@ -39,8 +39,8 @@ export default function HomepageClient({
 
   useEffect(() => {
     fetch("/api/media/captions?folder=slider")
-      .then((r) => r.json())
-      .then((data: { captions?: Record<string, string> }) => setSliderCaptions(data.captions ?? {}))
+      .then((r) => r.json() as Promise<{ captions?: Record<string, string> }>)
+      .then((data) => setSliderCaptions(data.captions ?? {}))
       .catch(() => {});
   }, []);
 

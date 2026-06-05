@@ -27,7 +27,7 @@ export default function ContactFormClient() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, subject, message }),
       });
-      const data = await res.json();
+      const data = await res.json() as { error?: string };
       if (!res.ok) {
         setStatus("error");
         setErrorText(data.error || "Nie udało się wysłać.");

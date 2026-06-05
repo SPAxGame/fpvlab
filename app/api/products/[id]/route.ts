@@ -22,7 +22,7 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const body = await request.json();
+  const body = await request.json() as Partial<Product>;
   const products = readProducts();
   const idx = products.findIndex((p) => p.id === id);
 

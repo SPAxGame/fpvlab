@@ -47,11 +47,11 @@ export default function CompatibilityClient() {
 
   const loadData = () => {
     setLoading(true);
-    Promise.all([
+    (Promise.all([
       fetch("/api/products").then((r) => r.json()),
       fetch("/api/compatibility").then((r) => r.json()),
-    ])
-      .then(([prods, compat]: [Product[], CompatRule[]]) => {
+    ]) as Promise<[Product[], CompatRule[]]>)
+      .then(([prods, compat]) => {
         setProducts(prods);
         setRules(compat);
       })

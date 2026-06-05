@@ -186,8 +186,8 @@ function MediaPanel({
   const loadFiles = () => {
     setLoading(true);
     fetch(`/api/media?folder=${folder}`)
-      .then((r) => r.json())
-      .then((data: { files?: string[] }) => {
+      .then((r) => r.json() as Promise<{ files?: string[] }>)
+      .then((data) => {
         const f = data.files ?? [];
         setFiles(f);
         setSavedFiles(f);
@@ -198,8 +198,8 @@ function MediaPanel({
 
   const loadCaptions = () => {
     fetch(`/api/media/captions?folder=${folder}`)
-      .then((r) => r.json())
-      .then((data: { captions?: Record<string, string> }) => {
+      .then((r) => r.json() as Promise<{ captions?: Record<string, string> }>)
+      .then((data) => {
         const c = data.captions ?? {};
         setCaptions(c);
         setSavedCaptions(c);

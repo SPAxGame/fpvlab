@@ -11,7 +11,7 @@ const TO_EMAIL = process.env.MAIL_TO || "beniugalaxy@gmail.com";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const body = await request.json() as { name: string; email: string; subject: string; message: string };
     const { name, email, subject, message } = body;
 
     // basic validation

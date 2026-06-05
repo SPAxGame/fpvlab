@@ -22,14 +22,14 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
+  const body = await request.json() as Partial<Product>;
   const products = readProducts();
 
-  const newProduct: Product = {
+  const newProduct = {
     id: `p-${Date.now()}`,
     inStock: true,
     ...body,
-  };
+  } as Product;
 
   products.push(newProduct);
   writeProducts(products);

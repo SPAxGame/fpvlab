@@ -350,12 +350,12 @@ export default function ConfiguratorClient() {
 
   useEffect(() => {
     fetch("/api/products")
-      .then((r) => r.json())
-      .then((data: Product[]) => setProducts(data))
+      .then((r) => r.json() as Promise<Product[]>)
+      .then((data) => setProducts(data))
       .catch(() => setProducts([]))
       .finally(() => setLoading(false));
     fetch("/api/compatibility")
-      .then((r) => r.json())
+      .then((r) => r.json() as Promise<Array<{ id: string; productA: string; productB: string; reason: string }>>)
       .then(setCompatRules)
       .catch(() => {});
   }, []);

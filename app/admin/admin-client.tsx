@@ -71,8 +71,8 @@ export default function AdminClient() {
   const loadProducts = () => {
     setLoading(true);
     fetch("/api/products")
-      .then((r) => r.json())
-      .then((data: Product[]) => setProducts(data))
+      .then((r) => r.json() as Promise<Product[]>)
+      .then((data) => setProducts(data))
       .catch(() => setProducts([]))
       .finally(() => setLoading(false));
   };
@@ -139,7 +139,7 @@ export default function AdminClient() {
     try {
       const res = await fetch("/api/upload", { method: "POST", body: fd });
       if (!res.ok) throw new Error("Upload failed");
-      const { filename } = await res.json();
+      const { filename } = (await res.json()) as { filename: string };
       setForm((prev) => {
         const imgs = [...(prev.images ?? [])];
         imgs[idx] = filename;
